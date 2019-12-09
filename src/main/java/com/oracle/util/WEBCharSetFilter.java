@@ -17,7 +17,7 @@ public class WEBCharSetFilter implements Filter {
 	/**
 	 * Default constructor.
 	 */
-	public WEBCharSetFilter() {
+	public WEBCharSetFilter()  {
 		// TODO Auto-generated constructor stub
 	}
 
