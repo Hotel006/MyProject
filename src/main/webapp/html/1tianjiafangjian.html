@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>添加房间</title>
+
+<link rel="stylesheet" href="../css/addroom.css" />
+
+<script type="text/javascript" src="../js/jquery-1.7.2.min.js" ></script>
+<script type="text/javascript" src="../js/bootstrap.js" ></script>
+<script type="text/javascript" src="../js/vue.js" ></script>
+
+<script>
+	  window.onload = function(){
+		  new Vue({
+			  el:'#box',
+			  data:{
+				 myData:[],
+				 username:"",
+				 money:"",
+				 amount:"",
+				 nowIndex:-100
+			  },
+			  methods:{
+				 add:function(){
+					  this.myData.push({
+						  username:this.username,
+						  money:this.money,
+						  amount:this.amount,
+					  })
+					 this.username="",
+					 this.money="",
+					 this.amount=""
+				 },
+				  del:function(n){
+					  if(n ==-2){
+						  this.myData="";
+					  }{
+						  this.myData.splice(n,1);
+					  }
+				  }
+			  }
+		  })
+	  }
+</script>
+
+</head>
+<body>
+<!-- 代码 开始 -->
+<div class="container" id="box">
+	 <form role="form">
+		 <div class="form-group">
+			 <label for="username">房间类型：</label>
+			 <input type="text" id="username" class="form-control" v-model="username" placeholder="输入房间类型">
+		 </div>
+		 <div class="form-group">
+			 <label for="money">房间价格：</label>
+			 <input type="text" id="money" class="form-control"  v-model="money" placeholder="输入房间价格">
+		 </div>
+		 <div class="form-group">
+			 <label for="amount">房间数量：</label>
+			 <input type="text" id="amount" class="form-control"  v-model="amount" placeholder="输入房间数量">
+		 </div>
+		  <div style="width: 100%;height:100%; ">
+	<div id="upBox">
+	 <div id="inputBox"><input type="file" title="请选择图片" id="file" multiple accept="image/png,image/jpg,image/gif,image/JPEG">点击选择图片</div>
+     <div id="imgBox">
+     </div>
+     <button id="btn">上传</button>
+	</div>
+</div>
+		 <div class="form-group">
+			 <input type="button"  value="添加" class="btn btn-primary" v-on:click="add()">
+			 <input type="reset"  value="重置" class="btn btn-danger">
+		 </div>
+	 </form>
+	 <hr/>
+	 
+	
+
+<script type="text/javascript" src="../js/uploadImg.js" ></script>
+<script type="text/javascript">
+	imgUpload({
+	inputId:'file', //input框id
+	imgBox:'imgBox', //图片容器id
+	buttonId:'btn', //提交按钮id
+	upUrl:'',  //提交地址
+	data:'file1' //参数名
+})
+</script>
+	 <table class="table table-bordered table-hover">
+		  <caption class="h3 text-info">房间信息表</caption>
+		 <tr>
+			 <th class="text-center">房间编号</th>
+			 <th class="text-center">房间类型</th>
+			 <th class="text-center">房间价格</th>
+			 <th class="text-center">房间数量</th>
+			 <th class="text-center">操作</th>
+		 </tr>
+		 <tr class="text-center" v-for="item in myData">
+			 <td>{{$index+1}}</td>
+			 <td>{{item.username}}</td>
+			 <td>{{item.money}}</td>
+			 <td>{{item.amount}}</td>
+			 <td>
+				 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
+			 </td>
+		 </tr>
+		 <tr v-show="myData.length!=0">
+			 <td colspan="5" class="text-right">
+				 <button class="btn btn-danger"  data-toggle="modal" data-target="#layer" v-on:click="nowIndex=-2">删除全部</button>
+			 </td>
+		 </tr>
+		 <tr v-show="myData.length==0">
+			 <td colspan="4" class="text-center text-info">
+				 <p>暂无数据...</p>
+			 </td>
+		 </tr>
+	 </table>
+	 <!--模态框 弹出框-->
+	 <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
+		  <div class="modal-dialog">
+			  <div class="modal-content">
+				  <div class="modal-header">
+					  <button class="close" data-dismiss="modal">
+						  <span>&times;</span>
+					  </button>
+					  <h4 class="modal-title">确认删除吗？</h4>
+				  </div>
+				  <div class="modal-body text-right">
+					  <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
+					  <button class="btn btn-danger btn-sm" data-dismiss="modal" v-on:click="del(nowIndex)">确认</button>
+				  </div>
+			  </div>
+		  </div>
+	 </div>
+</div>
+
+
+</body>
+</html>

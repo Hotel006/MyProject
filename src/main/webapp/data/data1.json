@@ -1,0 +1,45 @@
+[
+    {
+        "idname":"20190809",
+        "procode": "马加爵",
+        "prosign": "666",
+        "prozhaungtai01": "1",
+        "proper": "288"
+    },
+	{
+	    "idname":"20190809",
+	    "procode": "杨柳",
+	    "prosign": "903",
+	    "prozhaungtai01": "2",
+	    "proper": "255"
+	},
+	{
+	    "idname":"20190809",
+	    "procode": "集远",
+	    "prosign": "902",
+	    "prozhaungtai01": "1",
+	    "proper": "111"
+	},
+	{
+	    "idname":"20190812",
+	    "procode": "雷浩斌",
+	    "prosign": "726",
+	    "prozhaungtai01": "4",
+	    "proper": "888"
+	},
+	{
+	    "idname":"20190818",
+	    "procode": "周静",
+	    "prosign": "666",
+	    "prozhaungtai01": "1",
+	    "proper": "666"
+	},
+	{
+	    "idname":"20190823",
+	    "procode": "鲁大师",
+	    "prosign": "888",
+	    "prozhaungtai01": "1",
+	    "proper": "888"
+	}
+	
+]

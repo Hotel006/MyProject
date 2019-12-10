@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>旅途名宿</title>
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link href="../css/base.css" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<script src="https://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/index/proindex.css" />
+		<script src="../js/vue.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/axios.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+
+<!-- 顶部导航 -->
+<div class="wrapper">
+  <nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+      <ul class="nav">
+        <li class="nav-header text-center"> <a href="http://www.caifuguan.com" style="padding: 3px 0 10px"> <img src="../images/logo.png" alt="logo" height="50"/> </a> </li>
+        <li class=""> <a href="/"><i class="glyphicon glyphicon-indent-left"></i></a> </li>
+        <li class=""> <a href="/report"><i class="glyphicon glyphicon-th-large"></i></a> </li>
+      </ul>
+    </div>
+  </nav>
+  <div id="page-wrapper" class="gray-bg dashboard"  style="padding-bottom:40px">
+    <div class="row border-bottom">
+      <nav class="navbar white-bg" role="navigation" style="margin-bottom: 0">
+        <h2 class="m-t m-l-lg" style="font-size:20px"> 旅途名宿 </h2>
+      </nav>
+    </div>
+    <div class="row m-t-md">
+      <div class="col-sm-12">
+        <div class="box float-e-margins">
+          <div class="box-title">
+            <h5>旅途名宿经营报表</h5>
+            <div style="margin-top: 43px;margin-left: 16px; background-color:white;">
+			<!--<div id="roottable">
+		</div> -->
+				<div class="button_line">
+							按年份查询：<input type="text" id="filtertxt1">
+							<button class="btn1" id="Search">搜索</button>
+							按月份查询：<input type="text" id="filtertxt1">
+							<button class="btn1" id="Search">搜索</button>
+						</div>
+          <div class="box-content">
+            <div class="row text-center" id="splashSummary">
+              <div class="col-sm-3">
+                <h1 class="num">7,891,968,091.60</h1>
+                <small>收益额（元）</small> </div>
+              <div class="col-sm-3">
+                <h1 class="num">5,084,064</h1>
+                <small>房间数（间）</small> </div>
+              <div class="col-sm-3">
+                <h1 class="num">368,59732</h1>
+                <small>订单数（单）</small> </div>
+            </div>
+            <hr />
+            <div id="app">
+				<table border="0" cellspacing="0" cellpadding="10" style="width: 100%;text-align: center;margin-top: 40px;">
+					<thead>
+						<tr>
+							<th>日期</th>
+							<th>姓名</th>
+							<th>房间号</th>
+							<th>房间数量</th>
+							<th>金额</th>
+						</tr>
+					</thead>
+					<tbody id="table_proindex" align="left">
+						<tr v-for="value in info" class="second_tr">
+							<td>{{ value.idname}}</td>
+							<td>{{ value.procode}}</td>
+							<td>{{ value.prosign}}</td>
+							<td>{{ value.prozhaungtai01}}</td>
+							<td>{{ value.proper}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<script src="../js/api.js" type="text/javascript" charset="utf-8"></script>
+			<script src="../js/Allin.js" type="text/javascript" charset="utf-8"></script>
+			<script type="../text/javascript">
+				$(function() {
+					$('#Search').click(function() {
+						var txt = $('#filtertxt1').val();
+						$("table tbody tr")
+							.hide()
+							.filter(":contains('" + txt + "')")
+							.show();
+					})
+				});
+			</script>
+            <div class="row m-t">
+              <div class="col-sm-12 invest-month-report"> 
+                <!-- <div class="echart-chart">
+                                            <div class="echart-chart-content" id="summary"></div>
+                                        </div> --> 
+                
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#" id="xmzt_a">经营报表统计图</a></li>
+                  
+                </ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div id="xmzt">
+                    <div class="container-fluid">
+                      <canvas id="xiangmuzhitou" class="col-lg-12 xiangmuzhitou_height"></canvas>
+                    </div>
+                  </div>
+                  <div id="zqzr">
+                    <div class="container-fluid">
+                      <canvas id="zhaiquanzhuanrang" class="col-lg-12 xiangmuzhitou_height"></canvas>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!-- Js --> 
+<script src="../js/jquery-1.8.0.min.js"></script> 
+<script src="../js/bootstrap.min.js"></script> 
+<script src="../js/setting.js"></script> 
+<script src="../js/Chart.min.js"></script>
+<script src="../js/echarts-all.js"></script>
+</body>
+</html>
