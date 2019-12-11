@@ -2,216 +2,126 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>入住界面</title>
+        <title>欢迎页面-L-admin1.0</title>
         <meta name="renderer" content="webkit">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
-        <script src="exampel/Timetables.min.js"></script>
-		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="stylesheet" href="../css/font.css">
         <link rel="stylesheet" href="../css/xadmin.css">
-		<script src="../exampel/Timetables.min.js"></script>
-		<style>
-			#coursesTable {
-				padding: 15px 10px;
-			}
-		
-			.Courses-head {
-				background-color: #edffff;
-			}
-		
-			.Courses-head>div {
-				text-align: center;
-				font-size: 14px;
-				line-height: 28px;
-			}
-		
-			.left-hand-TextDom,
-			.Courses-head {
-				background-color: #f2f6f7;
-			}
-		
-			.Courses-leftHand {
-				background-color: #f2f6f7;
-				font-size: 12px;
-			}
-		
-			.Courses-leftHand .left-hand-index {
-				color: #9c9c9c;
-				margin-bottom: 4px !important;
-			}
-		
-			.Courses-leftHand .left-hand-name {
-				color: #666;
-			}
-		
-			.Courses-leftHand p {
-				text-align: center;
-				font-weight: 900;
-			}
-		
-			.Courses-head>div {
-				border-left: none !important;
-			}
-		
-			.Courses-leftHand>div {
-				padding-top: 5px;
-				border-bottom: 1px dashed rgb(219, 219, 219);
-			}
-		
-			.Courses-leftHand>div:last-child {
-				border-bottom: none !important;
-			}
-		
-			.left-hand-TextDom,
-			.Courses-head {
-				border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important;
-			}
-		
-			.Courses-content>ul {
-				border-bottom: 1px dashed rgb(219, 219, 219);
-				box-sizing: border-box;
-			}
-		
-			.Courses-content>ul:last-child {
-				border-bottom: none !important;
-			}
-		
-			.highlight-week {
-				color: #02a9f5 !important;
-			}
-		
-			.Courses-content li {
-				text-align: center;
-				color: #666666;
-				font-size: 14px;
-				line-height: 50px;
-			}
-		
-			.Courses-content li span {
-				padding: 6px 2px;
-				box-sizing: border-box;
-				line-height: 18px;
-				border-radius: 4px;
-				white-space: normal;
-				word-break: break-all;
-				cursor: pointer;
-			}
-		
-			.grid-active {
-				z-index: 9999;
-			}
-		
-			.grid-active span {
-				box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-			}
-		</style>
+		<script src="../js/JQuey.js" type="text/javascript" charset="utf-8"></script>
     </head>
     <body>
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">欢迎管理员：
             <span class="x-red">test</span>！
 			<label id="#clock"></label>
-			 </blockquote>
-       
+			</blockquote>
         <fieldset class="layui-elem-field">
-            <legend>当前房间</legend>
-            <div id="coursesTable"></div>
-            <button onclick="onChange()" style="background-color: #00a2ae; color: #fff; padding: 5px 10px; border-radius: 4px;border: none">
-            	查询
-            </button>
+            <legend>系统通知</legend>
+            <div class="layui-field-box">
+               <table id="table" border="1" width="600" cellspacing="0" cellpadding="0" class="layui-table" lay-skin="line">
+				   
+				   <tr>
+					   <td onclick=""> </td>
+				   </tr>
+			   </table>
+				</div>
         </fieldset>
-     
-           
+       <script>
+           var html = '';
+           for(var i = 0; i <10; i++){
+			   var t=new Date();
+			   var mont=t.getMonth()+1;
+			   var nday=t.getDate();
+			   
+			   console.log(ntime);
+               html += '<tr>'
+               for(var j = 0; j <5; j++){
+				   if(i==0&&j==0){
+					   html += '<td οnmοusemοve="removeClassType(this)" data-index="'+ i + '-' + j +'">room/time</td>'
+				   }
+				   else if(j==0){
+					    html += '<td data-index="'+ i + '-' + j +'">10'+i+'</td>'
+				   }else if(i==0){
+					   var ntime=mont+'-'+(nday+j-1);
+					  html += '<td data-index="'+ i + '-' + j +'">'+ntime+'</td>' 
+					  console.log(ntime);
+				  }else{
+					   html += '<td onclick="tanchuang(this)" data-index="'+ i + '-' + j +'"></td>'
+				  }
+               }
+               html += '</tr>'
+           }
+       	 document.getElementById("table").innerHTML = html;
+          // $(function(){
+       	  //    $("tr").after(html);
+          // });
+       
+           function removeClassType($this) {
+			   var text1 ='我是一个父窗';
+               $($this).attr("title",text1.innerText);
+           }
+		  
+		   
+           var table = document.getElementById("table"); 
+           if(table.rows.length > 0){
+               var rows = table.rows;
+               for(var i=0; i<rows.length; i++){
+                   (function(i){
+                       var tds=rows[i];
+                       for(var j=0; j<tds.cells.length; j++){
+                           var obj=tds.cells[j];
+                           obj.onmouseover=function(e){
+                               var val = this.getAttribute('data-index');
+                               var x = val.split('-')[0];
+                               var y = val.split('-')[1];
+                               console.log(val)
+       
+                               var tds = document.getElementsByTagName("td");
+                               for(var k=0; k<tds.length; k++){
+                                   tds[k].style.backgroundColor="#fff";
+                               }
+                               
+                               table.rows[i].style.backgroundColor="red";
+                               
+                               for(var k=0; k<=y; k++){
+                                   table.rows[x].cells[k].style.backgroundColor="pink";
+                               }
+                               for(var k=0; k<x; k++){
+                                   table.rows[k].cells[y].style.backgroundColor="pink";
+                               }
+       
+                           };
+                       }
+                   })(i)
+               }
+       
+           }
+		   function tanchuang($this){
+		   			   var val1 = $($this).attr('data-index');
+		   			   var x1 = val1.split('-')[0];
+		   			   var y1 = val1.split('-')[1];
+		   			    alert("我是第"+x1+"行，第"+y1+"列");
+		   }
+		   
+		   function showTime(){
+		   var t =new Date();
+		   var year =t.getFullYear();//年
+		   var month=t.getMonth();//月
+		   var day =t.getDate();//日
+		   var week=t.getDay();//星期
+		   var arr=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+		   var hour =t.getHours();
+		   var min=t.getMinutes();
+		   var second=t.getSeconds();
+		   var showTime=year+'/'+month+'/'+day+' '+arr[week]+' '+hour+((min<10)?":0":":")+min+((second<10)?":0":":")+second;
+		   document.getElementById('#clock').innerHTML=showTime;
+		   }
+		   $(function(){
+		   	setInterval(showTime,1000);
+		   });
+       </script>
+   
     </body>
-	<script src="../js/JQuey.js" type="text/javascript" charset="utf-8"></script>
-	<script type="text/javascript">
-		var t;
-		var year;
-		var month;
-		var day;
-		var week;
-		function showTime(){
-		t =new Date();
-		year =t.getFullYear();//年
-		month=t.getMonth();//月
-		day =t.getDate();//日
-		week=t.getDay();//星期
-		var arr=new Array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
-		var hour =t.getHours();
-		var min=t.getMinutes();
-		var second=t.getSeconds();
-		var showTime=year+'/'+month+'/'+day+' '+arr[week]+' '+hour+((min<10)?":0":":")+min+((second<10)?":0":":")+second;
-		console.log(showTime);
-		document.getElementById('#clock').innerHTML=showTime;
-		}
-		$(function(){
-			setInterval(showTime,1000);
-		});
-			var room = 101+12;
-			var courseList = [
-				['', '静静', '', '', '', '', '', '静静', '', '', '', ''],
-				['', '', '静静', '', '', '', '', '', '', '', '', '静静'],
-				['', '静静', '', '', '', '', '', '', '', '', '', '静静'],
-				['静静', '', '', '', '', '静静', '', '', '', '', '', ''],
-				['', '静静', '', '', '', '', '', '', '', '', '静静', ''],
-			];
-			var t =new Date();
-			var nowday =t.getMonth();
-			
-			var week = window.innerWidth > 360 ?  ['12-8', '12-9', '12-10', '12-11', '12-12'] : ['一', '二', '三', '四', '五'];
-			var day = new Date().getDay()+1;
-			var p='';
-			var x=1;
-			for(var i=101;i<=room;i++){
-			 p+="[{index: "+x+", name: "+i+"}, 1],"
-			 x++;
-			 }
-			 
-			var courseType = [[{index: 1, name: 101}, 1],[{index: 2, name: 102}, 1],[{index: 3, name: 103}, 1],[{index: 4, name: 104}, 1],[{index: 5, name: 105}, 1],[{index: 6, name: 106}, 1],[{index: 7, name: 107}, 1],[{index: 8, name: 108}, 1],[{index: 9, name: 109}, 1],[{index: 10, name: 110}, 1],[{index: 11, name: 111}, 1],[{index: 12, name: 112}, 1],[{index: 13, name: 113}, 1],];
-			
-			var Timetable = new Timetables({
-				
-				el: '#coursesTable',
-				timetables: courseList,
-				week: week,
-				timetableType: courseType,
-				highlightWeek: day,
-				gridOnClick: function(e) {
-					alert('你是我天边最美的云彩');
-					console.log(e);
-				},
-				styles: {
-					Gheight: 50
-				}
-			});
-			
-			//切换课表
-			function onChange() {
-				var courseListOther = [
-					['', '静静', '', '', '', '', '', '静静', '', '', '', ''],
-					['', '', '', '静静', '', '', '', '', '', '', '静静', ''],
-					['', '', '', '', '', '', '', '', '', '', '', ''],
-					['静静', '', '', '', '', '', '静静', '', '', '', '', ''],
-					['', '', '', '', '静静', '', '', '', '', '', '', '静静'],
-				];
-		
-				Timetable.setOption({
-					timetables: courseListOther,
-					week: ['一', '二', '三', '四', '五', '六', '日'],
-					styles: {
-						palette: ['#dedcda', '#ff4081']
-					},
-					timetableType: courseType,
-					gridOnClick: function(e) {
-						console.log(e);
-					}
-				});
-			};
-			$(function(){
-				console.log(p);
-			})
-	</script>
-	
 </html>
