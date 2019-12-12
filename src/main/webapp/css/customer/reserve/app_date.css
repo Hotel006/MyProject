@@ -1,0 +1,10 @@
+.app_date{
+	border-collapse: collapse;
+	width: 100%;
+	margin-bottom: 40px;
+}
+.app_date th{height: 40px;}
+.app_date td{text-align: center;height: 40px;line-height: 40px;border:#ccc 1px solid;}
+.app_date td.date_allow.active{background:#5ae;color:#fff;}
+.app_date tr.week_few td{background: #ddd; text-align: center;}
+.app_date td.close,.app_date td.date_before,.app_date td.date_after{background:#eee;color:#666;}

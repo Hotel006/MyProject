@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>旅途民宿-账号登录</title>
+    <link href="../../../css/customer/login/mui.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../../../css/customer/login/verify.css" />
+    <script type="text/javascript" src="../../../js/jquery-2.1.0.js" ></script>
+    <script type="text/javascript" src="../../../js/customer/login/verify.js" ></script>
+    
+    <style type="text/css">
+        .login-content{
+            position: absolute;
+            top: 30%;
+            width: 90%;
+            left: 50%;
+            margin-left: -45%;
+            border-radius: 10px;
+            padding: 0 25px;
+            background-color: #fff;
+        }
+        .ui-page-login,  body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .ui-page-login{
+            background-image: url("images/login-bg.jpg");
+            background-size: 100% 100%;
+        }
+        .login-content{
+            position: absolute;
+            top: 30%;
+            width: 90%;
+            left: 50%;
+            margin-left: -45%;
+            border-radius: 10px;
+            padding: 0 25px;
+            background-color: #fff;
+        }
+        .login-logo{
+            text-align: center;
+            margin-top: -37px;
+        }
+        .login-logo img{
+            border: 1px solid #fb4746;
+            border-radius: 50%;
+        }
+        .ipttxt-row{
+            margin-top: 12px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .ipttxt-row label{
+            width: 20%;
+        }
+        .ipttxt-row .mui-input{
+            width: 80%;
+            border: 1px solid #fb4746;
+            border-radius: 30px;
+            margin-bottom: 0;
+            background-color: transparent;
+        }
+        .ipttxt-row .mui-input::placeholder{ font-size: 14px;}
+        .link-area{
+            margin-top: 12px;
+            margin-bottom: 15px;
+            text-align: right;
+        }
+        .link-area a{
+            color: #fb4746;
+            font-size: 14px;
+        }
+        .mui-btn-login{
+            padding: 10px 0;
+            background-color: #ff7776;
+            border: 1px solid #fb4746;
+            border-radius: 30px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body class="ui-page-login">
+    <header class="mui-bar mui-bar-transparent">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href="index.html"></a>
+    </header>
+    <div class="login-content" id="content1">
+        <div class="login-logo"><img src="../../../images/customer/login/00.jpg" style="width: 60px; height: 60px;"/></div>
+        <form id="login-form">
+            <div class="ipttxt-row">
+                <label><img src="../../../images/accout.png"/></label>
+                <input id="account" type="text" class="mui-input" placeholder="账号"/>
+            </div>
+            <div class="ipttxt-row">
+                <label><img src="../../../images/password.png"/></label>
+                <input id="password" type="password" class="mui-input" placeholder="密码"/>
+            </div>
+            <!--描述：验证码-->
+            <div id="mpanel1" class="ipttxt-row" style="padding-left: 80px;" >
+			</div>
+            
+            <div class="link-area">
+            	<a href="reg_customer.html"  class="mui-pull-left" id="lijizhuce">立即注册</a>
+                <a href="forget_password.html" id="wangjimima">忘记密码?</a>
+            </div>
+        </form>
+        <div class="">
+            <button type="button" id="login" class="mui-btn mui-btn-block mui-btn-login">登 录</button>
+        </div>
+    </div>
+</body>
+<script>
+
+	
+	$("#login").click(function(){
+		
+		alert("登录成功！");
+});
+	
+	$('#mpanel1').slideVerify({
+		type : 1,		//类型
+		vOffset : 5,	//误差量，根据需求自行调整
+		barSize : {
+			width : '240px',
+			height : '40px',
+		},
+		ready : function() {
+		},
+		success : function() {
+			alert('验证成功，添加你自己的代码！');
+			//......后续操作
+		},
+		error : function() {
+//		        	alert('验证失败！');
+		}
+		
+	});
+</script>
+</html>
