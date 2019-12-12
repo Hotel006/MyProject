@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <title>添加房间</title>
 
-<link rel="stylesheet" href="../../../css/shop/room/addroom.css" />
+<link rel="stylesheet" href="../../../css/shop/room/addroom.css">
+<script src="../../../js/jquery-2.1.0.js"></script>
 
-<script type="text/javascript" src="../../../js/jquery.min.js" ></script>
-<link href="../../../css/shop/statement/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript" src="../../../js/shop/statement/vue.js" ></script>
+<script src="../../../js/shop/statement/bootstrap.js"></script>
+<script src="../../../js/shop/statement/vue.js"></script>
 
 <script>
 	  window.onload = function(){
@@ -16,21 +16,21 @@
 			  el:'#box',
 			  data:{
 				 myData:[],
+				 cardroom:"",
 				 username:"",
 				 money:"",
-				 amount:"",
 				 nowIndex:-100
 			  },
 			  methods:{
 				 add:function(){
 					  this.myData.push({
+						  cardroom:this.cardroom,
 						  username:this.username,
 						  money:this.money,
-						  amount:this.amount,
 					  })
+					 this.cardroom="",
 					 this.username="",
-					 this.money="",
-					 this.amount=""
+					 this.money=""
 				 },
 				  del:function(n){
 					  if(n ==-2){
@@ -49,6 +49,11 @@
 <!-- 代码 开始 -->
 <div class="container" id="box">
 	 <form role="form">
+	 
+	 	 <div class="form-group">
+			 <label for="cardroom">房间编号：</label>
+			 <input type="text" id="cardroom" class="form-control"  v-model="cardroom" placeholder="输入房间编号">
+		 </div>
 		 <div class="form-group">
 			 <label for="username">房间类型：</label>
 			 <input type="text" id="username" class="form-control" v-model="username" placeholder="输入房间类型">
@@ -56,10 +61,6 @@
 		 <div class="form-group">
 			 <label for="money">房间价格：</label>
 			 <input type="text" id="money" class="form-control"  v-model="money" placeholder="输入房间价格">
-		 </div>
-		 <div class="form-group">
-			 <label for="amount">房间数量：</label>
-			 <input type="text" id="amount" class="form-control"  v-model="amount" placeholder="输入房间数量">
 		 </div>
 		  <div style="width: 100%;height:100%; ">
 	<div id="upBox">
@@ -94,14 +95,12 @@
 			 <th class="text-center">房间编号</th>
 			 <th class="text-center">房间类型</th>
 			 <th class="text-center">房间价格</th>
-			 <th class="text-center">房间数量</th>
 			 <th class="text-center">操作</th>
 		 </tr>
 		 <tr class="text-center" v-for="item in myData">
-			 <td>{{$index+1}}</td>
+			 <td>{{item.cardroom}}</td>
 			 <td>{{item.username}}</td>
 			 <td>{{item.money}}</td>
-			 <td>{{item.amount}}</td>
 			 <td>
 				 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
 			 </td>
