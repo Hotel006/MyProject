@@ -9,4 +9,24 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>CheckinServlet.do</display-name>
+    <servlet-name>CheckinServlet.do</servlet-name>
+    <servlet-class>com.oracle.servlet.CheckinServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckinServlet.do</servlet-name>
+    <url-pattern>/CheckinServlet.do</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CheckServlet.do</display-name>
+    <servlet-name>CheckServlet.do</servlet-name>
+    <servlet-class>com.oracle.shop.check.servlet.CheckinServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckServlet.do</servlet-name>
+    <url-pattern>/CheckServlet.do</url-pattern>
+  </servlet-mapping>
 </web-app>

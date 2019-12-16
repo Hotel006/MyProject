@@ -55,15 +55,6 @@
 					html += '</tr>'
 				}
 				document.getElementById("table").innerHTML = html;
-				// $(function(){
-				//    $("tr").after(html);
-				// });
-
-				function removeClassType($this) {
-					var text1 = '我是一个父窗';
-					$($this).attr("title", text1.innerText);
-
-				}
 
 
 				var table = document.getElementById("table");
@@ -118,8 +109,8 @@
 					  content: 'checkin.html' //iframe的url
 					}); 
 				}
-
-				function showTime() {
+				
+					function showTime() {
 					var t = new Date();
 					var year = t.getFullYear(); //年
 					var month = t.getMonth(); //月
@@ -133,6 +124,18 @@
 						(second < 10) ? ":0" : ":") + second;
 					document.getElementById('#clock').innerHTML = showTime;
 				}
+				
+				function hotel() {
+					$.ajax("CheckServlet.do",function(ajax)){
+						if (json.result) {
+							
+						}
+					}
+				}
+				
+				
+				
+				
 				$(function() {
 					setInterval(showTime, 1000);
 				});
