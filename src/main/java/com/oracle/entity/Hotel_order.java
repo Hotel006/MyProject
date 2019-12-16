@@ -1,19 +1,22 @@
 package com.oracle.entity;
 
 public class Hotel_order{
-	//属性列表
 	private	int	oid;
 	private	String	onumber;
 	private	String	opeople;
 	private	String	ophone;
+	private	String	oroom;
 	private	String	ohouse;
 	private	String	ocount;
 	private	String	omoney;
+	private	java.util.Date	oydontime;
 	private	java.util.Date	oontime;
+	private	java.util.Date	oyjouttime;
 	private	java.util.Date	oouttime;
 	private	String	ooderstate;
 	private	String	osource;
-	private	String	ocard;
+	private String ocard;
+	
 	//setter
 	public void setOid(int oid){
 		this.oid = oid;
@@ -47,6 +50,14 @@ public class Hotel_order{
 		 return ophone;
 	}
 	//setter
+	public void setOroom(String oroom){
+		this.oroom = oroom;
+	}
+	//getter
+	public String getOroom(){
+		 return oroom;
+	}
+	//setter
 	public void setOhouse(String ohouse){
 		this.ohouse = ohouse;
 	}
@@ -71,12 +82,28 @@ public class Hotel_order{
 		 return omoney;
 	}
 	//setter
+	public void setOydontime(java.util.Date oydontime){
+		this.oydontime = oydontime;
+	}
+	//getter
+	public java.util.Date getOydontime(){
+		 return oydontime;
+	}
+	//setter
 	public void setOontime(java.util.Date oontime){
 		this.oontime = oontime;
 	}
 	//getter
 	public java.util.Date getOontime(){
 		 return oontime;
+	}
+	//setter
+	public void setOyjouttime(java.util.Date oyjouttime){
+		this.oyjouttime = oyjouttime;
+	}
+	//getter
+	public java.util.Date getOyjouttime(){
+		 return oyjouttime;
 	}
 	//setter
 	public void setOouttime(java.util.Date oouttime){
@@ -102,12 +129,12 @@ public class Hotel_order{
 	public String getOsource(){
 		 return osource;
 	}
-	//setter
-	public void setOcard(String ocard){
-		this.ocard = ocard;
-	}
 	//getter
-	public String getOcard(){
-		 return ocard;
+	public String getOcard() {
+		return ocard;
+	}
+	//setter
+	public void setOcard(String ocard) {
+		this.ocard = ocard;
 	}
 }
