@@ -37,20 +37,17 @@
       <table class="layui-table layui-form">
         <thead>
           <tr>
-            
-            <th width="70">编号</th>
+            <th width="70">房间号</th>
             <th width="150px">房间类型</th>
             <th width="150px">房间价格</th>
             <th width="150px">房间状态</th>
             <th width="280">操作</th>
            
-        </thead>
+     	   </thead>
         <tbody class="x-cate">
           <tr cate-id='1' fid='0' >
-            
             <td>1</td>
             <td>
-              
               豪华大床房
             </td>
             <td><p>1088</td>
@@ -62,38 +59,43 @@
               <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
             </td>
           </tr>
-          
-          <tr cate-id='5' fid='0' >
-            
-            <td>5</td>
-            <td>
-              
-              	标准大床房
-            </td>
-            <td><p>1</p></td>
-            <td>
-              <input type="checkbox" name="switch"  lay-text="开启|停用"  checked="" lay-skin="switch">
-            </td>
-            <td class="td-manage">
-              <button class="layui-btn layui-btn layui-btn-xs"  onclick="x_admin_show('编辑','admin-edit.html')" ><i class="layui-icon">&#xe642;</i>编辑</button>
-             
-              <button class="layui-btn-danger layui-btn layui-btn-xs"  onclick="member_del(this,'要删除的id')" href="javascript:;" ><i class="layui-icon">&#xe640;</i>删除</button>
-            </td>
-          </tr>
-         
         </tbody>
       </table>
-    </div>
-    <style type="text/css">
-      
-    </style>
     <script>
       layui.use(['form'], function(){
         form = layui.form;
-        
       });
-
-      
+      //查询所有房间信息
+	function{
+		$.ajax({
+			url:"${pageContext.request.contextPath}Hotel_roomServlet.do",
+			type:"get",
+			dataType:"json",
+			cache:false;
+			processData : false,// 不处理数据
+	        contentType : false, // 不设置内容类型
+	        success:function(data){
+	        	//将查询的信息遍历
+	        	if (data.result) {
+	        		 //渲染
+	        		 xuanrn(data);
+				} else {
+					alert(data.msg);
+				}
+	        }
+		});
+	}
+      var typeroomData;
+      //解析渲染房间类型和房间数据
+      //当页面加载完的时候解析
+      function xuanran(data){
+    	  //解析
+    	  var datas = data.data;
+    	  typeroomData=datas;
+    	  for(var j=0;j<fms.length;j++){
+    		  
+    	  }
+      }
 
       /*用户-删除*/
       function member_del(obj,id){

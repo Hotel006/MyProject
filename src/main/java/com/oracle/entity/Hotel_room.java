@@ -3,11 +3,13 @@ package com.oracle.entity;
 public class Hotel_room{
 	//属性列表
 	private	int	rid;
+	private int rstatus;
 	private	String	rhouse;
 	private	String	rmoney;
 	private	String	rcount;
 	private	String	rimg;
 	private	String	rnumber;
+	
 	//setter
 	public void setRid(int rid){
 		this.rid = rid;
@@ -55,5 +57,11 @@ public class Hotel_room{
 	//getter
 	public String getRnumber(){
 		 return rnumber;
+	}
+	public int getRstatus() {
+		return rstatus;
+	}
+	public void setRstatus(int rstatus) {
+		this.rstatus = rstatus;
 	}
 }
