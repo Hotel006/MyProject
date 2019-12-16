@@ -201,7 +201,7 @@
       
 		$(function(){
 			$.ajax({
-		           url : "/ShowStaffServlet.do",
+		           url : "${pageContext.request.contextPath}/shop/ShowStaffServlet.do",
 		           type : "get",
 		           dataType : "json",
 	  	           success : function(data) {

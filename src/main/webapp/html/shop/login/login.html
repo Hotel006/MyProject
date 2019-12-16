@@ -12,18 +12,11 @@
 
 <div id="wrapper" class="login-page">
 <div id="login_form" class="form">
-<form class="register-form">
-<input type="text" placeholder="用户名" value="admin" id="r_user_name" />
-<input type="password" placeholder="密码" id="r_password" />
-<input type="text" placeholder="电子邮件" id="r_emial" />
-<button id="create">创建账户</button>
-<p class="message">已经有了一个账户? <a href="#">立刻登录</a></p>
-</form>
 <form class="login-form">
  <h2>管理登录</h2>
 <input type="text" placeholder="用户名" value="admin" id="user_name" />
 <input type="password" placeholder="密码" id="password" />
-<button id="login">登　录</button>
+<button id="login" type="submit">登　录</button>
 <p class="message">超管账号，如果不慎丢失，请联系技术人员</p>
 </form>
 </div>
@@ -50,33 +43,30 @@
 	  },1);  
 	 }
 	}
-	function check_register(){
-		var name = $("#r_user_name").val();
-		var pass = $("#r_password").val();
-		var email = $("r_email").val();
-		if(name!="" && pass=="" && email != "")
-		 {
-		  alert("注册成功！");
-		  $("#user_name").val("");
-		  $("#password").val("");
-		 }
-		 else
-		 {
-		  $("#login_form").removeClass('shake_effect');  
-		  setTimeout(function()
-		  {
-		   $("#login_form").addClass('shake_effect')
-		  },1);  
-		 }
-	}
+	
 	$(function(){
-		$("#create").click(function(){
-			check_register();
-			return false;
-		})
+
 		$("#login").click(function(){
-			check_login();
-			return false;
+			$.ajax({
+				
+		        url : "${pageContext.request.contextPath}/shop/shopLoginServlet.do",
+		           type : "get",
+		           data:$("form:eq(0)").serialize(),
+		           dataType : "json",
+	  	           success : function(data) {
+	  	        	   if(data.result){
+	  	   				alert("登录成功");
+	  	   			$(location).attr('href', 'index.html');
+	  	   				
+	  	        	   }else{
+	  	        		   console.log(data.msg);
+	  	        	   }
+	  	        	 
+		           }
+				
+				
+				
+			});
 		})
 		$('.message a').click(function () {
 		    $('form').animate({

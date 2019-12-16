@@ -34,7 +34,7 @@ public class shopLoginServlet extends HttpServlet {
 			Hotel_admin ha  = ls.login(loginname, loginpass);
 			
 			request.getSession().setAttribute("SESSIONUSER", ha);
-			request.getRequestDispatcher("").forward(request, response);
+			request.getRequestDispatcher("/").forward(request, response);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -109,7 +109,7 @@
             </div>
         </form>
         <div class="">
-            <button type="button" id="login" class="mui-btn mui-btn-block mui-btn-login">登 录</button>
+            <button type="submit" id="login" class="mui-btn mui-btn-block mui-btn-login">登 录</button>
         </div>
     </div>
 </body>
@@ -117,8 +117,21 @@
 
 	
 	$("#login").click(function(){
+		$.ajax({
+			url:"${pageContext.request.contextPath}/customer/servlet/LoginServlet.do",
+			method:"get",
+			data:$("form:eq(0)").serialize(),
+			type:"json",
+			success:function(data){
+				if(data.result){
+					alert("登录成功");
+				}else{ 
+					alert(data.msg);
+				}
+			}
+			
+		});
 		
-		alert("登录成功！");
 });
 	
 	$('#mpanel1').slideVerify({
@@ -132,7 +145,8 @@
 		},
 		success : function() {
 			alert('验证成功，添加你自己的代码！');
-			//......后续操作
+			
+			
 		},
 		error : function() {
 //		        	alert('验证失败！');
