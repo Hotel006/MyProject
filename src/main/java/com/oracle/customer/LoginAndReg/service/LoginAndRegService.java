@@ -5,8 +5,7 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 import com.oracle.customer.LoginAndReg.dao.LogAndRegDao;
-import com.oracle.customer.LoginAndReg.entity.UserAdmin;
-import com.oracle.entity.Shopuser;
+import com.oracle.entity.User_admin;
 import com.oracle.util.SMGutil;
 
 public class LoginAndRegService {
@@ -16,7 +15,7 @@ public class LoginAndRegService {
                                  
 		}
 		
-		UserAdmin ua = LogAndRegDao.queryByPhone(phone);
+		User_admin ua = LogAndRegDao.queryByPhone(phone);
 		
 		if (ua != null) {
 			throw new RuntimeException("账号已经注册，如忘记密码，请点击忘记密码进行密码修改操作");
@@ -31,18 +30,18 @@ public class LoginAndRegService {
 		SMGutil smg = new SMGutil();
 		smg.sendValidateCode(phone, sb.toString());
 		
-		UserAdmin uaa = new UserAdmin();
+		User_admin uaa = new User_admin();
 		uaa.setUloginname(phone);
 		uaa.setUloginpass(sb.toString());
-		uaa.setUnikename(nikename);
+		uaa.setUnickname(nikename);
 		
 		LogAndRegDao.save(uaa);
 		
 		
 	}
 	
-	public UserAdmin login(String phone, String pass) throws Exception {
-		UserAdmin ua = LogAndRegDao.queryByPhone(phone);
+	public User_admin login(String phone, String pass) throws Exception {
+		User_admin ua = LogAndRegDao.queryByPhone(phone);
 		if (ua == null) {
 			throw new RuntimeException("账号不存在,请先注册");
 		}

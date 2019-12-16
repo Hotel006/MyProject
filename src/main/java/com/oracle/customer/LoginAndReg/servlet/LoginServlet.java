@@ -6,8 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oracle.customer.LoginAndReg.entity.UserAdmin;
 import com.oracle.customer.LoginAndReg.service.LoginAndRegService;
+import com.oracle.entity.User_admin;
 
 /**
  * Servlet implementation class LoginServlet
@@ -32,7 +32,7 @@ public class LoginServlet extends HttpServlet {
 		LoginAndRegService ls = new LoginAndRegService();
 		
 		try {
-			UserAdmin ua = ls.login(phone, pass);
+			User_admin ua = ls.login(phone, pass);
 			request.getSession().setAttribute("SESSIONUSER", ua);
 			request.getRequestDispatcher("").forward(request, response);
 		} catch (Exception e) {
