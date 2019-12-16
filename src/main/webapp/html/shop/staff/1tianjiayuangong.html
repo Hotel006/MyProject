@@ -24,7 +24,7 @@
                   <span class="x-red">*</span>员工姓名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="relname" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -33,7 +33,7 @@
                   <span class="x-red">*</span>性别
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="sex" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -42,7 +42,7 @@
                   	年龄
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="age" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -51,7 +51,7 @@
                   			生日
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="birthday" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -60,7 +60,7 @@
                   <span class="x-red">*</span>手机号
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="phone" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -81,7 +81,7 @@
                   <span class="x-red">*</span>员工密码
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="userpass" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
               <div class="layui-form-mid layui-word-aux">
@@ -93,7 +93,7 @@
                   <span class="x-red">*</span>员工昵称
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="username" name="username" required lay-verify="required"
+                  <input type="text" id="username" name="nikename" required lay-verify="required"
                   autocomplete="off" class="layui-input">
               </div>
           </div>
@@ -130,7 +130,10 @@
           //监听提交
           form.on('submit(add)', function(data){
             console.log(data);
-            //发异步，把数据提交给php
+		
+            
+            
+            
             layer.alert("增加成功", {icon: 6},function () {
                 // 获得frame索引
                 var index = parent.layer.getFrameIndex(window.name);

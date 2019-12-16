@@ -1,6 +1,8 @@
 package com.oracle.customer.LoginAndReg.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +34,11 @@ public class RegServlet extends HttpServlet {
 		//调用service
 		LoginAndRegService reg = new LoginAndRegService();
 		
-		reg.register(phone,nikename);
+		try {
+			reg.register(phone,nikename);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		
 		
