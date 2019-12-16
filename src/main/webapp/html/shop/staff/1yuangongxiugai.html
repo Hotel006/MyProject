@@ -13,6 +13,7 @@
     <script src="../../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/xadmin.js"></script>
+    <script type="text/javascript" src="../../../js/jquery-2.1.0.js" ></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -98,15 +99,11 @@
             <th>手机号</th>
             <th>员工账号</th>
             <th>员工密码</th>
-            <th>员工昵称</th>
             <th >操作</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="showstaff">
           <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
             <td>1</td>
             <td>周静</td>
             <td>男</td>
@@ -115,65 +112,17 @@
             <td>18888888888</td>
             <td>001</td>
             <td>000000</td>
-            <td>静静</td>
 
             <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
                 <i class="layui-icon">&#xe640;</i>
               </a>
             </td>
           </tr>
           
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-            <td>2</td>
-            <td>杨柳</td>
-            <td>男</td>
-            <td>22</td>
-            <td>01-01</td>
-            <td>18888888888</td>
-            <td>001</td>
-            <td>000000</td>
-            <td>杨教授</td>
-
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+         
           
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-            <td>3</td>
-            <td>雷昊斌</td>
-            <td>男</td>
-            <td>22</td>
-            <td>01-01</td>
-            <td>18888888888</td>
-            <td>001</td>
-            <td>000000</td>
-            <td>雷老板</td>
-
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+        
         </tbody>
       </table>
       <div class="page">
@@ -248,6 +197,52 @@
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }
+      
+      
+		$(function(){
+			$.ajax({
+		           url : "/ShowStaffServlet.do",
+		           type : "get",
+		           dataType : "json",
+	  	           success : function(data) {
+	  	        	   if(data.result){
+	  	   				xuanran(data);
+	  	        	   }else{
+	  	        		   console.log(data.msg);
+	  	        	   }
+	  	        	 
+		           } 
+			
+			});
+		});
+		function xuanran(data){
+			
+			$("#showstaff").empty();
+			var datas = data.data;
+			var aaa = datas;
+			for(int i=0;i<=aaa.length;i++){
+				
+			var td = datas[i];
+			
+			var staffinfo = "<tr>"+
+	            "<td>"+td.getSid()+"</td>"+
+	            "<td>"+td.getSname()+"</td>"+
+	            "<td>"+td.getSsex()+"</td>"+
+	            "<td>"+td.getSage()+"</td>"+
+	            "<td>"+td.getSbirthday()+"</td>"+
+	            "<td>"+td.getSphone()+"</td>"+
+	            "<td>"+td.getSentername()+"</td>"+
+	            "<td>"+td.getSenterpass()+"</td>"+
+	            "<td class='td-manage'>"+
+	              "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:;'>"+
+	                "<i class='layui-icon'>&#xe640;</i>"+
+	              "</a>"+
+	            "</td>"+
+	          "</tr>";
+          $("#showstaff").append(staffinfo);
+			}
+			
+		}
     </script>
   </body>
 
