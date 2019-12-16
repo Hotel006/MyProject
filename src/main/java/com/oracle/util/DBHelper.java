@@ -46,7 +46,7 @@ public class DBHelper {
 		return druid;
 	}
 
-	private DBHelper() {
+	public DBHelper() {
 
 		ds = new DruidDataSource();
 		ds.setDriverClassName(properties.getProperty("driverClassName"));
