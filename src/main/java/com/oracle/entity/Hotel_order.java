@@ -3,7 +3,7 @@ package com.oracle.entity;
 public class Hotel_order{
 	private	int	oid;
 	private	String	onumber;
-	private	String	opeople;
+	private	String	oname;
 	private	String	ophone;
 	private	String	oroom;
 	private	String	ohouse;
@@ -34,12 +34,12 @@ public class Hotel_order{
 		 return onumber;
 	}
 	//setter
-	public void setOpeople(String opeople){
-		this.opeople = opeople;
+	public void setOname(String oname){
+		this.oname = oname;
 	}
 	//getter
-	public String getOpeople(){
-		 return opeople;
+	public String getOname(){
+		 return oname;
 	}
 	//setter
 	public void setOphone(String ophone){
