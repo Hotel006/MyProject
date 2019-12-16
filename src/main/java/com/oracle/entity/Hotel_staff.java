@@ -1,15 +1,17 @@
 package com.oracle.entity;
 
+import java.util.Date;
+
 public class Hotel_staff{
 	//属性列表
 	private	int	sid;
-	private	Object	sname;
-	private	Object	ssex;
-	private	Object	sage;
-	private	Object	sbirthday;
-	private	Object	sphone;
-	private	Object	sentername;
-	private	Object	senterpass;
+	private	String	sname;
+	private	String	ssex;
+	private	int	sage;
+	private	Date	sbirthday;
+	private	String	sphone;
+	private	String	sentername;
+	private	String	senterpass;
 	//setter
 	public void setSid(int sid){
 		this.sid = sid;
@@ -19,7 +21,7 @@ public class Hotel_staff{
 		 return sid;
 	}
 	//setter
-	public void setSname(Object sname){
+	public void setSname(String sname){
 		this.sname = sname;
 	}
 	//getter
@@ -27,7 +29,7 @@ public class Hotel_staff{
 		 return sname;
 	}
 	//setter
-	public void setSsex(Object ssex){
+	public void setSsex(String ssex){
 		this.ssex = ssex;
 	}
 	//getter
@@ -35,7 +37,7 @@ public class Hotel_staff{
 		 return ssex;
 	}
 	//setter
-	public void setSage(Object sage){
+	public void setSage(int sage){
 		this.sage = sage;
 	}
 	//getter
@@ -43,7 +45,7 @@ public class Hotel_staff{
 		 return sage;
 	}
 	//setter
-	public void setSbirthday(Object sbirthday){
+	public void setSbirthday(Date sbirthday){
 		this.sbirthday = sbirthday;
 	}
 	//getter
@@ -51,7 +53,7 @@ public class Hotel_staff{
 		 return sbirthday;
 	}
 	//setter
-	public void setSphone(Object sphone){
+	public void setSphone(String sphone){
 		this.sphone = sphone;
 	}
 	//getter
@@ -59,7 +61,7 @@ public class Hotel_staff{
 		 return sphone;
 	}
 	//setter
-	public void setSentername(Object sentername){
+	public void setSentername(String sentername){
 		this.sentername = sentername;
 	}
 	//getter
@@ -67,7 +69,7 @@ public class Hotel_staff{
 		 return sentername;
 	}
 	//setter
-	public void setSenterpass(Object senterpass){
+	public void setSenterpass(String senterpass){
 		this.senterpass = senterpass;
 	}
 	//getter

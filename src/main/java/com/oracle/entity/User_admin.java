@@ -3,9 +3,9 @@ package com.oracle.entity;
 public class User_admin{
 	//属性列表
 	private	int	uid;
-	private	Object	uloginname;
-	private	Object	uloginpass;
-	private	Object	unickname;
+	private	String	uloginname;
+	private	String	uloginpass;
+	private	String	unickname;
 	//setter
 	public void setUid(int uid){
 		this.uid = uid;
@@ -15,7 +15,7 @@ public class User_admin{
 		 return uid;
 	}
 	//setter
-	public void setUloginname(Object uloginname){
+	public void setUloginname(String uloginname){
 		this.uloginname = uloginname;
 	}
 	//getter
@@ -23,7 +23,7 @@ public class User_admin{
 		 return uloginname;
 	}
 	//setter
-	public void setUloginpass(Object uloginpass){
+	public void setUloginpass(String uloginpass){
 		this.uloginpass = uloginpass;
 	}
 	//getter
@@ -31,7 +31,7 @@ public class User_admin{
 		 return uloginpass;
 	}
 	//setter
-	public void setUnickname(Object unickname){
+	public void setUnickname(String unickname){
 		this.unickname = unickname;
 	}
 	//getter
