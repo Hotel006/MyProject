@@ -5,7 +5,9 @@ import com.oracle.shop.loginandreg.dao.LoginDao;
 
 public class LoginService {
 	public Hotel_admin login(String loginname, String loginpass) throws Exception {
-		Hotel_admin ha = LoginDao.queryByLoginName(loginname);
+		Hotel_admin ha = new Hotel_admin();
+		LoginDao ld = new LoginDao();
+		ha = ld.queryByLoginName(loginname);
 		if (ha == null) {
 			throw new RuntimeException("账号不存在,请先注册");
 		}

@@ -1,5 +1,6 @@
 package com.oracle.customer.LoginAndReg.service;
 
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -9,13 +10,15 @@ import com.oracle.entity.User_admin;
 import com.oracle.util.SMGutil;
 
 public class LoginAndRegService {
-	public void register(String phone,String nikename) {
+	public void register(String phone,String nikename) throws SQLException {
 		if (!validateMobilePhone(phone)) {
 			throw new RuntimeException("手机号码错误,请重新输入");
                                  
 		}
 		
-		User_admin ua = LogAndRegDao.queryByPhone(phone);
+		User_admin ua = new User_admin();
+		LogAndRegDao lrd = new LogAndRegDao();
+		ua = lrd.queryByPhone(phone);
 		
 		if (ua != null) {
 			throw new RuntimeException("账号已经注册，如忘记密码，请点击忘记密码进行密码修改操作");
@@ -35,13 +38,14 @@ public class LoginAndRegService {
 		uaa.setUloginpass(sb.toString());
 		uaa.setUnickname(nikename);
 		
-		LogAndRegDao.save(uaa);
+		lrd.save(uaa);
 		
 		
 	}
 	
 	public User_admin login(String phone, String pass) throws Exception {
-		User_admin ua = LogAndRegDao.queryByPhone(phone);
+		User_admin ua = new User_admin();
+		LogAndRegDao lar = new LogAndRegDao();
 		if (ua == null) {
 			throw new RuntimeException("账号不存在,请先注册");
 		}
