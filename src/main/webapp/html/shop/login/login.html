@@ -23,26 +23,7 @@
 </div>
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
 <script type="text/javascript">
-	function check_login()
-	{
-	 var name=$("#user_name").val();
-	 var pass=$("#password").val();
-	 if(name=="admin" && pass=="admin")
-	 {
-	  alert("登录成功！");
-	  $("#user_name").val("");
-	  $("#password").val("");
-       $(location).attr('href', 'index.html');
-	 }
-	 else
-	 {
-	  $("#login_form").removeClass('shake_effect');  
-	  setTimeout(function()
-	  {
-	   $("#login_form").addClass('shake_effect')
-	  },1);  
-	 }
-	}
+
 	
 	$(function(){
 

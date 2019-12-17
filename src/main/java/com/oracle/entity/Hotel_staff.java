@@ -76,4 +76,5 @@ public class Hotel_staff{
 	public Object getSenterpass(){
 		 return senterpass;
 	}
+
 }

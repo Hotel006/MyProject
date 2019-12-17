@@ -41,6 +41,8 @@ public class ShowStaffServlet extends HttpServlet {
 			StaffService ss = new StaffService();
 			try {
 				List<Hotel_staff> list =  ss.queryAll();
+				
+			
 				map.put("result", true);
 				map.put("data", list);
 				

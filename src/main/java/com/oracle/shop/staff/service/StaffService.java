@@ -12,4 +12,19 @@ public class StaffService {
 			return sd.queryAll();
 		
 	}
+	
+	public void save(Hotel_staff st) throws SQLException {
+		
+		StaffDao sd = new StaffDao();
+		
+		
+		 sd.save(st);
+	
+	}
+	public Hotel_staff queryByUsername(String username) throws SQLException {
+		StaffDao sd = new StaffDao();
+		return sd.queryByUsername(username);
+	
+}
+	
 }
