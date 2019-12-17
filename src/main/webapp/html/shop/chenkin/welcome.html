@@ -22,14 +22,33 @@
 			<fieldset class="layui-elem-field">
 				<legend>系统通知</legend>
 				<div class="layui-field-box">
-					<table id="table" border="1" width="600" cellspacing="0" cellpadding="0" class="layui-table" lay-skin="line">
+					<table id="table"  border="1" width="600" cellspacing="0" cellpadding="0" class="layui-table" lay-skin="line" >
 
 						<tr>
-							<td onclick="" style="background-color: ;"> </td>
+							<td onclick="" style="background-color: "> </td>
 						</tr>
 					</table>
 				</div>
 			</fieldset>
+			<fieldset class="layui-elem-field">
+            <legend>系统通知</legend>
+            <div class="layui-field-box">
+                <table class="layui-table" lay-skin="line">
+                    <tbody>
+                        <tr>
+                            <td >
+                                <a class="x-a" href="/" target="_blank">新版L-admin 2.0上线了</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td >
+                                <a class="x-a" href="/" target="_blank">交流qq:(370946531)</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </fieldset>
 			<script>
 				var html = '';
 				for (var i = 0; i < 10; i++) {
@@ -69,7 +88,7 @@
 									var val = this.getAttribute('data-index');
 									var x = val.split('-')[0];
 									var y = val.split('-')[1];
-									console.log(val)
+									console.log(val+"-----3")
 
 									var tds = document.getElementsByTagName("td");
 									
@@ -81,11 +100,10 @@
 									table.rows[i].style.backgroundColor = "red";
 
 									for (var k = 0; k <= y; k++) {
-										table.rows[x].cells[k].style.backgroundColor = "#D2E9FF";
+											table.rows[x].cells[k].style.backgroundColor = "#D2E9FF";
 									}
 									for (var k = 0; k < x; k++) {
 										table.rows[k].cells[y].style.backgroundColor = "#D2E9FF";
-
 									}
 
 								};
@@ -96,20 +114,62 @@
 				}
 
 				function tanchuang($this) {
+					var table = document.getElementById("table");
 					var val1 = $($this).attr('data-index');
 					var x1 = val1.split('-')[0];
 					var y1 = val1.split('-')[1];
-					alert("我是第" + x1 + "行，第" + y1 + "列");
-					layer.open({
-					  type: 2,
-					  title: '入住',
-					  shadeClose: true,
-					  shade: 0.8,
-					  area: ['550px', '90%'],
-					  content: 'checkin.html' //iframe的url
-					}); 
+					var text =$($this).text();
+					var state=text.split('>')[1];
+					if (state=='入住中') {
+						layer.confirm('此房间已入住，是否修改房间信息？', {
+							  btn: ['是','否'] //按钮
+							}, function(){
+								layer.open({
+									  type: 2,
+									  title: '入住',
+									  shadeClose: true,
+									  shade: 0.8,
+									  area: ['550px', '90%'],
+									  content: 'change.html?room='+x1 //iframe的url
+								}); 
+							}, function(){
+							  layer.msg('确认取消', {
+							    time: 300, //20s后自动关闭
+							  });
+							});
+					}else if(state=='已预定'){
+						layer.confirm('此房间已被预定，是否入住？', {
+							  btn: ['是','否'] //按钮
+							}, function(){
+								layer.open({
+									  type: 2,
+									  title: '入住',
+									  shadeClose: true,
+									  shade: 0.8,
+									  area: ['550px', '90%'],
+									  content:'Checkin.jsp?room='+x1+'&state=0' //iframe的url
+								}); 
+							}, function(){
+							  layer.msg('确认取消', {
+							    time: 300, //20s后自动关闭
+							  });
+							});
+					}else {
+						layer.open({
+							  type: 2,
+							  title: '入住',
+							  shadeClose: true,
+							  shade: 0.8,
+							  area: ['550px', '90%'],
+							  content: 'Checkin.jsp?room='+x1+'&state=1' //iframe的url
+						}); 
+					}
+					
 				}
 				
+					
+					
+					
 					function showTime() {
 					var t = new Date();
 					var year = t.getFullYear(); //年
@@ -124,20 +184,68 @@
 						(second < 10) ? ":0" : ":") + second;
 					document.getElementById('#clock').innerHTML = showTime;
 				}
-				
-				function hotel() {
-					$.ajax("CheckServlet.do",function(ajax)){
-						if (json.result) {
-							
-						}
-					}
+				function showruzhu() {
+					var t = new Date();
+					var day = t.getDate(); //日
+					var table = document.getElementById("table");
+					
+					  $.getJSON("${request.getContextPath()}/QueryruzhuServlet.do",function(json){
+							$(json.datas).each(function(index,ele) {
+									var room=ele.oroom;
+									var rztime=ele.oontime;
+									 var x = room.split('-')[1];
+									 var unixTimestamp = new Date(rztime) ;
+									 commonTime = unixTimestamp.toLocaleString();
+									 var totle=parseInt(ele.oday);
+									 var y = parseInt((commonTime.substring(8,10))-day+1); 
+									 var name=ele.oname;
+									 var tq=y+totle; 
+									 if(tq>0){
+										 for (var i=0; i <tq-1; i++) {
+											 if(y>0){
+												 $("tr:eq("+x+")  td:eq("+(y+i)+")").css("background","#FAEBD7").text(name+"-->入住中");	
+											 }
+											
+										}
+										
+									 }					
+									});
+					});  
+					  $.getJSON("${request.getContextPath()}/QueryyudingServlet.do",function(json){
+							$(json.datas).each(function(index,ele) {
+									var room=ele.oroom;
+									var yjtime=ele.oydontime;
+									 var x = room.split('-')[1];
+									 var unixTimestamp = new Date(yjtime) ;
+									 commonTime = unixTimestamp.toLocaleString();
+									 var totle=parseInt(ele.oday);
+									 var y = parseInt((commonTime.substring(8,10))-day+1); 
+									 var name=ele.oname;
+									 var tq=y+totle;
+									 if(tq>0){
+										 for (var i=0; i <tq-1; i++) {
+											 if(y>0){
+												 $("tr:eq("+x+")  td:eq("+(y+i)+")").css("background","#FFD2D2").text(name+"-->已预定");	
+											 }
+											
+										}
+										
+									 }	
+															
+									});
+						
+					});  
+					
 				}
-				
+			
+			 	
 				
 				
 				
 				$(function() {
 					setInterval(showTime, 1000);
+					setInterval(showruzhu, 1000);
+					
 				});
 			</script>
 

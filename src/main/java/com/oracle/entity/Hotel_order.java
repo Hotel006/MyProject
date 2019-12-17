@@ -1,22 +1,42 @@
 package com.oracle.entity;
 
 public class Hotel_order{
+	//属性列表
 	private	int	oid;
 	private	String	onumber;
 	private	String	oname;
 	private	String	ophone;
-	private	String	oroom;
 	private	String	ohouse;
 	private	String	ocount;
 	private	String	omoney;
-	private	java.util.Date	oydontime;
+	private String  oroom;
 	private	java.util.Date	oontime;
-	private	java.util.Date	oyjouttime;
+	private	java.util.Date	oydontime;
 	private	java.util.Date	oouttime;
 	private	String	ooderstate;
 	private	String	osource;
-	private String ocard;
+	private	String	ocard;
+	private	String	oday;
 	
+	
+	public String getOday() {
+		return oday;
+	}
+	public void setOday(String oday) {
+		this.oday = oday;
+	}
+	public java.util.Date getOydontime() {
+		return oydontime;
+	}
+	public void setOydontime(java.util.Date oydontime) {
+		this.oydontime = oydontime;
+	}
+	public String getOroom() {
+		return oroom;
+	}
+	public void setOroom(String oroom) {
+		this.oroom = oroom;
+	}
 	//setter
 	public void setOid(int oid){
 		this.oid = oid;
@@ -34,28 +54,20 @@ public class Hotel_order{
 		 return onumber;
 	}
 	//setter
-	public void setOname(String oname){
-		this.oname = oname;
-	}
-	//getter
-	public String getOname(){
-		 return oname;
-	}
+	
 	//setter
 	public void setOphone(String ophone){
 		this.ophone = ophone;
 	}
+	public String getOname() {
+		return oname;
+	}
+	public void setOname(String oname) {
+		this.oname = oname;
+	}
 	//getter
 	public String getOphone(){
 		 return ophone;
-	}
-	//setter
-	public void setOroom(String oroom){
-		this.oroom = oroom;
-	}
-	//getter
-	public String getOroom(){
-		 return oroom;
 	}
 	//setter
 	public void setOhouse(String ohouse){
@@ -82,28 +94,12 @@ public class Hotel_order{
 		 return omoney;
 	}
 	//setter
-	public void setOydontime(java.util.Date oydontime){
-		this.oydontime = oydontime;
-	}
-	//getter
-	public java.util.Date getOydontime(){
-		 return oydontime;
-	}
-	//setter
 	public void setOontime(java.util.Date oontime){
 		this.oontime = oontime;
 	}
 	//getter
 	public java.util.Date getOontime(){
 		 return oontime;
-	}
-	//setter
-	public void setOyjouttime(java.util.Date oyjouttime){
-		this.oyjouttime = oyjouttime;
-	}
-	//getter
-	public java.util.Date getOyjouttime(){
-		 return oyjouttime;
 	}
 	//setter
 	public void setOouttime(java.util.Date oouttime){
@@ -129,12 +125,12 @@ public class Hotel_order{
 	public String getOsource(){
 		 return osource;
 	}
-	//getter
-	public String getOcard() {
-		return ocard;
-	}
 	//setter
-	public void setOcard(String ocard) {
+	public void setOcard(String ocard){
 		this.ocard = ocard;
+	}
+	//getter
+	public String getOcard(){
+		 return ocard;
 	}
 }
