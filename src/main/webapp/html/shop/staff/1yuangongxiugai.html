@@ -138,6 +138,30 @@
 
     </div>
     <script>
+    $(function(){
+		$.ajax({
+	           url : "../../../ShowStaffServlet.do",
+	           type : "get",
+	           dataType : "json",
+  	           success : function(data) {
+  	        	   if(data.result){
+  	   				xuanran(data);
+  	        	   }else{
+  	        		   console.log(data.msg);
+  	        	   }
+  	        	 
+	           } 
+		
+		});
+	});
+    
+    
+    
+    
+    
+    
+    
+    
       layui.use('laydate', function(){
         var laydate = layui.laydate;
         
@@ -199,48 +223,34 @@
       }
       
       
-		$(function(){
-			$.ajax({
-		           url : "${pageContext.request.contextPath}/shop/ShowStaffServlet.do",
-		           type : "get",
-		           dataType : "json",
-	  	           success : function(data) {
-	  	        	   if(data.result){
-	  	   				xuanran(data);
-	  	        	   }else{
-	  	        		   console.log(data.msg);
-	  	        	   }
-	  	        	 
-		           } 
-			
-			});
-		});
+		
 		function xuanran(data){
 			
 			$("#showstaff").empty();
 			var datas = data.data;
 			var aaa = datas;
-			for(int i=0;i<=aaa.length;i++){
+			console.log(aaa);
+ 		 for(var i=0;i<aaa.length;i++){ 
 				
-			var td = datas[i];
+			 var td = aaa[i]; 
 			
-			var staffinfo = "<tr>"+
-	            "<td>"+td.getSid()+"</td>"+
-	            "<td>"+td.getSname()+"</td>"+
-	            "<td>"+td.getSsex()+"</td>"+
-	            "<td>"+td.getSage()+"</td>"+
-	            "<td>"+td.getSbirthday()+"</td>"+
-	            "<td>"+td.getSphone()+"</td>"+
-	            "<td>"+td.getSentername()+"</td>"+
-	            "<td>"+td.getSenterpass()+"</td>"+
+			 var staffinfo = "<tr>"+
+	            "<td>"+td.sid+"</td>"+
+	            "<td>"+td.sname+"</td>"+
+	            "<td>"+td.ssex+"</td>"+
+	            "<td>"+td.sage+"</td>"+
+	            "<td>"+td.sbirthday+"</td>"+
+	            "<td>"+td.sphone+"</td>"+
+	            "<td>"+td.sentername+"</td>"+
+	            "<td>"+td.senterpass+"</td>"+
 	            "<td class='td-manage'>"+
 	              "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:;'>"+
 	                "<i class='layui-icon'>&#xe640;</i>"+
 	              "</a>"+
 	            "</td>"+
 	          "</tr>";
-          $("#showstaff").append(staffinfo);
-			}
+          $("#showstaff").append(staffinfo); 
+			}  
 			
 		}
     </script>
