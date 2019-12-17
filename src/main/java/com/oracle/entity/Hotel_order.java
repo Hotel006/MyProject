@@ -10,6 +10,7 @@ public class Hotel_order{
 	private	String	ocount;
 	private	String	omoney;
 	private String  oroom;
+	private String  rmoney;
 	private	java.util.Date	oontime;
 	private	java.util.Date	oydontime;
 	private	java.util.Date	oouttime;
@@ -19,6 +20,12 @@ public class Hotel_order{
 	private	String	oday;
 	
 	
+	public String getRmoney() {
+		return rmoney;
+	}
+	public void setRmoney(String rmoney) {
+		this.rmoney = rmoney;
+	}
 	public String getOday() {
 		return oday;
 	}
