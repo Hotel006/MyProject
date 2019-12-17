@@ -3,7 +3,7 @@ package com.oracle.customer.LoginAndReg.servlet;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.ServletException;
+import javax.servlet.ServletException;   
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +37,7 @@ public class RegServlet extends HttpServlet {
 		try {
 			reg.register(phone,nikename);
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -54,3 +55,4 @@ public class RegServlet extends HttpServlet {
 	}
 
 }
+
