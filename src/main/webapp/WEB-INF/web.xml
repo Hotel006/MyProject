@@ -29,4 +29,24 @@
     <servlet-name>CheckServlet.do</servlet-name>
     <url-pattern>/CheckServlet.do</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Hotel_roomServlet</display-name>
+    <servlet-name>Hotel_roomServlet</servlet-name>
+    <servlet-class>com.oracle.shop.check.servlet.Hotel_roomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hotel_roomServlet</servlet-name>
+    <url-pattern>/Hotel_roomServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Hotel_RoomServlet</display-name>
+    <servlet-name>Hotel_RoomServlet</servlet-name>
+    <servlet-class>com.oracle.shop.room.servlet.Hotel_RoomServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Hotel_RoomServlet</servlet-name>
+    <url-pattern>/Hotel_RoomServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

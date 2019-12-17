@@ -1,139 +1,161 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-<head lang="en">
+<head>
 <meta charset="UTF-8">
-<title>添加房间</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<title>房间添加</title>
 
-<link rel="stylesheet" href="../../../css/shop/room/addroom.css">
-<script src="../../../js/jquery-2.1.0.js"></script>
-
-<script src="../../../js/shop/statement/bootstrap.js"></script>
-<script src="../../../js/shop/statement/vue.js"></script>
-
-<script>
-	  window.onload = function(){
-		  new Vue({
-			  el:'#box',
-			  data:{
-				 myData:[],
-				 cardroom:"",
-				 username:"",
-				 money:"",
-				 nowIndex:-100
-			  },
-			  methods:{
-				 add:function(){
-					  this.myData.push({
-						  cardroom:this.cardroom,
-						  username:this.username,
-						  money:this.money,
-					  })
-					 this.cardroom="",
-					 this.username="",
-					 this.money=""
-				 },
-				  del:function(n){
-					  if(n ==-2){
-						  this.myData="";
-					  }{
-						  this.myData.splice(n,1);
-					  }
-				  }
-			  }
-		  })
-	  }
-</script>
+<link rel="stylesheet" type="text/css" href="../../../css/shop/room/base.css">
+<link rel="stylesheet" type="text/css" href="../../../css/shop/room/home.css">
 
 </head>
 <body>
-<!-- 代码 开始 -->
-<div class="container" id="box">
-	 <form role="form">
-	 
-	 	 <div class="form-group">
-			 <label for="cardroom">房间编号：</label>
-			 <input type="text" id="cardroom" class="form-control"  v-model="cardroom" placeholder="输入房间编号">
-		 </div>
-		 <div class="form-group">
-			 <label for="username">房间类型：</label>
-			 <input type="text" id="username" class="form-control" v-model="username" placeholder="输入房间类型">
-		 </div>
-		 <div class="form-group">
-			 <label for="money">房间价格：</label>
-			 <input type="text" id="money" class="form-control"  v-model="money" placeholder="输入房间价格">
-		 </div>
-		  <div style="width: 100%;height:100%; ">
-	<div id="upBox">
-	 <div id="inputBox"><input type="file" title="请选择图片" id="file" multiple accept="image/png,image/jpg,image/gif,image/JPEG">点击选择图片</div>
-     <div id="imgBox">
-     </div>
-     <button id="btn">上传</button>
+
+<section class="aui-content">
+	<div style="height:20px;"></div>
+	<div class="aui-content-up">
+		<form action="" name="form1" method="post">
+			<div class="aui-content-up-form">
+				<h2>添加房间</h2>
+			</div>
+			<div class="aui-form-group clear">
+				<label class="aui-label-control">
+					房间类型 <em>*</em>
+				</label>
+				<div class="aui-form-input">
+					<input type="text" class="aui-form-control-two" name="yourname" onBlur="checkna()" required id="1" placeholder="请输入房间类型">
+					<span class="tips" id="divname">长度1~6个字符</span>
+				</div>
+			</div>
+			<div class="aui-form-group clear">
+				<label class="aui-label-control">
+					房间编号 <em>*</em>
+				</label>
+				<div class="aui-form-input">
+					<input type="text" class="aui-form-control-two" name="youphone" id="2" placeholder="请输入房间编号" onBlur="checkpsd1()" required/>
+					<span class="tips" id="phone">必须是4个的数字</span>
+				</div>
+			</div>
+			<div class="aui-form-group clear">
+				<label class="aui-label-control">
+					房间价格 <em>*</em>
+				</label>
+				<div class="aui-form-input">
+					<input type="text" class="aui-form-control-two" name="youziz" id="3" placeholder="请输入房间价格" onBlur="checkpsd2()" required/>
+					<span class="tips" id="zizhi">必须是2个以上的数字</span>
+				</div>
+			</div>
+			<div class="aui-form-group clear">
+				<label class="aui-label-control">
+					房间简介：
+				</label>
+				<div class="aui-form-input">
+					<textarea class="aui-form-control" name="description" id="4" minlength="5">请输入您要推广的内容...</textarea>
+				</div>
+			</div>
+			<div class="aui-form-group clear">
+				<label class="aui-label-control">
+					房间照片 <em>*</em>
+					<span>小于5M</span>
+				</label>
+				<div class="aui-form-input">
+					<div class="aui-content-img-box aui-content-full">
+						<div class="aui-photo aui-up-img clear">
+							<section class="aui-file-up fl">
+								<img src="../../../images/up.png" class="add-img">
+								<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
+							</section>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</form>
+	</div>
+	<div class="aui-btn-default">
+		<button class="aui-btn aui-btn-account">保存并提交</button>
+	</div>
+</section>
+<!-- mask begin -->
+<div class="aui-mask aui-works-mask">
+	<div class="aui-mask-content">
+		<p class="aui-delete-text">确定要删除你上传的资料？</p>
+		<p class="aui-check-text">
+			<span class="aui-delete aui-accept-ok">确定</span>
+			<span class="aui-accept-no">取消</span>
+		</p>
 	</div>
 </div>
-		 <div class="form-group">
-			 <input type="button"  value="添加" class="btn btn-primary" v-on:click="add()">
-			 <input type="reset"  value="重置" class="btn btn-danger">
-		 </div>
-	 </form>
-	 <hr/>
-	 
-	
+<!-- mask end -->
 
-<script type="text/javascript" src="../../../js/shop/statement/uploadImg.js" ></script>
+<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../../js/shop/statement/up.js"></script>
 <script type="text/javascript">
-	imgUpload({
-	inputId:'file', //input框id
-	imgBox:'imgBox', //图片容器id
-	buttonId:'btn', //提交按钮id
-	upUrl:'',  //提交地址
-	data:'file1' //参数名
-})
+	//验证房间类型
+	function checkna(){
+
+		na=form1.yourname.value;
+
+		if( na.length <1 || na.length >8)
+
+		{
+
+			divname.innerHTML='<font class="tips_false">长度是1~8个字符</font>';
+
+		}else{
+
+			divname.innerHTML='<font class="tips_true">输入正确</font>';
+
+		}
+
+	}
+
+	//验证房间编号
+	function checkpsd1(){
+
+		na=form1.youphone.value;
+
+		if( na.length <4 || na.length >4)
+
+		{
+
+			phone.innerHTML='<font class="tips_false">必须是4位的数字</font>';
+
+
+
+		}else{
+
+			phone.innerHTML='<font class="tips_true">输入正确</font>';
+
+		}
+
+	}
+
+	//验证房间价格
+	function checkpsd2(){
+
+		na=form1.youziz.value;
+
+		if( na.length <2 || na.length >10)
+
+		{
+
+			zizhi.innerHTML='<font class="tips_false">必须是2位以上的数字</font>';
+
+		}else{
+
+			zizhi.innerHTML='<font class="tips_true">输入正确</font>';
+
+		}
+	}
+
 </script>
-	 <table class="table table-bordered table-hover">
-		  <caption class="h3 text-info">房间信息表</caption>
-		 <tr>
-			 <th class="text-center">房间编号</th>
-			 <th class="text-center">房间类型</th>
-			 <th class="text-center">房间价格</th>
-			 <th class="text-center">操作</th>
-		 </tr>
-		 <tr class="text-center" v-for="item in myData">
-			 <td>{{item.cardroom}}</td>
-			 <td>{{item.username}}</td>
-			 <td>{{item.money}}</td>
-			 <td>
-				 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#layer" v-on:click="nowIndex=$index">删除</button>
-			 </td>
-		 </tr>
-		 <tr v-show="myData.length!=0">
-			 <td colspan="5" class="text-right">
-				 <button class="btn btn-danger"  data-toggle="modal" data-target="#layer" v-on:click="nowIndex=-2">删除全部</button>
-			 </td>
-		 </tr>
-		 <tr v-show="myData.length==0">
-			 <td colspan="4" class="text-center text-info">
-				 <p>暂无数据...</p>
-			 </td>
-		 </tr>
-	 </table>
-	 <!--模态框 弹出框-->
-	 <div role="dialog" class="modal fade" id="layer" data-index="{{nowIndex}}">
-		  <div class="modal-dialog">
-			  <div class="modal-content">
-				  <div class="modal-header">
-					  <button class="close" data-dismiss="modal">
-						  <span>&times;</span>
-					  </button>
-					  <h4 class="modal-title">确认删除吗？</h4>
-				  </div>
-				  <div class="modal-body text-right">
-					  <button class="btn btn-primary btn-sm" data-dismiss="modal">取消</button>
-					  <button class="btn btn-danger btn-sm" data-dismiss="modal" v-on:click="del(nowIndex)">确认</button>
-				  </div>
-			  </div>
-		  </div>
-	 </div>
-</div>
+
 
 
 </body>

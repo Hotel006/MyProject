@@ -10,15 +10,12 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../../css/font.css">
     <link rel="stylesheet" href="../../../css/xadmin.css">
+    
     <script src="../../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/xadmin.js"></script>
     <script type="text/javascript" src="../../../js/shop/statement/bootstrap.js" ></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
   </head>
   
   <body>
@@ -44,13 +41,13 @@
             <th width="280">操作</th>
            
      	   </thead>
-        <tbody class="x-cate">
+        <tbody class="x-cate" id="tboday1">
           <tr cate-id='1' fid='0' >
             <td>1</td>
             <td>
               豪华大床房
             </td>
-            <td><p>1088</td>
+            <td>1088</td>
             <td>
               <input type="checkbox" name="switch"  lay-text="开启|停用"  checked="" lay-skin="switch">
             </td>
@@ -62,38 +59,60 @@
         </tbody>
       </table>
     <script>
-      layui.use(['form'], function(){
-        form = layui.form;
-      });
-      //查询所有房间信息
-	function{
+    
+    $(function(){
 		$.ajax({
-			url:"${pageContext.request.contextPath}Hotel_roomServlet.do",
+			url:"../../../Hotel_RoomServlet",
 			type:"get",
 			dataType:"json",
-			cache:false;
-			processData : false,// 不处理数据
-	        contentType : false, // 不设置内容类型
 	        success:function(data){
 	        	//将查询的信息遍历
 	        	if (data.result) {
 	        		 //渲染
-	        		 xuanrn(data);
+	        		 console.log(data.length);
+	        		 xuanran(data);
 				} else {
 					alert(data.msg);
 				}
 	        }
 		});
-	}
-      var typeroomData;
+	});
+    
+    
+    
+    
+    
+    
+      layui.use(['form'], function(){
+        form = layui.form;
+      });
+      //查询所有房间信息
+	
+      
       //解析渲染房间类型和房间数据
       //当页面加载完的时候解析
       function xuanran(data){
     	  //解析
     	  var datas = data.data;
-    	  typeroomData=datas;
-    	  for(var j=0;j<fms.length;j++){
+    	 var typeroomData=datas;
+    	  for(var j=0;j<typeroomData.length;j++){
+    		  var td = typeroomData[j];
     		  
+    		  
+    var tdHTML =  "<tr cate-id='1' fid='0' >"+
+              "<td>"+td.rnumber+"</td>"+
+              " <td>"+td.rhouse+" </td>"+
+              " <td>"+td.rmoney+"</td>"+
+               "<td>"+
+               " <input type='checkbox' name='switch'  lay-text='开启|停用'  checked='' lay-skin='switch'>"+
+               " </td>"+
+              " <td class='td-manage'>"+
+              " <button class='layui-btn layui-btn layui-btn-xs'  onclick='x_admin_show('编辑','admin-edit.html')' ><i class='layui-icon'>&#xe642;</i>修改</button>"+
+              " <button class='layui-btn-danger layui-btn layui-btn-xs'  onclick='member_del(this,'要删除的id')' href='javascript:;' ><i class='layui-icon'>&#xe640;</i>删除</button>"+
+              "</td>"+
+             "</tr>"+
+            $("#tboday1").append(tdHTML);
+            
     	  }
       }
 
