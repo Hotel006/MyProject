@@ -42,12 +42,6 @@ public class Hotel_RoomServlet extends HttpServlet {
 							
 					map.put("data",list);	
 					map.put("result", true);
-					
-					
-					
-
-					//包含房间类型和信息的对象
-				
 				} catch (Exception e) {
 					map.put("result", false);
 					map.put("msg", "没有找到房间信息");

@@ -19,7 +19,7 @@
 <section class="aui-content">
 	<div style="height:20px;"></div>
 	<div class="aui-content-up">
-		<form action="" name="form1" method="post">
+		<form id="sss" onsubmit="return false" name="sss" >
 			<div class="aui-content-up-form">
 				<h2>添加房间</h2>
 			</div>
@@ -68,7 +68,7 @@
 						<div class="aui-photo aui-up-img clear">
 							<section class="aui-file-up fl">
 								<img src="../../../images/up.png" class="add-img">
-								<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
+								<input type="file" name="path" id="path" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
 							</section>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 		</form>
 	</div>
 	<div class="aui-btn-default">
-		<button class="aui-btn aui-btn-account">保存并提交</button>
+		<button class="aui-btn aui-btn-account" id="add">保存并提交</button>
 	</div>
 </section>
 <!-- mask begin -->
@@ -99,7 +99,7 @@
 	//验证房间类型
 	function checkna(){
 
-		na=form1.yourname.value;
+		na=sss.yourname.value;
 
 		if( na.length <1 || na.length >8)
 
@@ -118,7 +118,7 @@
 	//验证房间编号
 	function checkpsd1(){
 
-		na=form1.youphone.value;
+		na=sss.youphone.value;
 
 		if( na.length <4 || na.length >4)
 
@@ -139,7 +139,7 @@
 	//验证房间价格
 	function checkpsd2(){
 
-		na=form1.youziz.value;
+		na=sss.youziz.value;
 
 		if( na.length <2 || na.length >10)
 
@@ -153,6 +153,27 @@
 
 		}
 	}
+	
+	//给提交写点击事件
+	
+	$(function() {
+		$("#add").click(function(){
+			$.ajax({
+				url:"../../../AddRoomServlet",
+				type:"post",
+				data:$("#sss").serialize(),//获取表单数据
+				dataType:"json",
+				
+				success:function(data){
+					if (data.result) {
+						alert("添加房间成功")
+					} else {
+						console.log(data.msg);
+					}
+				}
+			})
+		});
+	});
 
 </script>
 

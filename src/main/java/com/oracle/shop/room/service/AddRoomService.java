@@ -4,15 +4,20 @@ import java.sql.SQLException;
 
 import com.oracle.entity.Hotel_room;
 import com.oracle.shop.room.dao.AddRoomDao;
+import com.oracle.shop.room.dao.Hotel_roomDao;
 
 public class AddRoomService {
-	public void add (String number) throws SQLException {
+	public void add (Hotel_room hr ) throws SQLException {
 		
-		Hotel_room hr = new Hotel_room();
+		String number = hr.getRnumber();
 		AddRoomDao ad = new AddRoomDao();
-		hr = ad.queryByNumber(number);
-		if (hr != null) {
-			throw new RuntimeException("该房间已存在，请从新输入");
+		Hotel_room qbn = ad.queryByNumber(number);
+		if (qbn == null) {
+			/* throw new RuntimeException("该房间已存在，请从新输入"); */
+			ad.save(hr);
 		}
+		
 	}
+
+	
 }
