@@ -13,18 +13,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.oracle.entity.Hotel_order;
-import com.oracle.shop.order.service.HotelOrderService;
+import com.oracle.shop.order.service.HotelOrderOnumberService;
 
 /**
- * Servlet implementation class HotelOrderServlet
+ * Servlet implementation class HotelOrderOnumberServlet
  */
-public class HotelOrderServlet extends HttpServlet {
+public class HotelOrderOnumberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HotelOrderServlet() {
+    public HotelOrderOnumberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,25 +33,21 @@ public class HotelOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.setContentType("application/json;charset=utf-8");
-		
+		response.setContentType("application/json,charset=utf-8");
 		Map<String, Object> map = new HashMap<String, Object>();
-		
-		HotelOrderService hos = new HotelOrderService();
-		
-//		DateUtil du = new DateUtil();
+		HotelOrderOnumberService hos = new HotelOrderOnumberService();
 		
 		try {
-			
-			List<Hotel_order> list = hos.queryAll() ;
-			System.out.println(list.size());
+			Hotel_order ho = new Hotel_order();
+			List<Hotel_order> list = hos.queryByOnumber(ho.getOnumber());
 			map.put("result", true);
 			map.put("data", list);
 		} catch (SQLException e) {
-			map.put("msg", e.getMessage());
-
+			
+			map.put("result", false);
+			map.put("msg", "没有找到订单信息");
 		}
+		
 		response.getWriter().print(JSON.toJSONString(map));
 	}
 
@@ -59,8 +55,8 @@ public class HotelOrderServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
-		
 	}
 
 }
