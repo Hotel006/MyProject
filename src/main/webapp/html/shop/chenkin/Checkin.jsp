@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
 <meta charset="UTF-8">
 <title>欢迎页面-L-admin1.0</title>
 <meta name="renderer" content="webkit">
@@ -17,85 +17,73 @@
 <script type="text/javascript" src="../../../lib/layui/layui.js"
 	charset="utf-8"></script>
 <script type="text/javascript" src="../../../js/xadmin.js"></script>
-<title>入住</title>
 <%
 	int state = Integer.valueOf(request.getParameter("state"));
 	String room = request.getParameter("room");
 	String rroom = room.split("/")[0];
 %>
-	</head>
-<body>
+<title>入住</title>
+</head>
 <body class="form-wrap">
 
 	<div class="layui-fluid">
 		<div class="layui-card">
 			<div class="layui-card-header">
-				房间号为<%=room %></div>
+				房间号为<%=room%>
+			</div>
 			<div class="layui-card-body" style="padding: 15px;">
-				<form class="layui-form" action="" lay-filter="component-form-group">
+				<form action="CheckServlet" method="post" id="ajaxForm">
 					<div class="layui-form-item">
 						<label class="layui-form-label">姓名：</label>
 						<div class="layui-input-block">
-							<input id="user_name" type="text" name="title" lay-verify="title"
-								autocomplete="off" class="layui-input">
+							<input type="text" id="user_name" name="name" lay-verify="title"
+								autocomplete="off" placeholder="请输入姓名" class="layui-input">
+						
 						</div>
 					</div>
+					
+					<input type="hidden"  name="room" value="<%=room%>">
+
+					<input type="hidden"  name="state" value="<%=state%>">
+					
 					<div class="layui-form-item">
-						<label class="layui-form-label">身份证号：</label>
+						<label class="layui-form-label">手机号：</label>
 						<div class="layui-input-block">
-							<input id="user_cardid" type="text" name="username"
-								lay-verify="required" autocomplete="off" class="layui-input">
+							<input type="tel" name="phone" id="user_phone" lay-verify="required|phone"
+								autocomplete="off" placeholder="请输入手机号" class="layui-input">
 						</div>
 					</div>
 
 					<div class="layui-form-item">
-						<label class="layui-form-label">手机号：</label>
+						<label class="layui-form-label">身份证号：</label>
 						<div class="layui-input-block">
-							<input id="user_phone" type="tel" name="phone"
-								lay-verify="required|phone" autocomplete="off"
+							<input type="text" name="cardid" id="user_cardid" lay-verify="identity"
+								placeholder="请输入身份证号" autocomplete="off" class="layui-input">
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">房间金额：</label>
+						<div class="layui-input-block">
+							<input type="text" id="user_money" name="money" autocomplete="off"
+								class="layui-input">
+						</div>
+
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">入住天数：</label>
+						<div class="layui-input-block">
+							<input type="tel" id="u_day" name="day" autocomplete="off"
 								class="layui-input">
 						</div>
 					</div>
 
 
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">金额</label> <label
-								class="layui-form-label" id="user_money">￥xxxx元</label>
-						</div>
-					</div>
-					<div class="layui-form-item">
-						<div class="layui-inline">
-							<label class="layui-form-label">入住天数</label>
-							<div class="layui-input-inline">
-								<select id="user_day" name="modules" lay-verify="required"
-									lay-search="">
-									<option value="">直接选择或搜索选择</option>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-									<option value="4">4</option>
-								</select>
-								<div class="layui-form-select">
-									<div class="layui-select-title">
-										<input type="text" placeholder="直接选择或搜索选择" value=""
-											class="layui-input"><i class="layui-edge"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="layui-form-item layui-form-text">
-						<label class="layui-form-label">其他要求</label>
-						<div class="layui-input-block">
-							<textarea name="text" placeholder="请输入内容" class="layui-textarea"></textarea>
-						</div>
-					</div>
+
 					<div class="layui-form-item layui-layout-admin">
 						<div class="layui-input-block">
 							<div class="layui-footer" style="left: 0;">
-								<button class="layui-btn" lay-submit=""
-									lay-filter="component-form-demo1">立即提交</button>
+								<button class="layui-btn" type="submit" >确认</button>
 								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
 							</div>
 						</div>
@@ -104,56 +92,82 @@
 			</div>
 		</div>
 	</div>
-	<%if(state==0){ %>
-	<script type="text/javascript">
-	function add(name, phone, money) {
-		console.log(name);
-		console.log(phone);
-		console.log(money);
-		$("#user_name").attr("value", name);
-		$("#user_phone").attr("value", phone);
-		$("#user_money").text(money+"元");
-	}
-	$(function() {
-		$.ajax({
-			url : "/Hotel/YudingServlet.do",
-			context : document.body,
-			data:{"datas":"<%=rroom%>","state":<%=state%>},
-			dataType:"json",
-			success : function(data) {
-				$(data.datas).each(function(index,ele){
-					var phone =ele.ophone;
-					var name =ele.oname;
-					var money =ele.rmoney;
-					add(name, phone, money);
-				})
-			}
-		});
-	})
 
-</script>
-<%} else {%>
-<script type="text/javascript">
-	function add(money) {
-		$("#user_money").text(money+"元");
+
+	<script>
+		
+	<%
+	if (state == 0) {
+      %>
+		function add(name, phone, money, day) {
+			$("#user_name").attr("value", name);
+			$("#user_phone").attr("value", phone);
+			$("#user_money").attr("value",money + "元/天");
+			$("#u_day").attr("value",day + "天");
+		}
+
+		
+		$(function() {
+			$.ajax({
+				url : "/Hotel/YudingServlet.do",
+				context : document.body,
+				data:{"datas":"<%=rroom%>","state":<%=state%> },
+				dataType:"json",
+				success : function(data) {
+					$(data.datas).each(function(index,ele){
+						var phone =ele.ophone;
+						var name =ele.oname;
+						var money =ele.rmoney;
+						var day=ele.oday;
+						add(name, phone, money,day);
+					})
+				}
+			});
+		})
+		<%
+	} else {
+%>
+function add(money) {
+	$("#user_money").attr("value",money + "元/天");
+}
+$(function() {
+	$.ajax({
+		url :"/Hotel/YudingServlet.do",
+		context : document.body,
+		data:{"datas":"<%=rroom%>","state":<%=state%>},
+		dataType:"json",
+		success : function(data) {
+			$(data.datas).each(function(index,ele){
+				var money =ele.rmoney;
+				console.log(money);
+				add(money);
+			})
+		}
+	});
+})
+<%
 	}
-	$(function() {
-		$.ajax({
-			url :"/Hotel/YudingServlet.do",
-			context : document.body,
-			data:{"datas":"<%=rroom%>","state":<%=state%>},
-			dataType:"json",
-			success : function(data) {
-				$(data.datas).each(function(index,ele){
-					var money =ele.rmoney;
-					add(money);
-				})
-			}
-		});
-	})
+%>
+$(      //页面加载完执行
+        $("#ajaxForm").on("submit",function () {    //表单提交时监听提交事件
+        	$.ajax({
+    			url :"/Hotel/CheckServlet.do",
+    			context : document.body,
+    			data:$('#ajaxForm').serialize(),
+    			dataType:"json",
+    			success : function(data) {
+    				window.location.href="www.baidu.com";
+    			}
+    		});
+            return false;   //  必须返回false，才能跳到想要的页面
+        })
+    )
 	</script>
-	<% }%>
 
 
+	
 </body>
+<style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}</style>
+
+
 </html>

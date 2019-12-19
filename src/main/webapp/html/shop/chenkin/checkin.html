@@ -53,6 +53,10 @@
               <label class="layui-form-label">金额</label>
                <label class="layui-form-label">￥xxxx元</label>
             </div>
+            <div class="layui-inline">
+              <label class="layui-form-label">金额</label>
+               <label class="layui-form-label">￥xxxx元</label>
+            </div>
           </div>
           
           
@@ -109,10 +113,6 @@
       elem: '#LAY-component-form-group-date'
     });
     
-   
-    
-   
-    
     /* 监听提交 */
     form.on('submit(component-form-demo1)', function(data){
       parent.layer.alert(JSON.stringify(data.field), {
@@ -120,7 +120,7 @@
       })
       return false;
     });
-  });
+  }); 
   </script>
 
 
