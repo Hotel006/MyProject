@@ -103,26 +103,9 @@
             </tr>
         </thead>
         <tbody id="showstaff">
-          <tr>
-            <td>1</td>
-            <td>周静</td>
-            <td>男</td>
-            <td>22</td>
-            <td>01-01</td>
-            <td>18888888888</td>
-            <td>001</td>
-            <td>000000</td>
-
-            <td class="td-manage">
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-          
-         
-          
-        
+   <!-- 动态生成 -->
+   
+   
         </tbody>
       </table>
       <div class="page">
@@ -143,7 +126,7 @@
 	           url : "../../../ShowStaffServlet.do",
 	           type : "get",
 	           dataType : "json",
-  	           success : function(data) {
+  	           success : funct-ion(data) {
   	        	   if(data.result){
   	   				xuanran(data);
   	        	   }else{

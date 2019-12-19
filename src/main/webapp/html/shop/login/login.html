@@ -12,13 +12,13 @@
 
 <div id="wrapper" class="login-page">
 <div id="login_form" class="form">
-<form class="login-form">
+<form class="login-form" id="form1">
  <h2>管理登录</h2>
-<input type="text" placeholder="用户名" value="admin" id="user_name" />
-<input type="password" placeholder="密码" id="password" />
-<button id="login" type="submit">登　录</button>
+<input type="text" placeholder="用户名" value="admin" id="username" name="username" />
+<input type="password" placeholder="密码" id="password" name="password" />
 <p class="message">超管账号，如果不慎丢失，请联系技术人员</p>
 </form>
+<button id="login" >登　录</button>
 </div>
 </div>
 <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
@@ -30,15 +30,14 @@
 		$("#login").click(function(){
 			$.ajax({
 				
-		        url : "${pageContext.request.contextPath}/shop/shopLoginServlet.do",
+		        url : "../../../ShopLoginServlet.do",
 		           type : "get",
-		           data:$("form:eq(0)").serialize(),
+		           data:$("#form1").serialize(),
 		           dataType : "json",
 	  	           success : function(data) {
 	  	        	   if(data.result){
-	  	   				alert("登录成功");
-	  	   			$(location).attr('href', 'index.html');
-	  	   				
+	  	   				alert(data.result);
+	  	   			window.location.href="../../../index.html";
 	  	        	   }else{
 	  	        		   console.log(data.msg);
 	  	        	   }
@@ -49,12 +48,12 @@
 				
 			});
 		})
-		$('.message a').click(function () {
+	/* 	$('.message a').click(function () {
 		    $('form').animate({
 		        height: 'toggle',
 		        opacity: 'toggle'
 		    }, 'slow');
-		});
+		}); */
 	})
 	</script>
 </body>
