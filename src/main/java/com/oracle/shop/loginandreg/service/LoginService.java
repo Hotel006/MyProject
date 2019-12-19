@@ -8,12 +8,14 @@ public class LoginService {
 		Hotel_admin ha = new Hotel_admin();
 		LoginDao ld = new LoginDao();
 		ha = ld.queryByLoginName(loginname);
+		System.out.println(ha);
 		if (ha == null) {
 			throw new RuntimeException("账号不存在,请先注册");
 		}
 		if (!ha.getAloginpass().equals(loginpass)) {
 			throw new RuntimeException("用户名或密码错误");
 		}
+		
 		return ha;
 	}
 }

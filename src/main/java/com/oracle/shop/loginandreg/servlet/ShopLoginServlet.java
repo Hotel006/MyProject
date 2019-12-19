@@ -1,28 +1,28 @@
-package com.oracle.customer.LoginAndReg.servlet;
+package com.oracle.shop.loginandreg.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.ServletException;   
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.oracle.customer.LoginAndReg.service.LoginAndRegService;
+import com.oracle.entity.Hotel_admin;
+import com.oracle.shop.loginandreg.service.LoginService;
 
 /**
- * Servlet implementation class RegServlet
+ * Servlet implementation class LoginRegServlet
  */
-public class RegServlet extends HttpServlet {
+public class ShopLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegServlet() {
+    public ShopLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,22 +31,26 @@ public class RegServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Map<String,Object> map = new HashMap<String,Object>();
 		
-		Map<String,Object> map = new HashMap();
-		//获取电话号码和昵称，准备注册
-		String phone = request.getParameter("phone");
-		String nikename = request.getParameter("nikename");
-		//调用service
-		LoginAndRegService reg = new LoginAndRegService();
-		
+		String loginname = request.getParameter("username");
+		String loginpass = request.getParameter("password");
+		System.out.println(loginname);
+		LoginService ls = new LoginService();
 		try {
-			reg.register(phone,nikename);
+			Hotel_admin ha  = ls.login(loginname, loginpass);
+			
+			request.getSession().setAttribute("SESSIONUSER", ha);
+			
+			
 			map.put("result", true);
-		} catch (SQLException e) {
+			
+			response.getWriter().print(JSON.toJSONString(map));
+			
+
+		} catch (Exception e) {
 			map.put("msg", e.getMessage());
 		}
-		
-		response.getWriter().print(JSON.toJSONString(map));
 		
 		
 	}
@@ -55,9 +59,7 @@ public class RegServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
 		doGet(request, response);
 	}
 
 }
-

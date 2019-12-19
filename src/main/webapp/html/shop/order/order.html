@@ -2,7 +2,7 @@
 <html>
   
   <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html"; charset="UTF-8">
     <title>旅途民宿</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -13,21 +13,16 @@
     <script src="../../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/xadmin.js"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
   </head>
   
   <body>
     <div class="x-nav">
       <span class="layui-breadcrumb">
-        <!--<a href="">首页</a>-->
-        <!--<a href="">演示</a>
+        
         <a>
           <cite>导航元素</cite></a>-->
-          <h2>订单页面</h2>
+          
       </span>
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
@@ -35,25 +30,9 @@
     <div class="x-body">
       <div class="layui-row">
         <form class="layui-form layui-col-md12 x-so">
-          <!--<input class="layui-input" placeholder="入住时间" name="start" id="start">
-          <input class="layui-input" placeholder="离开时间" name="end" id="end">-->
-          <!--<div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付状态</option>
-              <option>已支付</option>
-              <option>未支付</option>
-            </select>
-          </div>-->
-          <!--<div class="layui-input-inline">
-            <select name="contrller">
-              <option>支付方式</option>
-              <option>支付宝</option>
-              <option>微信</option>
-              <option>货到付款</option>
-            </select>
-          </div>-->
-          <div class="layui-input-inline">
-            <select name="contrller">
+          
+          <div class="layui-input-inline" id="layui-house">
+            <select name="house">
               <option value="">房间类型</option>
               <option value="0">标准大床房</option>
               <option value="1">豪华大床房</option>
@@ -61,8 +40,8 @@
               <option value="3">豪华双床房</option>
             </select>
           </div>
-          <div class="layui-input-inline">
-            <select name="contrller">
+          <div class="layui-input-inline" id="layui-source">
+            <select name="source">
               <option value="">订单来源</option>
               <option value="0">本站订单</option>
               <option value="1">美团订单</option>
@@ -70,137 +49,81 @@
               <option value="3">飞猪订单</option>
             </select>
           </div>
-          <input type="text" name="username"  placeholder="请输入手机号" autocomplete="off" class="layui-input">
-          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <input type="text" name="username"  placeholder="请输入手机号" autocomplete="off" class="layui-input" id="layui-phone">
+          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input" id="layui-number">
+          <button class="layui-btn" id="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
         
         
         
         </form>
       </div>
-      <!--<xblock>
-        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
-        <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-      </xblock>-->
+      
       <table class="layui-table">
         <thead>
           <tr>
-            <!--<th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>-->
             <th>订单编号</th>
-            <th>入住人</th>
+            <th>姓名</th>
             <th>手机号</th>
+            <th>房间号</th>
             <th>房型</th>
             <th>房间数</th>
             <th>金额</th>
             <th>预计入住时间</th>
+            <th>入住天数</th>
             <th>入住时间</th>
             <th>预计离开时间</th>
             <th>离开时间</th>
-            <th>支付状态</th>
             <th>订单状态</th>
             <th>订单来源</th>
+            <th>身份证号</th>
             <th >操作</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="hotelorder">
           <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
             <td>20191215001</td>
             <td>周静</td>
             <td>12345678900</td>
+            <td>0101</td>
             <td>豪华大床房</td>
             <td>1间</td>
             <td>265</td>
             <td>2019-12-15 18:00:00</td>
+            <td>3</td>
             <td>2019-12-16 19:00:00</td>
             <td>2019-12-16 12:00:00</td>
             <td>2019-12-16 13:00:00</td>
             <td>已支付</td>
-            <td>已入住</td>
             <td>美团订单</td>
+            <td>228135387118520302236</td>
             <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
               <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-          
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-            <td>20191215002</td>
-            <td>周静</td>
-            <td>12345678911</td>
-            <td>豪华大床房</td>
-            <td>1间</td>
-            <td>265</td>
-            <td>2019-12-15 18:00:00</td>
-            <td>2019-12-16 19:00:00</td>
-            <td>2019-12-16 12:00:00</td>
-            <td>2019-12-16 13:00:00</td>
-            <td>已支付</td>
-            <td>已入住</td>
-            <td>本站订单</td>
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-          
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-            <td>20191210003</td>
-            <td>周静</td>
-            <td>12345678911</td>
-            <td>豪华大床房</td>
-            <td>1间</td>
-            <td>265</td>
-            <td>2019-12-15 18:00:00</td>
-            <td>2019-12-16 19:00:00</td>
-            <td>2019-12-16 12:00:00</td>
-            <td>2019-12-16 13:00:00</td>
-            <td>已支付</td>
-            <td>已入住</td>
-            <td>携程订单</td>
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
+                <i class="layui-icon" id="layui-delete">&#xe640;</i>
               </a>
             </td>
           </tr>
         </tbody>
       </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <span class="current">1</span>
-          <a class="num" href="">2</a>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
+     
       </div>
-
-    </div>
     <script>
+
+    $(function(){
+		$.ajax({
+			url:"../../../HotelOrderServlet.do",
+			type:"get",
+			datatype:"json",
+			success:function(data){
+				if (data.result) {
+					xunranorder(data);
+					
+				} else {
+					console.log(data.msg);
+				}
+			}
+		});
+    });
+  
       layui.use('laydate', function(){
         var laydate = layui.laydate;
         
@@ -260,6 +183,40 @@
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }
+      
+      function xunranorder(data) {
+		$("#hotelorder").empty();
+		var datas = data.data;
+		var odr = datas;
+		console.log(odr);
+		for (var i = 0; i<odr.length;i++) {
+			var hd = odr[i];
+			var orderinfo="<tr>"+
+	            "<td>"+hd.onumber+"</td>"+
+	            "<td>"+hd.oname+"</td>"+
+	            "<td>"+hd.ophone+"</td>"+
+	            "<td>"+hd.oroom+"</td>"+
+	            "<td>"+hd.ohouse+"</td>"+
+	            "<td>"+hd.ocount+"</td>"+
+	            "<td>"+hd.omoney+"</td>"+
+	            "<td>"+hd.oydontime+"</td>"+
+	            "<td>"+hd.oday+"</td>"+
+	            "<td>"+hd.oontime+"</td>"+
+	            "<td>"+hd.oyjouttime+"</td>"+
+	            "<td>"+hd.oouttime+"</td>"+
+	            "<td>"+hd.ooderstate+"</td>"+
+	            "<td>"+hd.osource+"</td>"+
+	            "<td>"+hd.ocard+"</td>"+
+	            "<td class='td-manage'>"+
+	              "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:;'>"+
+	                "<i class='layui-icon'>&#xe640</i>"+
+	              "</a>"+
+	            "</td>"+
+	          "</tr>";
+	       $("#hotelorder").append(orderinfo); 
+		}
+	}
+ 
     </script>
   </body>
 

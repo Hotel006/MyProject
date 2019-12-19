@@ -1,8 +1,9 @@
-package com.oracle.shop.check.servlet;
+package com.oracle.shop.room.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,21 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.oracle.entity.Hotel_order;
-import com.oracle.shop.check.service.QueryService;
-import com.oracle.util.AjaxResult;
+import com.oracle.entity.Hotel_room;
+import com.oracle.shop.room.service.Hotel_roomService;
 
 /**
- * Servlet implementation class QueryruzhuServlet
+ * Servlet implementation class Hotel_RoomServlet
  */
-
-public class QueryruzhuServlet extends HttpServlet {
+public class Hotel_RoomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryruzhuServlet() {
+    public Hotel_RoomServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,19 +32,22 @@ public class QueryruzhuServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AjaxResult result = new AjaxResult();
-		QueryService qService =new QueryService();
-		try {
-			List<Hotel_order> list =qService.queryruzhu();
-			result.setDatas(list);
-
-		} catch (SQLException e) {
-			result.setResult(false);
-			result.setMsg(e.getMessage());
-			e.printStackTrace();
-		}
-		String json=JSON.toJSONString(result);
-		response.getWriter().print(json);
+		// 返回的json字符串，对应的java类
+				Map<String, Object>map = new HashMap<String, Object>();
+				Hotel_roomService hr = new Hotel_roomService();
+				try {
+					response.setContentType("application/json;charset=utf-8");
+					//查询 判断 
+					List<Hotel_room> list  =  hr.queryAll();
+							
+					map.put("data",list);	
+					map.put("result", true);
+				} catch (Exception e) {
+					map.put("result", false);
+					map.put("msg", "没有找到房间信息");
+				}
+				//返回给客户端信息
+				response.getWriter().print(JSON.toJSONString(map));
 	}
 
 	/**

@@ -9,6 +9,7 @@ public class Hotel_room{
 	private	String	rcount;
 	private	String	rimg;
 	private	String	rnumber;
+	private String  rbrief;
 	
 	//setter
 	public void setRid(int rid){
@@ -63,5 +64,11 @@ public class Hotel_room{
 	}
 	public void setRstatus(int rstatus) {
 		this.rstatus = rstatus;
+	}
+	public String getRbrief() {
+		return rbrief;
+	}
+	public void setRbrief(String rbrief) {
+		this.rbrief = rbrief;
 	}
 }

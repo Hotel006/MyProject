@@ -10,7 +10,7 @@ public class DateUtil {
 	public static final String PATTEN1 = "yyyy年MM月dd日HH时mm分ss秒";
 	public static final String Y="yyyyMMdd HH:mm:ss";
 	public static final String H="yyyy-MM-dd HH:mm:ss";
-	public static final String D="yyyyMMdd";
+	public static final String D="yyyy-MM-dd";
 	public static final String F="HH";
 	public static final String G="dd";
 	/**
