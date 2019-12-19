@@ -38,6 +38,7 @@ public class QueryruzhuServlet extends HttpServlet {
 		try {
 			List<Hotel_order> list =qService.queryruzhu();
 			result.setDatas(list);
+
 		} catch (SQLException e) {
 			result.setResult(false);
 			result.setMsg(e.getMessage());
