@@ -37,7 +37,7 @@ public class Reserve_Room_Servlet extends HttpServlet {
 		ReserveService rs = new ReserveService();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			List<Hotel_room> hr = rs.allRoom();
+			List<Map<String, Object>> hr = rs.queryRoomsNumber();
 			if(hr.size()==0) {
 				map.put("result",false);
 			}else {

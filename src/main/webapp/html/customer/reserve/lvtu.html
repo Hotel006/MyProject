@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>旅途民宿</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui,minimum-scale=1,width=device-width,">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script type="text/javascript" charset="utf-8">
+			mui.init();
+		</script>
+	<link href="../../../css/customer/reserve/mui.min.css" rel="stylesheet" />
+    <link href="../../../css/customer/reserve/ratchet.min.css" rel="stylesheet">
+    <link href="../../../css/customer/reserve/common.css" rel="stylesheet">
+	
+    <script src="../../../js/customer/reserve/jquery-1.8.3.min.js"></script>
+    <script src="../../../js/customer/reserve/lazyload.min.js"></script>
+    
+</head>
+
+<body>
+	
+	<nav class="mui-bar mui-bar-tab">
+		<a class="mui-tab-item mui-active" href="#tabbar" id="yd">
+			
+			<span class="mui-tab-label">预定</span>
+		</a>
+		<a class="mui-tab-item" href="#tabbar-with-chat" id="wd">
+			
+			<span class="mui-tab-label">我的</span>
+		</a>
+	</nav>
+<div id="wdjm" style="display: none">
+	
+	
+  	<div class="segmented-control index_sc">
+    	<a class="control-item" id="dd_ls">历史订单 </a>
+    	<a class="control-item" id="xg_mm">修改密码 </a>
+  	</div>
+  	
+  	<div id="ddjm">
+  	
+  	</div>
+  	
+    <div class="mui-content" id="xgjm" style="display: none">
+        <form class="mui-input-group">
+            <div class="mui-input-row">
+                <label>旧密码</label>
+                <input type="tel" class="mui-input-clear mui-input" placeholder="请输旧密码"/>
+            </div>
+            
+            <div class="mui-input-row">
+                <label >新密码</label>
+                <input type="text" class="mui-input-clear mui-input" placeholder="请输入新密码" id="xinmima"/>
+            </div>
+            <div class="mui-input-row">
+                <label >确认密码</label>
+                <input type="text" class="mui-input-clear mui-input" placeholder="请再次输入新密码" id="querenmima"/>
+            </div>
+        </form>
+        <div class="mui-content-padded">
+            <button class="mui-btn mui-btn-block mui-btn-danger border-radius" id="xgtj">提 交</button>
+        </div>
+    </div>
+  	 
+  	
+</div>
+
+
+<div id="ydjm" >	
+	<header id="page_h" class="bar bar-nav">
+  		<h1 class="title">旅途民宿</h1>
+	</header>
+	
+<div class="content history-color">
+	<div class="slider">
+			<div class="slide-group" style="transform: translate3d(0px, 0px, 0px); transition-duration: 0.2s;">
+			<div class="slide"><a href=""><img src="../../../images/customer/reserve/1.jpg"></a></div>
+		</div>
+		<div class="hotel-title">
+			<h1>旅途民宿</h1> 
+            
+			<h3>Hotel Lv Tu</h3>
+            
+		</div>
+		<div class="hotel-img-count">
+            <a>相片2张</a>
+        </div>
+	</div>
+    
+    <ul id="indexul" class="table-view">
+    
+        <li class="table-view-cell" style="padding-right:11px">
+        	<a href="tel:400-636-6636">预订电话：<span class="selDate">400-636-6636</spa n></a>
+        </li>
+    
+        <li class="table-view-cell" style="padding-right:11px">
+        	旅途民宿是陕西艺术奢华酒店，为您提供贴心的个性化服务, 为您提供最奢侈的客房设施：共有 26间客房及套房的浴室内...<a href=# style="display:inline">&gt;&gt;&gt;</a>
+        </li>
+        
+        <li class="table-view-cell">
+        	<a href="map.html">地址：西安市雁塔区曲江大道中海紫御华府28号楼下天天168便利店</a>
+        </li>
+        <li style="padding: 11px 15px;">
+        	<div style="width: 50%; float: left;">
+        		&nbsp;&nbsp;&nbsp;&nbsp;<span>入住日期</span>
+        		<input type="date" id="ltms_intime"/>
+        	</div>
+        	<div style="width: 50%; float: left;">
+        		&nbsp;&nbsp;&nbsp;&nbsp;<span>离店日期</span>
+        		<input type="date" id="ltms_outtime"/>
+        	</div>
+        	<div style="clear: both;"></div>
+        </li>
+        <!--<li class="table-view-cell">
+        	<a class="navigate-right">入住日期：<span id="start_date" class="selDate">2019-12-9</span></a>
+        </li>
+        <li class="table-view-cell">
+        	<a class="navigate-right">离店日期：<span id="end_date" class="selDate">2019-12-10</span></a>
+        </li>-->
+    </ul>
+       
+    <div class="segmented-control index_sc">
+    	<a class="control-item" id="fxyd">房型预订 </a>
+    	<a class="control-item" id="jdxq">酒店详情 </a>
+  	</div>
+  	
+	<div class="roomlist" id="fxyd_jm">   
+    	<div class="oneroom">      
+    		<div class="roominfo">      	 
+    			<p>豪华大床房</p>      
+    			<p class="des">大床2米、16-20楼、28-35平米、免费WIFI、可入住2人</p>
+    		</div>      
+    		<div class="rateplanlist">      	
+    			<ul>        	
+    				<li>            	
+    					           		
+    						<span class="rpname">标准价</span>                	
+    						<span class="price">￥1866</span>                	
+    						<span class="book">
+    						<a href="预定登记.html?id=豪华大床房"> 
+    						<button class="btn btn-negative" >预订</button></a>
+    						</span>                
+    					            
+    				</li>        		        
+    			</ul>       
+    		</div>    
+    	</div>
+    	<div class="oneroom">      
+    		<div class="roominfo">      	
+    			<p>豪华双床房</p>      	
+    			<p class="des">双床1.2米、16-20楼、30平米、免费WIFI、可入住2人</p>      
+    		</div>      
+    		<div class="rateplanlist">      	
+    			<ul>        	
+    				<li>            	
+    					<a href="预定登记.html?id="++"&intime="++"&outtime="+>      
+    						
+    						<span class="rpname">标准价</span>                	
+    						<span class="price">￥1866</span>                	
+    						<span class="book">
+    						<button class="btn" disabled="">订完</button></span>                
+    					</a>            
+    				</li>        	      
+    			</ul>      
+    		</div>    
+    	</div>    
+    	<div class="oneroom">      
+    		<div class="roominfo">      	
+    			<p>标准大床房</p>      	
+    			<p class="des">大床2米、18楼、174平米、免费WIFI、可入住2人</p>      
+    		</div>      
+    		<div class="rateplanlist">      	
+    			<ul>        	
+    				<li>            	
+    					<a href="预定登记.html?id=标准大床房">            		
+    						<span class="rpname">标准价</span>                	
+    						<span class="price">￥6888</span>                	
+    						<span class="book"><button class="btn" disabled="">订完</button></span>                
+    					</a>            
+    				</li>        
+    			</ul>      
+    		</div>    
+    	</div>    
+    	<div class="oneroom">      
+    		<div class="roominfo">      	
+    			<p>标准双床房</p>      	
+    			<p class="des">大床2米、17楼、180平米、免费WIFI、可入住2人</p>      
+    		</div>      
+    		<div class="rateplanlist">      	
+    			<ul>        	
+    				<li>            	
+    					<a href="预定登记.html?id=标准双床房">            		
+    						<span class="rpname">标准价</span>                	
+    						<span class="price">￥6888</span>                	
+    						<span class="book"><button class="btn" disabled="">订完</button></span>                
+    					</a>            
+    				</li>        
+    			</ul>      
+    		</div>    
+    	</div>
+    <div id="channelBooking">
+        <h3>渠道预订</h3>
+        <div class="channelList">
+            <span>如您所需房型不能预订或已满房，您可前往合作渠道查询预订。</span>
+            <a href="https://hotels.ctrip.com/hotel/2338316.html#ctm_ref=hod_hp_sb_lst"  class="btn btn-negative" style="text-align: right">携程预订</a>
+        </div>
+    </div>
+    <div class="bottomInfo">
+        <p class="hName">旅途民宿无线网站</p>
+        <p>本站属酒店在线，由酒店在线运营推广。</p>
+    </div>
+  	</div>
+
+  	<div id="jdxq_jm" style="display: none">
+  		<h4 >酒店介绍</h4>
+
+<div >
+<p>
+2015年开业&nbsp;&nbsp;30间房&nbsp;&nbsp;
+    </p>
+
+<br>
+<span id="ctl00_MainContentPlaceHolder_hotelDetailInfo_lbDesc" itemprop="description">　　西安天天快捷酒店设有标间，大床房，主题房等20多间房，房间装修简单大方，有简欧风格的衣柜，地处曲江大道中海紫御华府，停车方便，每间房都有独立网络，房间空间大，干净整洁，舒适优雅，服务周到对面有龙湖星悦荟吃饭购物娱乐一条街，周围有大雁塔，海洋馆，曲江遗址公园等历史名胜旅游景点！</span>
+
+</div>                  
+
+<h4 >酒店设施</h4>     
+<div >
+    <table>
+        <tbody>
+            <tr ><th>网络</th><td><ul ><li >客房WIFI*</li><li>房间内高速上网*</li><li>公用区wifi免费*</li></ul></td></tr><tr><th>交通设施</th><td><ul><li >酒店内有公共停车场。收费标准以酒店告知为准*</span></li></ul></td></tr><tr ><th>交通服务</th><td><ul ><li >接机服务*</li><li >叫车服务*</li></ul></td></tr><tr ><th>前台服务</th><td><ul ><li >行李寄存*</li><li >24小时前台*</li><li >叫醒服务*</li></ul></td></tr><tr ><th>通用设施</th><td><ul ><li >电梯*</li></ul></td></tr><tr><td colspan="2"><div ></div></td></tr>
+        </tbody>
+    </table>
+</div>
+
+
+<h4 >酒店政策</h4>
+
+<div >
+	<table >
+		<tbody><tr><th>入住和离店</th><td>入住时间：14:00以后&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;离店时间：12:00以前</td></tr><tr><th>儿童政策</th><td><ul class="policy_list_new"><li>酒店允许携带儿童入住</li></ul><ul class="policy_list_new"><li style="white-space:normal;">不接受18岁以下客人在无监护人陪同的情况下入住</li><li style="white-space:normal;">加床及儿童政策取决于您所选的房型，若超过房型限定人数，或携带儿童年龄不在政策描述范围内，可能需收取额外费用，提出的任何要求均需获得酒店的确认。</li></ul></td></tr><tr><th>早餐信息</th><td><p>酒店不提供早餐</p></td></tr><tr><th>宠物</th><td>允许携带宠物，具体咨询酒店。</td></tr>				
+	</tbody></table>
+</div>
+  	</div>
+  	
+</div>
+</div>
+</body>
+
+
+<script type="text/javascript">
+$(function(){
+	$.ajax({
+	url:"../../../Reserve_Room_Servlet.do",
+	type:"get",
+	dataType:"json",
+	success:function (data) {
+ 		if(data.result==true){
+			xuanran(data);
+		}else{
+			alert("暂无房间信息");
+		}
+		
+	}
+	});	
+});
+
+
+
+
+
+
+	$(function(){
+		$(".lazy").lazyload();
+	});
+	
+  	$(function(){
+		$("#fxyd").click(function(){
+			$("#jdxq_jm").hide(100,function(){
+  				
+  				$("#fxyd_jm").show(100);
+  			});
+  		});
+  		$("#jdxq").click(function(){
+  			$("#fxyd_jm").hide(100,function(){
+  				
+  					$("#jdxq_jm").show(100);
+  				
+  			});
+  		});
+  		
+  	});
+  	
+  	$(function(){
+		$("#yd").click(function(){
+			$("#wdjm").hide(100,function(){
+  				$("#ydjm").show(100);
+  			});
+  		});
+  		$("#wd").click(function(){
+  			$("#ydjm").hide(100,function(){
+  				
+  					$("#wdjm").show(100);
+  				
+  			});
+  		});
+  		
+  	});
+  	
+  	$(function(){
+		$("#dd_ls").click(function(){
+			$("#xgjm").hide(100,function(){
+  				$("#ddjm").show(100);
+  			});
+  		});
+  		$("#xg_mm").click(function(){
+  			$("#ddjm").hide(100,function(){
+  				$("#xgjm").show(100);
+  			});
+  		});
+  	});
+  		
+  	$(function(){
+  		$.ajax({
+  			type:"get",
+  			url:"",
+  			async:true
+  		});
+  	});
+  	
+	$("#xgtj").click(function(){
+	
+	 var $new = $("#xinmima").val();
+	 console.log($new);
+	 var $old = $("#querenmima").val();
+	 	 console.log($old);
+
+		if($new==$old){
+      			alert(1);
+			}else{
+        		alert("两次新密码不一致");
+        		$("#querenmima").val("");
+        		$("#xinmima").val("");
+			}
+	
+	});
+	
+	 /* function xuanran(data){
+		var datas = data.data;
+		$("#fxyd_jm").empty();
+		for(Map<String,object> m:datas){
+			var fx = m.get("rhouse");
+			console.log(fx);
+		}
+	}  */
+	
+  		
+</script>
+</html>
