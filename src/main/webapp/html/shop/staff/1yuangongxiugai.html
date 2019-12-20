@@ -71,10 +71,10 @@
             </select>
           </div>-->
           <label>手机号：</label>
-          <input type="text" name="username"  placeholder="请输入手机号查找" autocomplete="off" class="layui-input">
+          <input type="text" name="mphone" id="phone1"  placeholder="请输入手机号查找" autocomplete="off" class="layui-input">
           <label>员工姓名：</label>
-          <input type="text" name="username"  placeholder="请输入员工姓名查找" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <input type="text" name="mname" id="name1"  placeholder="请输入员工姓名查找" autocomplete="off" class="layui-input">
+          <button class="layui-btn"   lay-filter="sreach" id="search_btn" ><i class="layui-icon">&#xe615;</i></button>
         
         
         
@@ -121,6 +121,10 @@
 
     </div>
     <script>
+   
+    	
+    
+  
     $(function(){
 		$.ajax({
 	           url : "../../../ShowStaffServlet.do",
@@ -138,11 +142,34 @@
 		});
 	});
     
+    $("#search_btn").click(function(){
+    	
+    	var phone = $("#phone1").val();
+    	var staffname = $("#name1").val();
+    	
+    	$.ajax({
+	           url : "../../../SearchStaffServlet.do",
+	           type : "get",
+	           dataType : "json",
+	           data: {"phone":phone,"name":staffname},
+	           success : function(data) {
+	        	   if(data.result){
+	   				xuanran1(data);
+	        	   }else{
+	        		   console.log(data.msg);
+	        	   }
+	        	 
+	           } 
+		
+		});
+    	
+    	
+    });
     
     
     
     
-    
+ 
     
     
       layui.use('laydate', function(){
@@ -216,13 +243,15 @@
  		 for(var i=0;i<aaa.length;i++){ 
 				
 			 var td = aaa[i]; 
-			
+			 var time = td.sbirthday;
+			 var time1 = timestampToTime(time);
+			  console.log(time1);
 			 var staffinfo = "<tr>"+
 	            "<td>"+td.sid+"</td>"+
 	            "<td>"+td.sname+"</td>"+
 	            "<td>"+td.ssex+"</td>"+
 	            "<td>"+td.sage+"</td>"+
-	            "<td>"+td.sbirthday+"</td>"+
+	            "<td>"+time1+"</td>"+
 	            "<td>"+td.sphone+"</td>"+
 	            "<td>"+td.sentername+"</td>"+
 	            "<td>"+td.senterpass+"</td>"+
@@ -236,6 +265,54 @@
 			}  
 			
 		}
+		
+		
+		function xuanran1(data){
+			$("#showstaff").empty();
+			var datas = data.data;
+			var aaa = datas;
+			console.log(aaa);
+	 		 for(var i=0;i<aaa.length;i++){ 
+					
+				 var td = aaa[i]; 
+				 
+				  var time = td.sbirthday;
+				 var time1 = timestampToTime(time);
+				  console.log(time1);
+				 var staffinfo = "<tr>"+
+		            "<td>"+td.sid+"</td>"+
+		            "<td>"+td.sname+"</td>"+
+		            "<td>"+td.ssex+"</td>"+
+		            "<td>"+td.sage+"</td>"+
+		            "<td>"+time1+"</td>"+
+		            "<td>"+td.sphone+"</td>"+
+		            "<td>"+td.sentername+"</td>"+
+		            "<td>"+td.senterpass+"</td>"+
+		            "<td class='td-manage'>"+
+		              "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:;'>"+
+		                "<i class='layui-icon'>&#xe640;</i>"+
+		              "</a>"+
+		            "</td>"+
+		          "</tr>";
+	          $("#showstaff").append(staffinfo); 
+				} 
+			
+		}
+		
+		
+		function timestampToTime(time) {//转化成YYYYMMDDhhmmss格式的时间戳
+		    var date = new Date(time),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		    Y = date.getFullYear() + '',
+		    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '',
+		    D = date.getDate() + '',
+		    h = date.getHours() + '',
+		    m = date.getMinutes() + '',
+		    s = date.getSeconds();
+		console.log("转换时间了。");
+		console.log(Y);
+		    return Y+M+D;
+		}
+		
     </script>
   </body>
 

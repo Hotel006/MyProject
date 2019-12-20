@@ -20,15 +20,10 @@ public class LogAndRegDao extends DBHelper {
 	public void save(User_admin ua) throws SQLException {
 		QueryRunner qr = new QueryRunner(DBHelper.ds);
 
-		String sql = "insert into hotel_staff(\r\n" + 
-				"hotel_staff.sname,\r\n" + 
-				"hotel_staff.ssex,\r\n" + 
-				"hotel_staff.sage,\r\n" + 
-				"hotel_staff.sbirthday,\r\n" + 
-				"hotel_staff.sphone,\r\n" + 
-				"hotel_staff.sentername,\r\n" + 
-				"hotel_staff.senterpass)\r\n" + 
-				"values(?,?,?,?,?,?,?);";
+		String sql = "insert into user_admin(\r\n" + 
+				"user_admin.uloginname,\r\n" + 
+				"user_admin.uloginpass,\r\n" + 
+				"user_admin.unickname)VALUES(?,?,?)";
 		qr.update(sql, ua.getUloginname(), ua.getUloginpass(), ua.getUnickname());
 	}
 	

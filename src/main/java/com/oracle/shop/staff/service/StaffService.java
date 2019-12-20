@@ -26,5 +26,25 @@ public class StaffService {
 		return sd.queryByUsername(username);
 	
 }
+	public List<Hotel_staff> queryByRelname(String relname) throws SQLException {
+		StaffDao sd = new StaffDao();
+		
+		return sd.queryByRelname(relname);
+				
+		
+	}
 	
+	public List<Hotel_staff> queryByPhone(String phone) throws SQLException {
+		StaffDao sd = new StaffDao();
+
+		return sd.queryByPhone(phone);
+		
+	}
+	
+	public List<Hotel_staff> queryByPhoneAndName(String phone,String relname) throws SQLException {
+		StaffDao sd = new StaffDao();
+
+		return sd.queryByPhoneAndName(phone,relname);
+		
+	}
 }
