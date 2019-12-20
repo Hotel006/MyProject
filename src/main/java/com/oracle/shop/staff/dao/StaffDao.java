@@ -57,4 +57,44 @@ public class StaffDao extends DBHelper {
 		qr.update(sql,sf.getSname(),sf.getSsex(),sf.getSage(),sf.getSbirthday(),sf.getSphone(),sf.getSentername(),sf.getSenterpass());
 		
 	}
+	public List<Hotel_staff> queryByRelname(String relname) throws SQLException {
+	
+		List<Hotel_staff> list = new ArrayList<Hotel_staff>();
+		String sql = "select * from  hotel_staff where sname=?";
+		
+		
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+		list = qr.query(sql,relname, new BeanListHandler<Hotel_staff>(Hotel_staff.class));
+		
+		return list;
+		
+	}
+	
+	public List<Hotel_staff> queryByPhone(String phone) throws SQLException {
+		List<Hotel_staff> list = new ArrayList<Hotel_staff>();
+		
+		String sql = "select * from  hotel_staff where sphone=?";
+		
+		
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+		list = qr.query(sql,phone, new BeanListHandler<Hotel_staff>(Hotel_staff.class));
+		
+		return list;
+		
+		
+	}
+	
+	public List<Hotel_staff> queryByPhoneAndName(String phone,String relname) throws SQLException {
+		
+		List<Hotel_staff> list = new ArrayList<Hotel_staff>();
+		
+		String sql = "select * from  hotel_staff where sphone=? and sname=?";
+		
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+		
+		list = qr.query(sql,new BeanListHandler<Hotel_staff>(Hotel_staff.class),phone,relname);
+		
+		return list;
+		
+	}
 }

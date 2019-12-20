@@ -28,11 +28,12 @@
 	$(function(){
 
 		$("#login").click(function(){
+			
 			$.ajax({
-				
+
 		        url : "../../../ShopLoginServlet.do",
 		           type : "get",
-		           data:$("#form1").serialize(),
+		           data:$("#form1").serialize(),   {},
 		           dataType : "json",
 	  	           success : function(data) {
 	  	        	   if(data.result){
