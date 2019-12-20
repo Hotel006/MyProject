@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.druid.sql.dialect.h2.visitor.H2SchemaStatVisitor;
 import com.alibaba.fastjson.JSON;
 import com.oracle.customer.Reserve.service.ReserveService;
 import com.oracle.entity.Hotel_room;
@@ -37,7 +38,7 @@ public class Reserve_Room_Servlet extends HttpServlet {
 		ReserveService rs = new ReserveService();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			List<Map<String, Object>> hr = rs.queryRoomsNumber();
+			Map<Hotel_room, Integer> hr = rs.queryRoomsAll();
 			if(hr.size()==0) {
 				map.put("result",false);
 			}else {

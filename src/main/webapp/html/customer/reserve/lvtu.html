@@ -137,7 +137,7 @@
     						<span class="rpname">标准价</span>                	
     						<span class="price">￥1866</span>                	
     						<span class="book">
-    						<a href="预定登记.html?id=豪华大床房"> 
+    						<a href="预定登记.html?id=豪华大床房&intime=" id="ydaj"> 
     						<button class="btn btn-negative" >预订</button></a>
     						</span>                
     					            
@@ -249,25 +249,40 @@
 
 
 <script type="text/javascript">
-$(function(){
-	$.ajax({
-	url:"../../../Reserve_Room_Servlet.do",
-	type:"get",
-	dataType:"json",
-	success:function (data) {
- 		if(data.result==true){
-			xuanran(data);
-		}else{
-			alert("暂无房间信息");
-		}
+	var it=null;
+	var ot=null;
+	
+	$("#ydaj").click(function() {
+		it = $("#ltms_intime").val();
+		ot = $("#ltms_outtime").val();
+		this.attr("href","预定登记.html?id=豪华大床房&intime= "+it+"&outtime="+ot); 
+	})
+
+	$(function(){
+		$.ajax({
+		url:"../../../Reserve_Room_Servlet.do",
+		type:"get",
+		dataType:"json",
+		success:function (data) {
+ 			if(data.result){
+				/* xuanran(data); */
+ 				var datas = data.data;
+ 				$("#fxyd_jm").empty();
+ 				for(var key in map){
+ 					console.log(map[key]);
+ 				}		
+ 				
+			}else{
+				alert("暂无房间信息");
+			}
 		
-	}
-	});	
-});
+		}
+		});	
+	});
+	
+	
 
-
-
-
+	
 
 
 	$(function(){
