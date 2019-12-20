@@ -26,6 +26,18 @@ public class LogAndRegDao extends DBHelper {
 				"user_admin.unickname)VALUES(?,?,?)";
 		qr.update(sql, ua.getUloginname(), ua.getUloginpass(), ua.getUnickname());
 	}
+
+	public void updatePass(String phone, String pass) throws SQLException {
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+		String sql ="update user_admin set \r\n" + 
+				"user_admin.uloginpass =?\r\n" + 
+				"where uloginname =?";
+		
+				qr.update(sql,pass,phone);
+		
+		
+		
+	}
 	
 	
 }
