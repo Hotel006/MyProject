@@ -7,9 +7,8 @@ import com.oracle.entity.Hotel_order;
 import com.oracle.shop.check.dao.CheckDao;
 
 public class CheckService {
-	public List<Hotel_order> checkin(){
 		
 	}
 	
 
-}
+

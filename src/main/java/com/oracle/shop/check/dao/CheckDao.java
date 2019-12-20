@@ -41,10 +41,14 @@ public class CheckDao {
 				"hotel_order.osource,\r\n" + 
 				"hotel_order.ocard)\r\n" + 
 				"VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		System.out.println("开始存了");
 		qr.update(sql,onumber,oname,ophone,oroom,type,1,totlemoney,oday,nowtime,outtime,1,osource,cardid);
 	String sql1="UPDATE hotel_room SET rstatus='1' WHERE rnumber= ?";
 	qr.update(sql1,oroom);
+	}
+	public void yuding(long onumber, String name, String phone, String oroom, String type, int totlemoney,
+			int oday, String yjcometime, String yjouttime, String souce) throws SQLException {
+		String sql ="INSERT INTO `hotel_order`(`onumber`, `oname`, `ophone`, `oroom`, `ohouse`, `ocount`, `omoney`, `oydontime`, `oday`, `oyjouttime`, `ooderstate`, `osource`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+		qr.update(sql, onumber,name,phone,oroom,type,1,totlemoney,yjcometime,oday,yjouttime,0,souce);
 	}
 	
 

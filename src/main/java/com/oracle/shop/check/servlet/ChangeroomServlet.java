@@ -1,29 +1,21 @@
 package com.oracle.shop.check.servlet;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
-import com.oracle.entity.Hotel_order;
-import com.oracle.shop.check.service.QueryService;
-import com.oracle.util.AjaxResult;
-
 /**
- * Servlet implementation class QueryyudingServlet
+ * Servlet implementation class ChangeroomServlet
  */
-public class QueryyudingServlet extends HttpServlet {
+public class ChangeroomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryyudingServlet() {
+    public ChangeroomServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,18 +24,8 @@ public class QueryyudingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AjaxResult result = new AjaxResult();
-		QueryService qService =new QueryService();
-		try {
-			List<Hotel_order> list =qService.queryyuding();
-			result.setDatas(list);
-		} catch (Exception e) {
-			result.setResult(false);
-			result.setMsg(e.getMessage());
-			e.printStackTrace();
-		}
-		String json=JSON.toJSONString(result);
-		response.getWriter().print(json);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

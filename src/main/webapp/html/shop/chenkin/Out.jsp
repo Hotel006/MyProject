@@ -21,7 +21,6 @@
 	int state = Integer.valueOf(request.getParameter("state"));
 	String room = request.getParameter("room");
 	String rroom = room.split("/")[0];
-	String time=request.getParameter("time");
 %>
 <title>入住</title>
 </head>
@@ -54,7 +53,6 @@
 								autocomplete="off" placeholder="请输入手机号" class="layui-input">
 						</div>
 					</div>
-					<%if(state!=3){ %>
 
 					<div class="layui-form-item">
 						<label class="layui-form-label">身份证号：</label>
@@ -63,10 +61,6 @@
 								placeholder="请输入身份证号" autocomplete="off" class="layui-input">
 						</div>
 					</div>
-					
-				
-				
-					<%} %>
 
 					<div class="layui-form-item">
 						<label class="layui-form-label">房间金额：</label>
@@ -83,42 +77,6 @@
 								class="layui-input">
 						</div>
 					</div>
-					<%if(state==3){ %>
-					<div class="layui-form-item">
-						<label class="layui-form-label">订单来源：</label>
-						<div class="layui-input-block">
-							<input type="tel" id="user_souce" name="souce" autocomplete="off"
-								class="layui-input">
-						</div>
-					</div>
-					
-						<input type="hidden"  name="date" value="<%=time  %>">
-					<%} %>
-					
-					<%if(state==5){ %>
-			<div class="layui-card-body layui-row layui-col-space10">
-            	<div class="layui-col-md12">
-              		<select name="house" lay-verify="">
-                	<option value="" id='addroom'>请选择一个房间</option>
-              </select>
-            </div>
-          </div>
-          <script type="text/javascript">
-          $(function() {
-        	  var html='';
-				$.getJSON("/Hotel/QueryRoomServlet.do", function(json) {
-					$(json.datas).each(function(index, ele) {
-						var room=ele.rnumber;
-						var type=ele.rhouse;
-						var t =room+"/"+type;
-					   html+="<option value="+t+">"+t+"</option>" ;
-					})
-					$("#addroom").after(html);
-					
-  		})
-          </script>
-					
-					<%} %>
 
 
 
@@ -190,7 +148,6 @@ $(function() {
 <%
 	}
 %>
-
 $(      //页面加载完执行
         $("#ajaxForm").on("submit",function () {    //表单提交时监听提交事件
         	$.ajax({
@@ -199,34 +156,12 @@ $(      //页面加载完执行
     			data:$('#ajaxForm').serialize(),
     			dataType:"json",
     			success : function(data) {
-    				if(data.result==true){
-        				layer.confirm('入住/预定成功', {
-        					  btn: ['确认'] //按钮
-        					}, function(){
-        					  layer.msg('返回主页面', {icon: 1});
-        					  setTimeout(reload,1000);
-        					  parent.layer.closeAll();
-        					});
-    				}else{
-        				layer.confirm(data.msg, {
-        					  btn: ['确认'] //按钮
-        					}, function(){
-        					  layer.msg(data.msg, {icon: 2});
-        					 setTimeout(reload,1000);
-        					  parent.layer.closeAll();
-        					});
-    				}
-    				
-    				
+    				window.location.href="www.baidu.com";
     			}
     		});
             return false;   //  必须返回false，才能跳到想要的页面
         })
     )
-    
-    function reload() {
-				window.parent.location.reload();
-			}
 	</script>
 
 

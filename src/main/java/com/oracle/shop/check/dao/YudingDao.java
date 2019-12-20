@@ -36,8 +36,11 @@ public class YudingDao {
 	public String money(String phone) throws SQLException {
 		String sql ="SELECT rmoney FROM hotel_room WHERE rnumber=(SELECT oroom FROM hotel_order WHERE ophone=? AND ooderstate ='0')";
 		String money=qr.query(sql,new ScalarHandler<String>(),phone);
-		System.out.println(money);
 		return money;
 	}	
+	public void removeyuding(String room) throws SQLException {
+		String sql ="DELETE  FROM hotel_order WHERE oroom=? AND ooderstate= '0'";
+		qr.update(sql, room);
+	}
 
 }

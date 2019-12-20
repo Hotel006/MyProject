@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
 import com.oracle.entity.Hotel_order;
-import com.oracle.shop.check.service.YudingService;
+import com.oracle.shop.check.service.YudingandCheckService;
 import com.oracle.util.AjaxResult;
 
 /**
@@ -38,19 +38,33 @@ public class YudingServlet extends HttpServlet {
 		AjaxResult a =new AjaxResult();
 		String room=request.getParameter("datas");
 		int state=Integer.valueOf(request.getParameter("state"));
+		YudingandCheckService yc=new YudingandCheckService();
 		if(state==0) {
 			try {
-				List<Hotel_order> list=new YudingService().showroom(room);
+				List<Hotel_order> list=yc.showroom(room);
 				a.setDatas(list);
+				System.out.println("那就是这里");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				a.setMsg(e.getMessage());
 				a.setResult(false);
 				e.printStackTrace();
 			}
-		}else {
+		}else if(state==2){
+			String oroom =request.getParameter("room");
+			String stroom=oroom.split("/")[0];
 			try {
-				List<Hotel_order> list=new YudingService().showcheck(room);
+				yc.removeyuding(stroom);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				a.setMsg(e.getMessage());
+				a.setResult(false);
+				e.printStackTrace();
+			}
+		}else{
+			try {
+				List<Hotel_order> list=yc.showcheck(room);
+			System.out.println("这里");
 			a.setDatas(list);
 			} catch (SQLException e) {
 				a.setMsg(e.getMessage());
@@ -58,9 +72,8 @@ public class YudingServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-		
-		
 		String json=JSON.toJSONString(a);
+		System.out.println(json);
 		response.getWriter().print(json);
 	}
 

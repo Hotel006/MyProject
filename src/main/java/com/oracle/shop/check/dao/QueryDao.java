@@ -17,9 +17,17 @@ public class QueryDao {
 		return list;
 	}
 	public List<Hotel_order> queryruzhu() throws SQLException{
-		String sql ="SELECT * FROM hotel_order WHERE ooderstate = '1'";
+		String sql ="SELECT * FROM hotel_order WHERE ooderstate = '1' or ooderstate='2' or ooderstate='3' or ooderstate='4'";
 		List<Hotel_order> list=qr.query(sql,new BeanListHandler<Hotel_order>(Hotel_order.class));
 		return list;
+	}
+	public void upmsdatestate(String room) throws SQLException{
+		String sql ="UPDATE hotel_order SET ooderstate ='3' WHERE oroom=?";
+		qr.update(sql,room);
+	}
+	public void updatestate(String room) throws SQLException{
+		String sql ="UPDATE hotel_order SET ooderstate ='4' WHERE oroom=?";
+		qr.update(sql,room);
 	}
 
 }

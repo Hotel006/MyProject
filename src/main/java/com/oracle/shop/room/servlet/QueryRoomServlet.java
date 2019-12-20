@@ -1,4 +1,4 @@
-package com.oracle.shop.check.servlet;
+package com.oracle.shop.room.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.oracle.entity.Hotel_order;
-import com.oracle.shop.check.service.QueryService;
+import com.oracle.entity.Hotel_room;
+import com.oracle.shop.room.service.QueryRoomservice;
 import com.oracle.util.AjaxResult;
 
 /**
- * Servlet implementation class QueryyudingServlet
+ * Servlet implementation class QueryRoomServlet
  */
-public class QueryyudingServlet extends HttpServlet {
+public class QueryRoomServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QueryyudingServlet() {
+    public QueryRoomServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +32,18 @@ public class QueryyudingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		AjaxResult result = new AjaxResult();
-		QueryService qService =new QueryService();
+		
+		System.out.println("进来了");
+		AjaxResult result =new AjaxResult();
 		try {
-			List<Hotel_order> list =qService.queryyuding();
+			List<Hotel_room> list=new QueryRoomservice().queryallroom();
 			result.setDatas(list);
-		} catch (Exception e) {
-			result.setResult(false);
+		} catch (SQLException e) {
 			result.setMsg(e.getMessage());
+			result.setResult(false);
 			e.printStackTrace();
 		}
-		String json=JSON.toJSONString(result);
+		String json =JSON.toJSONString(result);
 		response.getWriter().print(json);
 	}
 

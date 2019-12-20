@@ -18,8 +18,15 @@ public class Hotel_order{
 	private	String	osource;
 	private	String	ocard;
 	private	String	oday;
+	private String oyjouttime;
 	
 	
+	public String getOyjouttime() {
+		return oyjouttime;
+	}
+	public void setOyjouttime(String oyjouttime) {
+		this.oyjouttime = oyjouttime;
+	}
 	public String getRmoney() {
 		return rmoney;
 	}

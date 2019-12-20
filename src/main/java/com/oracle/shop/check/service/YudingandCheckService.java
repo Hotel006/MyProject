@@ -10,7 +10,7 @@ import com.oracle.shop.check.dao.QueryDao;
 import com.oracle.shop.check.dao.YudingDao;
 import com.oracle.util.DateUtil;
 
-public class YudingService {
+public class YudingandCheckService {
 	YudingDao ydao =new YudingDao(); 
 	public List<Hotel_order> showroom(String room) throws SQLException{
 		List<Hotel_order> list= ydao.showroom(room);
@@ -61,6 +61,26 @@ public class YudingService {
 			String oroom=room.split("/")[0];
 			cDao.check(onumber,name,phone,totlemoney,oroom,type,oday,nowtime,outtime,cardid);
 		}
+	}
+	
+	public void  reserve(String name, String phone, String day, String money, String room, String souce, String time) throws SQLException {
+		CheckDao cDao =new CheckDao();
+		long onumber =System.currentTimeMillis();
+		int oday=Integer.valueOf(day);
+		int totlemoney=oday*Integer.valueOf(money);
+		String outtime=DateUtil.nexttime(oday);
+		String type=room.split("/")[1];
+		String oroom=room.split("/")[0];
+		String nowtime=DateUtil.nowtime(DateUtil.H);
+		String wday=nowtime.substring(8, 10);
+		int yjday=Integer.valueOf(time.split("-")[1])-Integer.valueOf(wday);
+		String yjcometime=DateUtil.nexttime(yjday);
+		String yjouttime =DateUtil.nexttime(yjday+oday);
+		cDao.yuding(onumber,name,phone,oroom,type,totlemoney,oday,yjcometime,yjouttime,souce);
+	}
+	
+	public void removeyuding(String room) throws SQLException {
+		ydao.removeyuding(room);
 	}
 
 }
