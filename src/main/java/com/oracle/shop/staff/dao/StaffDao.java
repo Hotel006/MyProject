@@ -42,7 +42,7 @@ public class StaffDao extends DBHelper {
 		
 	}
 	
-	public void save(Hotel_staff sf) throws SQLException {
+	public void save(Hotel_staff sf, String srtime) throws SQLException {
 		QueryRunner qr = new QueryRunner(DBHelper.ds);
 
 		String sql = "insert into hotel_staff(\r\n" + 
@@ -54,7 +54,7 @@ public class StaffDao extends DBHelper {
 				"hotel_staff.sentername,\r\n" + 
 				"hotel_staff.senterpass)\r\n" + 
 				"values(?,?,?,?,?,?,?)";
-		qr.update(sql,sf.getSname(),sf.getSsex(),sf.getSage(),sf.getSbirthday(),sf.getSphone(),sf.getSentername(),sf.getSenterpass());
+		qr.update(sql,sf.getSname(),sf.getSsex(),sf.getSage(),srtime,sf.getSphone(),sf.getSentername(),sf.getSenterpass());
 		
 	}
 	public List<Hotel_staff> queryByRelname(String relname) throws SQLException {
@@ -96,5 +96,26 @@ public class StaffDao extends DBHelper {
 		
 		return list;
 		
+	}
+
+	public void deleteStaffById(int id) throws SQLException {
+		Hotel_staff sf = new Hotel_staff();
+		String sql = "delete * from  hotel_staff where sid=?";
+		
+		
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+
+		qr.update(sql, id);
+		
+	}
+
+	public void updateById(int id,String pass,String phone) throws SQLException {
+		Hotel_staff sf = new Hotel_staff();
+		String sql = "update hotel_staff set senterpass=?,sphone=? where sid=?";
+		
+		
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+
+		qr.update(sql,pass,phone,id);
 	}
 }

@@ -31,6 +31,11 @@ public class ShopLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		
 		String loginname = request.getParameter("username");

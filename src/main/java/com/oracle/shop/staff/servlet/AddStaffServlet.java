@@ -34,6 +34,10 @@ public class AddStaffServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		String relname = request.getParameter("relname");
 		String sex =  request.getParameter("sex");
@@ -56,7 +60,7 @@ public class AddStaffServlet extends HttpServlet {
 			st.setSname(relname);
 			st.setSphone(phone);
 			st.setSage(Integer.parseInt(age));
-			st.setSbirthday(DateUtil.stringtodate(birthday, "D"));
+			st.setSbirthday(DateUtil.stringtodate(birthday, DateUtil.D));
 			st.setSentername(username);
 			st.setSenterpass(userpass);
 			st.setSsex(sex);

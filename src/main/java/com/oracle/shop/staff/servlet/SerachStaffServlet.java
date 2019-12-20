@@ -34,6 +34,10 @@ public class SerachStaffServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("application/json;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
 		String phone = request.getParameter("phone");
 		String name = request.getParameter("name");
 		Map<String,Object> map = new HashMap<String,Object>();

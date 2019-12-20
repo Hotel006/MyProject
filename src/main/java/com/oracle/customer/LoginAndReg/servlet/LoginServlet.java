@@ -27,6 +27,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("application/json;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		
 		String phone = request.getParameter("loginname");
 		String pass = request.getParameter("loginpass");
 		LoginAndRegService ls = new LoginAndRegService();

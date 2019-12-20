@@ -49,7 +49,7 @@ public class Hotel_staff{
 		this.sbirthday = sbirthday;
 	}
 	//getter
-	public Object getSbirthday(){
+	public Date getSbirthday(){
 		 return sbirthday;
 	}
 	//setter

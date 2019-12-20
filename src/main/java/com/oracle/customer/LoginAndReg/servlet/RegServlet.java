@@ -32,6 +32,10 @@ public class RegServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		response.setContentType("application/json;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
+		
 		Map<String,Object> map = new HashMap();
 		//获取电话号码和昵称，准备注册
 		String phone = request.getParameter("phone");
