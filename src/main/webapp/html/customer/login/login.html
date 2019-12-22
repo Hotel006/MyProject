@@ -107,34 +107,17 @@
             	<a href="reg_customer.html"  class="mui-pull-left" id="lijizhuce">立即注册</a>
                 <a href="forget_password.html" id="wangjimima">忘记密码?</a>
             </div>
-            <div class="">
+        </form>
+         <div>
             <button  id="login" class="mui-btn mui-btn-block mui-btn-login" >登 录</button>
         </div>
-        </form>
-         
        
     </div>
 </body>
 <script>
 
 	
-/* 	$("#login").click(function(){
-		$.ajax({
-			url:"${pageContext.request.contextPath}/customer/servlet/LoginServlet.do",
-			method:"get",
-			data:$("#form1").serialize(),
-			type:"json",
-			success:function(data){
-				if(data.result){
-					alert(data.result);
-				}else{ 
-					alert(data.msg);
-				}
-			}
-			
-		});
-		
-}); */
+
 	var fl = false;
 	$('#mpanel1').slideVerify({
 		type : 1,		//类型
@@ -155,6 +138,8 @@
 		}
 		
 	});
+	
+	
 	$("#login").click(function(){
 		
 		if (document.form1.loginname.value.replace(/\s+$|^\s+/g,"").length<=0) {
@@ -176,7 +161,7 @@
 				dataType:"json",
 				success:function(data){
 					if(data.result){
-						alert(data.result);
+						alert("登录成功！请点击确认进入主页！");
 						window.location.href="lvtu.html";
 					}else{ 
 						alert(data.msg);
@@ -188,9 +173,6 @@
 			alert("请滑动验证码");
 			return;
 		}
-		/* if(fl==true){
-			document.submit
-		} */
 	});
 
 	

@@ -45,19 +45,20 @@ public class ShopLoginServlet extends HttpServlet {
 		try {
 			Hotel_admin ha  = ls.login(loginname, loginpass);
 			
-			request.getSession().setAttribute("SESSIONUSER", ha);
+			request.getSession().setAttribute("SESSIONADMIN", ha);
 			
 			
 			map.put("result", true);
 			
-			response.getWriter().print(JSON.toJSONString(map));
+			
 			
 
 		} catch (Exception e) {
+			map.put("result", false);
 			map.put("msg", e.getMessage());
 		}
 		
-		
+		response.getWriter().print(JSON.toJSONString(map));
 	}
 
 	/**

@@ -46,6 +46,10 @@ public class LoginAndRegService {
 	public User_admin login(String phone, String pass) throws Exception {
 		User_admin ua = new User_admin();
 		LogAndRegDao lar = new LogAndRegDao();
+		
+		ua = lar.queryByPhone(phone);
+		System.out.println(ua.getUloginname());
+		System.out.println(ua.getUloginpass());
 		if (ua == null) {
 			throw new RuntimeException("账号不存在,请先注册");
 		}
