@@ -64,8 +64,7 @@ public class AddStaffServlet extends HttpServlet {
 			st.setSentername(username);
 			st.setSenterpass(userpass);
 			st.setSsex(sex);
-			
-			System.out.println(st.getSbirthday());
+
 			ss.save(st);
 			
 			

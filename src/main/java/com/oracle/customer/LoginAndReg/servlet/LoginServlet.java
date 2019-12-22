@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 		try {
 			User_admin ua = ls.login(phone, pass);
 			
-			request.getSession().setAttribute("SESSIONUSER", ua);
+			request.getSession().setAttribute("User_admin", ua);
 			map.put("result", true);
 			
 			
