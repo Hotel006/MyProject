@@ -36,25 +36,22 @@ public class OutService {
 			houttime=DateUtil.nowtime(DateUtil.H);
 			hsource=h.getOsource();
 			hcard=h.getOcard();
-			System.out.println(hnumber);
-			System.out.println(hpeople);
-			System.out.println(hphone);
-			System.out.println(hhouse);
-			System.out.println(hcount);
-			System.out.println(hmoney);
-			System.out.println(hontime);
-			System.out.println(houttime);
-			System.out.println(hsource);
-			System.out.println(hcard);
 			oDao.out(hnumber,hpeople,hphone,hhouse,hcount,hmoney,hontime,houttime,hsource,hcard);
 		}
 	}
 	}
 	public void clean(String room,String text) throws SQLException {
+		int day = 0 ;
 		if(text==null) {
 			oDao.clean(room);
 		}else {
-			oDao.xuzhu(room,text);
+			List<Hotel_order> list =new QueryDao().queryruzhu();
+			for (Hotel_order h : list) {
+				if(h.getOroom().equals(room)) {
+					day =Integer.valueOf(h.getOday())+Integer.valueOf(text);
+				}
+			}
+			oDao.xuzhu(room,day);
 		}
 		
 	}

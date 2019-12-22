@@ -20,10 +20,10 @@
 <body>
 	<div class="x-body layui-anim layui-anim-up">
 		<blockquote class="layui-elem-quote">
-			欢迎管理员： <span class="x-red">test</span>！ <label id="#clock"></label>
+			欢迎管理员： <span class="x-red">admin</span>！ <label id="#clock"></label>
 		</blockquote>
 		<fieldset class="layui-elem-field">
-			<legend>系统通知</legend>
+			<legend>房态信息</legend>
 			<div class="layui-field-box">
 				<table id="table" border="1" width="600" cellspacing="0"
 					cellpadding="0" class="layui-table" lay-skin="line">
@@ -161,28 +161,17 @@
 				var state = text.split('>')[1];
 				if (state == '入住中'||state== '房间即将到期'||state=='房间已过退房时间') {
 					layer.confirm('房间已入住，是否修改房间信息？', {
-						  btn: ['退房','修改信息'] //按钮
+						  btn: ['退房','续住'] //按钮
 						}, function(){
 							checkOut(room);
 						}, function(){
-						  layer.confirm('请选择操作？', {
-						    btn: ['续住', '更换房间']
-						  },function(){
-							  layer.open({
-									type : 2,
-									title : '入住',
-									shadeClose : true,
-									shade : 0.8,
-									area : [ '550px', '90%' ],
-									content : 'Checkin.jsp?room=' + room + '&state=5' //iframe的url
-								});
-								});
-						  },function(){
-							  layer.prompt({title: '请输入更换的房间', formType: 1}, function(text, index){
-								    layer.close(index);
-								    checkOut(room,text);
-								  });
-						  });
+							layer.prompt({title: '请输入天数', formType: 2}, function(text, index){
+							    layer.close(index);
+							    checkOut(room,text);
+							});
+							});
+				
+						
 						
 				} else if (state == '已预定') {
 					layer.confirm('此房间已被预定，是否入住？', {

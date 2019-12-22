@@ -21,9 +21,9 @@ public class OutDao {
 		String sql="UPDATE hotel_order SET ooderstate=2 WHERE oroom =?";
 		qr.update(sql, room);
 	}
-	public void xuzhu(String room, String text) throws SQLException {
-		String sql="UPDATE hotel_order SET ochangeroom=? AND oroom=? WHERE oroom =?";
-		qr.update(sql, room,text,room);
+	public void xuzhu(String room, int day) throws SQLException {
+		String sql="UPDATE hotel_order SET oday=?  WHERE oroom =?";
+		qr.update(sql, day,room);
 	}
 	public void changeRoom(String room, String text) throws SQLException {
 		String sql="UPDATE hotel_order SET ochangeroom=? AND oroom=? WHERE oroom =?";
