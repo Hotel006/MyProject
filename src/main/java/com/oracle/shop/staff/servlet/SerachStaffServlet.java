@@ -38,19 +38,13 @@ public class SerachStaffServlet extends HttpServlet {
 		response.setContentType("application/json;charset=utf-8");
 		request.setCharacterEncoding("utf-8");
 		
-		String phone = request.getParameter("phone");
-		String name = request.getParameter("name");
+		String phone = request.getParameter("mphone");
+		String name = request.getParameter("mname");
 		Map<String,Object> map = new HashMap<String,Object>();
 		StaffService ss = new StaffService();
 		List<Hotel_staff> list = new ArrayList<Hotel_staff>();
 		try {
-			if(phone==null && name==null) {
-			map.put("msg", "请输入查询条件进行查询");
-			
-			response.getWriter().print(JSON.toJSONString(map));
-
-				
-			}else if(phone==null){
+			if(phone==null){
 				list = ss.queryByRelname(name);
 				
 			}else if(name==null){
@@ -58,19 +52,18 @@ public class SerachStaffServlet extends HttpServlet {
 			}else {
 				list = ss.queryByPhoneAndName(phone, name);
 			}
-			
+
 			map.put("result", true);
 			map.put("data", list);
+
 			
-			
-			response.getWriter().print(JSON.toJSONString(map));
 			
 		} catch (SQLException e) {
 				map.put("result", false);
 				map.put("msg", e.getMessage());
 		}
 		
-		
+		response.getWriter().print(JSON.toJSONString(map));
 		
 		
 		

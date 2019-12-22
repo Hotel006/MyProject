@@ -48,8 +48,6 @@ public class LoginAndRegService {
 		LogAndRegDao lar = new LogAndRegDao();
 		
 		ua = lar.queryByPhone(phone);
-		System.out.println(ua.getUloginname());
-		System.out.println(ua.getUloginpass());
 		if (ua == null) {
 			throw new RuntimeException("账号不存在,请先注册");
 		}

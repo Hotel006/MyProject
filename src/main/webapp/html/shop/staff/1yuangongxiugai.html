@@ -34,7 +34,7 @@
     </div>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
+        <form class="layui-form layui-col-md12 x-so" onsubmit="return false" id="form11" name="form11">
           <!--<input class="layui-input" placeholder="入住时间" name="start" id="start">
           <input class="layui-input" placeholder="离开时间" name="end" id="end">-->
           <!--<div class="layui-input-inline">
@@ -71,9 +71,9 @@
             </select>
           </div>-->
           <label>手机号：</label>
-          <input type="text" name="mphone" id="phone1"  placeholder="请输入手机号查找" autocomplete="off" class="layui-input">
+          <input type="text" name="mphone" id="mphone"  placeholder="请输入手机号查找" autocomplete="off" class="layui-input">
           <label>员工姓名：</label>
-          <input type="text" name="mname" id="name1"  placeholder="请输入员工姓名查找" autocomplete="off" class="layui-input">
+          <input type="text" name="mname" id="mname"  placeholder="请输入员工姓名查找" autocomplete="off" class="layui-input">
           <button class="layui-btn"   lay-filter="sreach" id="search_btn" ><i class="layui-icon">&#xe615;</i></button>
         
         
@@ -144,19 +144,22 @@
     
     $("#search_btn").click(function(){
     	
-    	var phone = $("#phone1").val();
-    	var staffname = $("#name1").val();
+    	if (document.form11.mphone.value.replace(/\s+$|^\s+/g,"").length<=0 && document.form11.mname.value.replace(/\s+$|^\s+/g,"").length<=0 ) {
+			alert("\必须输入一个条件才能进行查询！");
+			return;
+		}
+	
     	
     	$.ajax({
-	           url : "../../../SearchStaffServlet.do",
+	           url : "../../../SerachStaffServlet.do",
 	           type : "get",
 	           dataType : "json",
-	           data: {"phone":phone,"name":staffname},
+	           data:$("#form11").serialize(),
 	           success : function(data) {
 	        	   if(data.result){
 	   				xuanran1(data);
 	        	   }else{
-	        		   console.log(data.msg);
+	        		   alert(data.msg);
 	        	   }
 	        	 
 	           } 
@@ -195,12 +198,12 @@
 	           url : "../../../	DeleteServlet.do",
 	           type : "get",
 	           dataType : "json",
-	           data: {"phone":phone,"name":staffname},
+	           data: {"sid":id},
 	           success : function(data) {
 	        	   if(data.result){
 	        		   $(obj).parents("tr").remove();
-	                   layer.msg('已删除!',{icon:1,time:1000});
-	                   window.location.href="yuangongxiugai.html";
+	                   alert("删除成功");
+	                   window.location.href="../../../yuangongxiugai.html";
 	        	   }else{
 	        		   alert(data.msg);
 	        	   }
@@ -275,7 +278,7 @@
 		            "<td>"+td.sentername+"</td>"+
 		            "<td>"+td.senterpass+"</td>"+
 		            "<td class='td-manage'>"+
-		              "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:;'>"+
+		              "<a title='删除' onclick='member_del(this,"+td.sid+")' href='javascript:;'>"+
 		                "<i class='layui-icon'>&#xe640;</i>"+
 		              "</a>"+
 		            "</td>"+

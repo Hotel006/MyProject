@@ -100,7 +100,7 @@ public class StaffDao extends DBHelper {
 
 	public void deleteStaffById(int id) throws SQLException {
 		Hotel_staff sf = new Hotel_staff();
-		String sql = "delete * from  hotel_staff where sid=?";
+		String sql = "delete from hotel_staff where sid=?";
 		
 		
 		QueryRunner qr = new QueryRunner(DBHelper.ds);

@@ -31,8 +31,9 @@ public class StaffService {
 }
 	public List<Hotel_staff> queryByRelname(String relname) throws SQLException {
 		StaffDao sd = new StaffDao();
-		
-		return sd.queryByRelname(relname);
+		List<Hotel_staff> list = sd.queryByRelname(relname);
+		System.out.println(list.size());
+		return list;
 				
 		
 	}
