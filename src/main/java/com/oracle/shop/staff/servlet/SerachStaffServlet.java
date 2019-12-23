@@ -43,14 +43,18 @@ public class SerachStaffServlet extends HttpServlet {
 		Map<String,Object> map = new HashMap<String,Object>();
 		StaffService ss = new StaffService();
 		List<Hotel_staff> list = new ArrayList<Hotel_staff>();
+		System.out.println(phone);
+		System.out.println(name);
 		try {
-			if(phone==null){
+			if(phone.equals("")){
 				list = ss.queryByRelname(name);
-				
-			}else if(name==null){
+				System.out.println("1");
+			}else if(name.equals("")){
 				list = ss.queryByPhone(phone);
+				System.out.println("2");
 			}else {
 				list = ss.queryByPhoneAndName(phone, name);
+				System.out.println("3");
 			}
 
 			map.put("result", true);

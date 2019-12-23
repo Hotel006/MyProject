@@ -72,12 +72,12 @@ public class StaffDao extends DBHelper {
 	
 	public List<Hotel_staff> queryByPhone(String phone) throws SQLException {
 		List<Hotel_staff> list = new ArrayList<Hotel_staff>();
-		
+		System.out.println("进来了");
 		String sql = "select * from  hotel_staff where sphone=?";
 		
 		
 		QueryRunner qr = new QueryRunner(DBHelper.ds);
-		list = qr.query(sql,phone, new BeanListHandler<Hotel_staff>(Hotel_staff.class));
+		list = qr.query(sql,phone,new BeanListHandler<Hotel_staff>(Hotel_staff.class));
 		
 		return list;
 		
