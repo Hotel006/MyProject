@@ -1,5 +1,7 @@
 package com.oracle.entity;
 
+import java.util.Date;
+
 public class Hotel_order{
 	//属性列表
 	private	int	oid;
@@ -11,20 +13,20 @@ public class Hotel_order{
 	private	String	omoney;
 	private String  oroom;
 	private String  rmoney;
-	private	java.util.Date	oontime;
-	private	java.util.Date	oydontime;
-	private	java.util.Date	oouttime;
+	private	Date	oontime;
+	private	Date	oydontime;
+	private	Date	oouttime;
 	private	String	ooderstate;
 	private	String	osource;
 	private	String	ocard;
 	private	String	oday;
-	private String oyjouttime;
+	private Date oyjouttime;
 	
 	
-	public String getOyjouttime() {
+	public Date getOyjouttime() {
 		return oyjouttime;
 	}
-	public void setOyjouttime(String oyjouttime) {
+	public void setOyjouttime(Date oyjouttime) {
 		this.oyjouttime = oyjouttime;
 	}
 	public String getRmoney() {
@@ -42,7 +44,7 @@ public class Hotel_order{
 	public java.util.Date getOydontime() {
 		return oydontime;
 	}
-	public void setOydontime(java.util.Date oydontime) {
+	public void setOydontime(Date oydontime) {
 		this.oydontime = oydontime;
 	}
 	public String getOroom() {
@@ -112,15 +114,15 @@ public class Hotel_order{
 		this.oontime = oontime;
 	}
 	//getter
-	public java.util.Date getOontime(){
+	public Date getOontime(){
 		 return oontime;
 	}
 	//setter
-	public void setOouttime(java.util.Date oouttime){
+	public void setOouttime(Date oouttime){
 		this.oouttime = oouttime;
 	}
 	//getter
-	public java.util.Date getOouttime(){
+	public Date getOouttime(){
 		 return oouttime;
 	}
 	//setter

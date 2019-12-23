@@ -1,4 +1,4 @@
-package com.oracle.shop.order.servlet;
+package com.oracle.customer.order.servlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -12,19 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
+import com.oracle.customer.order.service.CustomerOrderDetailsService;
+import com.oracle.customer.order.service.CustomerOrderService;
 import com.oracle.entity.Hotel_order;
-import com.oracle.shop.order.service.HotelOrderOhouseService;
 
 /**
- * Servlet implementation class HotelOrderOhouseServlet
+ * Servlet implementation class CustomerOrderDateilsServlet
  */
-public class HotelOrderOhouseServlet extends HttpServlet {
+public class CustomerOrderDateilsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HotelOrderOhouseServlet() {
+    public CustomerOrderDateilsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +34,24 @@ public class HotelOrderOhouseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("application/json,charset=utf-8");
+response.setContentType("application/json;charset=utf-8");
+		
 		Map<String, Object> map = new HashMap<String, Object>();
-		HotelOrderOhouseService hos = new HotelOrderOhouseService();
+		
+		CustomerOrderDetailsService cos = new CustomerOrderDetailsService();
+		
+		
 		
 		try {
-			Hotel_order ho = new Hotel_order();
-			List<Hotel_order> list = hos.queryByOhouse(ho.getOhouse());
+			
+			List<Hotel_order> list = cos.queryByDetails() ;
+			System.out.println(list.size());
 			map.put("result", true);
 			map.put("data", list);
 		} catch (SQLException e) {
-			
-			map.put("result", false);
-			map.put("msg", "没有找到订单信息");
+			map.put("msg", e.getMessage());
+
 		}
-		
 		response.getWriter().print(JSON.toJSONString(map));
 	}
 

@@ -10,10 +10,12 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="../../../css/font.css">
     <link rel="stylesheet" href="../../../css/xadmin.css">
+    <link rel="stylesheet" href="../../../css/shop/layer-v3.1.1/layer/mobile/need/layer.css" />
     <script src="../../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/xadmin.js"></script>
-    
+	<script src="../../../css/shop/layer-v3.1.1/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		
   </head>
   
   <body>
@@ -32,7 +34,7 @@
         <form class="layui-form layui-col-md12 x-so">
           
           <div class="layui-input-inline" id="layui-house">
-            <select name="house">
+            <select name="house" id="house">
               <option value="">房间类型</option>
               <option value="0">标准大床房</option>
               <option value="1">豪华大床房</option>
@@ -41,7 +43,7 @@
             </select>
           </div>
           <div class="layui-input-inline" id="layui-source">
-            <select name="source">
+            <select name="source" id="source">
               <option value="">订单来源</option>
               <option value="0">本站订单</option>
               <option value="1">美团订单</option>
@@ -49,16 +51,13 @@
               <option value="3">飞猪订单</option>
             </select>
           </div>
-          <input type="text" name="username"  placeholder="请输入手机号" autocomplete="off" class="layui-input" id="layui-phone">
-          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input" id="layui-number">
-          <button class="layui-btn" id="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          <input type="text" name="username"  placeholder="请输入手机号" autocomplete="off" class="layui-input" id="phone">
+          <input type="text" name="username"  placeholder="请输入订单号" autocomplete="off" class="layui-input" id="number">
+         <a href="JavaScript:search()"><button class="layui-btn" id="btn-trem"  lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button></a>
         
-        
-        
-        </form>
       </div>
       
-      <table class="layui-table">
+      <table class="layui-table" id="table">
         <thead>
           <tr>
             <th>订单编号</th>
@@ -80,34 +79,21 @@
             </tr>
         </thead>
         <tbody id="hotelorder">
-          <tr>
-            <td>20191215001</td>
-            <td>周静</td>
-            <td>12345678900</td>
-            <td>0101</td>
-            <td>豪华大床房</td>
-            <td>1间</td>
-            <td>265</td>
-            <td>2019-12-15 18:00:00</td>
-            <td>3</td>
-            <td>2019-12-16 19:00:00</td>
-            <td>2019-12-16 12:00:00</td>
-            <td>2019-12-16 13:00:00</td>
-            <td>已支付</td>
-            <td>美团订单</td>
-            <td>228135387118520302236</td>
-            <td class="td-manage">
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon" id="layui-delete">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
         </tbody>
       </table>
+       <br>
+                <a href="JavaScript:previous()" >上一页</a>
+                <span id="page"></span>
+                <a href="JavaScript:next()">下一页</a>
+      
+     </form>
      
       </div>
-    <script>
-
+    
+    </body>
+    <script type="text/javascript">
+    
+   
     $(function(){
 		$.ajax({
 			url:"../../../HotelOrderServlet.do",
@@ -116,74 +102,40 @@
 			success:function(data){
 				if (data.result) {
 					xunranorder(data);
-					
 				} else {
 					console.log(data.msg);
 				}
 			}
 		});
     });
-  
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
-
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
-          });
-      }
-
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
       
+    /*$("#btn-trem").click(function(){
+    	
+    	var house = $("#house").val();
+    	var source = $("#source").val();
+    	var phone = $("#phone").val();
+    	var number = $("#number").val();
+    	
+    	$.ajax({
+	           url : "../../../HotelOrderTermServlet.do",
+	           type : "get",
+	           dataType : "json",
+	           data: {"house":house,"source":source,"phone":phone,"number":number},
+	           success : function(data) {
+	        	   if(data.result){
+	   				xuanranorder1(data);
+	        	   }else{
+	        		   console.log(data.msg);
+	        	   }
+	        	 
+	           } 
+		
+		});
+    	
+    	
+    });
+    
+    
       function xunranorder(data) {
 		$("#hotelorder").empty();
 		var datas = data.data;
@@ -191,6 +143,19 @@
 		console.log(odr);
 		for (var i = 0; i<odr.length;i++) {
 			var hd = odr[i];
+			
+			var time1 = hd.oydontime;
+			var time2 = hd.oontime;
+			var time3 = hd.oyjouttime;
+			var time4 = hd.oouttime;
+			var time5 = timestampToTime(time1);
+			var time6 = timestampToTime(time2);
+			var time7 = timestampToTime(time3);
+			var time8 = timestampToTime(time4);
+			console.log(time5);
+			console.log(time6);
+			console.log(time7);
+			console.log(time8);
 			var orderinfo="<tr>"+
 	            "<td>"+hd.onumber+"</td>"+
 	            "<td>"+hd.oname+"</td>"+
@@ -199,25 +164,271 @@
 	            "<td>"+hd.ohouse+"</td>"+
 	            "<td>"+hd.ocount+"</td>"+
 	            "<td>"+hd.omoney+"</td>"+
-	            "<td>"+hd.oydontime+"</td>"+
+	            "<td>"+time5+"</td>"+
 	            "<td>"+hd.oday+"</td>"+
-	            "<td>"+hd.oontime+"</td>"+
-	            "<td>"+hd.oyjouttime+"</td>"+
-	            "<td>"+hd.oouttime+"</td>"+
+	            "<td>"+time6+"</td>"+
+	            "<td>"+time7+"</td>"+
+	            "<td>"+time8+"</td>"+
 	            "<td>"+hd.ooderstate+"</td>"+
 	            "<td>"+hd.osource+"</td>"+
 	            "<td>"+hd.ocard+"</td>"+
 	            "<td class='td-manage'>"+
-	              "<a title='删除' onclick='member_del(this,'要删除的id')' href='javascript:;'>"+
-	                "<i class='layui-icon'>&#xe640</i>"+
-	              "</a>"+
+	            "<button class='layui-btn' id='buttn' >详情</button>"+
 	            "</td>"+
 	          "</tr>";
 	       $("#hotelorder").append(orderinfo); 
 		}
 	}
- 
+      
+      function xunranorder1(data) {
+  		$("#hotelorder").empty();
+  		var datas = data.data;
+  		var odr = datas;
+  		console.log(odr);
+  		for (var i = 0; i<odr.length;i++) {
+  			var hd = odr[i];
+  			
+  			var time1 = hd.oydontime;
+  			var time2 = hd.oontime;
+  			var time3 = hd.oyjouttime;
+  			var time4 = hd.oouttime;
+  			var time5 = timestampToTime(time1);
+  			var time6 = timestampToTime(time2);
+  			var time7 = timestampToTime(time3);
+  			var time8 = timestampToTime(time4);
+  			console.log(time5);
+  			console.log(time6);
+  			console.log(time7);
+  			console.log(time8);
+  			var orderinfo="<tr>"+
+  	            "<td>"+hd.onumber+"</td>"+
+  	            "<td>"+hd.oname+"</td>"+
+  	            "<td>"+hd.ophone+"</td>"+
+  	            "<td>"+hd.oroom+"</td>"+
+  	            "<td>"+hd.ohouse+"</td>"+
+  	            "<td>"+hd.ocount+"</td>"+
+  	            "<td>"+hd.omoney+"</td>"+
+  	            "<td>"+time5+"</td>"+
+  	            "<td>"+hd.oday+"</td>"+
+  	            "<td>"+time6+"</td>"+
+  	            "<td>"+time7+"</td>"+
+  	            "<td>"+time8+"</td>"+
+  	            "<td>"+hd.ooderstate+"</td>"+
+  	            "<td>"+hd.osource+"</td>"+
+  	            "<td>"+hd.ocard+"</td>"+
+  	            "<td class='td-manage'>"+
+  	            "<button class='layui-btn' id='buttn' >详情</button>"+
+  	            "</td>"+
+  	          "</tr>";
+  	       $("#hotelorder").append(orderinfo); 
+  		}
+  	}
+      
+      function timestampToTime(time) {//转化成YYYYMMDDhhmmss格式的时间戳
+		    var date = new Date(time),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		    Y = date.getFullYear() + '',
+		    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '',
+		    D = date.getDate() + '',
+		    h = date.getHours() + '',
+		    m = date.getMinutes() + '',
+		    s = date.getSeconds();
+		console.log("转换时间了。");
+		console.log(Y);
+		    return Y+M+D+h+m+s;
+		}*/
+      function previous(){
+          if(page!=1){ //上一页
+             page--;
+              sendData();
+          }
+      }
+     
+      function next(){ //下一页
+           page++;
+             sendData();
+             
+      }
+      $(function(){
+  		//定时器
+  		//每个5000毫秒调用一次ajaxLoadOrder
+  		setInterval(xuanranOrder,500);
+  	});
+      
+    
+  	
+  	//解析 订单数据
+  	function xuanranOrder(data){
+  		//清空原有 
+  		//$("#div_order_content").empty();
+  		
+    	 
+   		
+  			for(var i=0;i<data;i++){
+  				//一条订单信息
+  				var odata = data[i]; 
+  				//console.log(odata);
+  				//订单中菜品列表
+  				var orderList = odata.orderList;
+  				
+  				
+  				//先去找 订单界面中的菜到底和后台现在返回的菜
+  				//是不是一样的，有没有找到
+  				//找到了更新状态
+  				//没找到，则添加进去
+  				//添加到最后，提示有新订单
+  				
+  				var orderID = odata.id;
+  				//通过后台的id查找前端界面对应的id
+  				var ymID = "#div_order_state_"+orderID;
+  				//通过jquery获取这个id对应的页面内容
+  				if($(ymID).length!=0){// 页面有这个数据
+  					// 订单状态0 已下单 1制作中 2申请退单 3已取消 4已完成
+  					//判断状态对不对
+  					console.log("找到了订单-->"+odata.orderstate);
+  					if(odata.orderstate==2){ 
+  						//新订单来了
+  	  					//提示有新的订单 
+  	  					
+  	  					
+  	  					  $('#newMessageDIV').html('<audio  autoplay="autoplay">'+
+  	                 			'<source src="yinxiao1323.mp3" type="audio/mp3" />'+
+  	                 				'<source src="yinxiao1323.mp3" type="audio/mpeg" />'+
+  	                 		  	'</audio>');   
+  	  					
+  	  					
+  	  					 //提示 
+  	              	   layer.open({
+  	              	     content: '您有新的订单'
+  	              	     ,skin: 'msg'
+  	              	     ,time: 2 //2秒后自动关闭
+  	              	   });
+  	              	
+  					}
+  					}	
+  					}
+  	}
+  					
+  				
+      
+      //给table添加数据
+      function xunranorder(data){
+    	  $("#hotelorder").empty();
+    	  var datas = data.data;
+  		  var odr = datas;
+  		console.log(odr);
+         for( i=0;i<odr.length;i++){
+        	 var hd = odr[i];
+        	var time1 = hd.oydontime;
+   			var time2 = hd.oontime;
+   			var time3 = hd.oyjouttime;
+   			var time4 = hd.oouttime;
+   			var time5 = timestampToTime(time1);
+   			var time6 = timestampToTime(time2);
+   			var time7 = timestampToTime(time3);
+   			var time8 = timestampToTime(time4);
+   			console.log(time5);
+   			console.log(time6);
+   			console.log(time7);
+   			console.log(time8);
+        	 var orderinfo="<tr>"+
+	            "<td>"+hd.onumber+"</td>"+
+	            "<td>"+hd.oname+"</td>"+
+	            "<td>"+hd.ophone+"</td>"+
+	            "<td>"+hd.oroom+"</td>"+
+	            "<td>"+hd.ohouse+"</td>"+
+	            "<td>"+hd.ocount+"</td>"+
+	            "<td>"+hd.omoney+"</td>"+
+	            "<td>"+time5+"</td>"+
+	            "<td>"+hd.oday+"</td>"+
+	            "<td>"+time6+"</td>"+
+	            "<td>"+time7+"</td>"+
+	            "<td>"+time8+"</td>"+
+	            "<td>"+hd.ooderstate+"</td>"+
+	            "<td>"+hd.osource+"</td>"+
+	            "<td>"+hd.ocard+"</td>"+
+	            "<td class='td-manage'>"+
+	            "<a href='JavaScript:search()'><button class='layui-btn' id='buttn' >详情</button></a>"+
+	            "</td>"+
+	          "</tr>";
+	          $("#hotelorder").append(orderinfo); 
+	      
+        var a=document.createElement("a");
+        var a1=document.createElement("a");
+        var node = document.createTextNode("详情");//给a标签设置value值
+        a.appendChild(node);//吧value值添加到a标签
+        a.setAttribute("href","../../../../HotelOrderServlet.do");//给a标签设置herf属性//修改的时候吧id传过去
+        
+         }
+          }
+     
+        //删除table的数据
+      function removeElement(){
+          //1.找到table 
+           var tab=document.getElementById("hotelorder");
+          //2.移除所有的元素
+           var length=tab.rows.length;
+           for(var index=0;index<length;index++){
+               tab.deleteRow(0);
+           }
+      }  
+     function onSearch(){
+         //page 等于1
+          page=1;
+         //调用搜索方法
+         search();
+      } 
+      var house=document.getElementById("house");
+      var source=document.getElementById("source");
+      var phone=document.getElementById("phone");
+      console.log(name.value);
+      var number=document.getElementById("number");
+      console.log(number);
+      function search(){
+            //1.初始化一个XmlHttpRequset对象
+            var request=new XMLHttpRequest();
+            //2.构建请求的参数URl
+            var url="../../../HotelOrderTermServlet.do?page="+page+"&ohouse="+ohouse.value+"&osource="+osource.value+"&ophone="+ophone.value+"&desc="+onumber.value;
+           console.log(url);         
+            request.open("get",url,true);
+            //3.发送请求
+            request.send();
+            //4.监听请求的数据
+            request.onreadystatechange=function(){
+               //监听状态
+               if(request.readyState==4&&request.status==200){
+                   //把响应的数据转换成json对象
+                   var data=JSON.parse(request.responseText);
+                   console.log(data.data);
+                        if(data.data.length==0){
+                            alert("已经到尾部了 没有更多数据了");
+                            page--;//page 自减1
+                            return;
+                         }
+                    //设置总页数 和当前页数
+                    var lab=document.getElementById("page");
+                    lab.innerText=page+"页/"+jsonObj.countpage+"页";
+                    //删除表上原有的数据
+                    removeElement();
+                   //将数据刷新到当前页面的table中
+                    xunranorder(data);
+               }
+            }
+       }
+      
+      function timestampToTime(time) {//转化成YYYYMMDDhhmmss格式的时间戳
+		    var date = new Date(time),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		    Y = date.getFullYear() + '',
+		    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '',
+		    D = date.getDate() + '',
+		    h = date.getHours() + '',
+		    m = date.getMinutes() + '',
+		    s = date.getSeconds();
+		console.log("转换时间了。");
+		console.log(Y);
+		    return Y+M+D+h+m+s;
+		}
+   
     </script>
-  </body>
+  
 
 </html>
