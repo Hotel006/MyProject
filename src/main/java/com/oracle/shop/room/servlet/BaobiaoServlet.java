@@ -53,13 +53,7 @@ public class BaobiaoServlet extends HttpServlet {
 		
 					 hh += Integer.parseInt(hs.getOmoney());
 					}
-					
-					
 					int sum = hh   ;
-					
-					
-					
-					
 					map.put("sum", sum);
 					map.put("data", list);
 					map.put("result", true);

@@ -50,22 +50,14 @@
         <tbody id="tboday1">
           
         </tbody>
-        
-
       </table>
-      <!-- 分页 -->
-	
     </div>
 	
-	<!-- 统计表 -->
-	<div id="container" style=" width: 600px;height: 300px;" ></div>
-	    <script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
+
 	    <script type="text/javascript">
-	    
-	    var parseInt(sum) = 0;
 	    //查询报表中所有的数据
-	      $(function(){
-		$.ajax({
+	      $(function () {
+			$.ajax({
 			url:"../../../1BaobiaoServlet",
 			type:"post",
 			dataType:"json",
@@ -80,7 +72,7 @@
 				}
 	        }
 		});
-	});
+		});
 	    
 	      //当页面加载完的时候渲染
 	      function xuanran(data){
@@ -89,185 +81,35 @@
 	    	 var typeroomData=datas;
 	    	  for(var j=0;j<typeroomData.length;j++){
 	    		  var td = typeroomData[j];
+	    		  var time = td.oontime;
+					 var time1 = timestampToTime(time);
 	    var tdHTML =  
 	    	"<tr>"+
-        "<td>"+td.oontime+"</td>"+
+        "<td>"+time1+"</td>"+
         "<td>"+td.oname+"</td>"+
         "<td>"+td.oroom+"</td>"+
         "<td>"+td.ohouse+"</td>"+
         "<td>"+td.ophone+"</td>"+
         "<td>"+td.omoney+"</td>"+
-        "<td></td><td></td><td></td><td></td><td></td>"+
-        "<td id='totalRow'>总和："+td.sum+"</td>"+
-        "</tr>"+
+       "</tr>"+
 	            $("#tboday1").append(tdHTML);
 	    	  }
-/* 	    	  var tdtd = "<tr>"+
-	          "<td></td><td></td><td></td><td></td><td></td>"+
-	          "<td id='totalRow'>总和："+data.sum+"</td>"+
-	          "</tr>"+
-	    	  $("#tboday1").append(tdtd);  
-	      } */
-	     
-	    //统计图
-	        var dom = document.getElementById("container");
-	        var myChart = echarts.init(dom);
-	        var app = {};
-	        option = null;
-	        app.title = '柱状图营业额划分';
-	        var namedate = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
-	        var numdate = [600, 2270, 2380, 3250, 1270, 4490, 7100];
-	        var colorlist = [];
-	        numdate.forEach(element => {
-	            if (element <1000) {
-	                colorlist.push(["#fc7095", "#fa8466"])
-	            } else if (element >= 2000 && element < 9000) {
-	                colorlist.push(["#386ffd", "#74b3ff"])
-	            } else {
-	                colorlist.push(["#1aa8ce", "#49d3c6"])
-	            }
-	        });
-	        option = {
-	
-	            tooltip: {
-	                trigger: 'axis',
-	                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-	                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-	                }
-	            },
-	            grid: {
-	                left: '3%',
-	                right: '4%',
-	                bottom: '3%',
-	                containLabel: true
-	            },
-	            xAxis: [
-	                {
-	                    type: 'category',
-	                    data: namedate,
-	                    axisTick: {
-	                        alignWithLabel: true
-	                    },
-	                    axisLine: {
-	                        lineStyle: {
-	                            color: "#4dd1c4",
-	                            width: 1
-	                        }
-	                    },
-	                    axisLabel: {
-	                        show: true,
-	                        textStyle: {
-	                            color: '#999'
-	                        }
-	                    }
-	                }
-	            ],
-	            yAxis: [
-	                {
-	                    type: 'value',
-	                    axisLabel: {
-	                        formatter: '{value} 元',
-	                        show: true,
-	                        textStyle: {
-	                            color: '#999'
-	                        }
-	                    },
-	                    axisLine: {
-	                        lineStyle: {
-	                            color: "#4dd1c4",
-	                            width: 1
-	                        }
-	                    },
-	                    splitLine: {
-	                        show: true,
-	                        lineStyle: {
-	                            type: 'dashed',
-	                            color: '#ddd'
-	                        }
-	                    }
-	
-	                }
-	            ],
-	            series: [
-	                {
-	                    name: '营业额：',
-	                    type: 'bar',
-	                    barWidth: '60%',
-	                    data: numdate,
-	                    itemStyle: {
-	                        normal: {
-	                            // color: new echarts.graphic.LinearGradient(
-	                            //     0, 0, 0, 1,
-	                            //     [
-	                            //         {offset: 1, color: 'red'},
-	                            //         {offset: 0, color: 'orange'}
-	                            //     ]
-	                            // )
-	                            color: function (params) {
-	                                // var colorList = colorlist;
-	                                // return colorList[params.dataIndex];
-	                                var colorList = colorlist
-	
-	                                var index = params.dataIndex;
-	                                // if(params.dataIndex >= colorList.length){
-	                                //         index=params.dataIndex-colorList.length;
-	                                // }
-	                                return new echarts.graphic.LinearGradient(0, 0, 0, 1,
-	                                    [
-	                                        { offset: 1, color: colorList[index][0] },
-	                                        { offset: 0, color: colorList[index][1] }
-	                                    ]);
-	
-	
-	                            }
-	                        }
-	                    }
-	                }
-	            ]
-	        };
-	        ;
-	        if (option && typeof option === "object") {
-	            myChart.setOption(option, true);
-	        }
-	 
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
-
-
-      /*用户-删除*/
-      function member_del(obj,id){
-          layer.confirm('确认要删除吗？',function(index){
-              //发异步删除数据
-              $(obj).parents("tr").remove();
-              layer.msg('已删除!',{icon:1,time:1000});
-          });
-      }
-
-
-
-      function delAll (argument) {
-
-        var data = tableCheck.getData();
-  
-        layer.confirm('确认要删除吗？'+data,function(index){
-            //捉到所有被选中的，发异步进行删除
-            layer.msg('删除成功', {icon: 1});
-            $(".layui-form-checked").not('.header').parents('tr').remove();
-        });
-      }
-      
+	    	  
+	    	  
+	      }
+	    
+			function timestampToTime(time) {//转化成YYYYMMDDhhmmss格式的时间戳
+			    var date = new Date(time),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+			    Y = date.getFullYear() + '',
+			    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '',
+			    D = date.getDate() + '',
+			    h = date.getHours() + '',
+			    m = date.getMinutes() + '',
+			    s = date.getSeconds();
+			console.log("转换时间了。");
+			console.log(Y);
+			    return Y+M+D;
+			}
       //给点击事件写点击事件
       	//给提交写点击事件
 	

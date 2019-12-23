@@ -30,16 +30,16 @@ public class BaobiaoDao extends DBHelper {
 	}
 	
 	//通过年份查询
-	public List<Hotel_order> queryYear() throws SQLException {
+	public List<Hotel_order> queryYear(String year) throws SQLException {
 		String sql = "select * from hotel_order where Year(oontime) = ?";
-		List<Hotel_order> list  = qr.query(sql, new BeanListHandler<Hotel_order>(Hotel_order.class));
+		List<Hotel_order> list  = qr.query(sql, new BeanListHandler<Hotel_order>(Hotel_order.class),year);
 		return list;
 		
 	}
 	//通过月份分查询
-	public List<Hotel_order> queryMonth() throws SQLException {
-		String sql = "select * from hotel_order where Year(oontime) = ? and Month(oontime) =?";
-		List<Hotel_order> list  = qr.query(sql, new BeanListHandler<Hotel_order>(Hotel_order.class));
+	public List<Hotel_order> queryMonth(String month) throws SQLException {
+		String sql = "select * from hotel_order where  Month(oontime) =?";
+		List<Hotel_order> list  = qr.query(sql, new BeanListHandler<Hotel_order>(Hotel_order.class),month);
 		return list;
 		
 	}

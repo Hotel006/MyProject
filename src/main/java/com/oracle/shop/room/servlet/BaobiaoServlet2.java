@@ -61,17 +61,18 @@ public class BaobiaoServlet2 extends HttpServlet {
 		 
 		 try {
 			 if (month!=null) {
-				 List<Hotel_order> list = bs.queryMonth();
+				 List<Hotel_order> list = bs.queryMonth(month);
 					map.put("data",list);	
 					map.put("result", true);
 			} else {
 				
-				 List<Hotel_order> list = bs.queryYear();
+				 List<Hotel_order> list = bs.queryYear(year);
 					map.put("data",list);	
 					map.put("result", true);
 			}
 			
 		} catch (SQLException e) {
+			e.printStackTrace();
 			map.put("result", false);
 			map.put("msg", "没有找到报表信息");
 			

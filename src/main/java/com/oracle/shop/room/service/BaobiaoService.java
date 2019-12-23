@@ -19,15 +19,15 @@ BaobiaoDao hte = new BaobiaoDao();
 		return hr;
 	}
 	//通过年份查
-	public List<Hotel_order> queryYear() throws SQLException {
-		List<Hotel_order> hr = hte.queryYear();
+	public List<Hotel_order> queryYear(String year) throws SQLException {
+		List<Hotel_order> hr = hte.queryYear(year);
 		System.out.println(hr.size());
 		return hr;
 	}
 
 	//通过月份查
-		public List<Hotel_order> queryMonth() throws SQLException {
-			List<Hotel_order> hr = hte.queryMonth();
+		public List<Hotel_order> queryMonth(String month) throws SQLException {
+			List<Hotel_order> hr = hte.queryMonth(month);
 			System.out.println(hr.size());
 			return hr;
 		}
