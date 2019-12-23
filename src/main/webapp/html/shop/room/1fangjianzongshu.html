@@ -11,7 +11,8 @@
 <link href="../../../css/shop/statement/font-awesome.css" rel="stylesheet">
 
 <!--可无视-->
-<link rel="stylesheet" type="text/css" href="css/demo.css">
+<link rel="stylesheet" type="text/css" href="../../../css/shop/statement/demo.css">
+
 
 <style type="text/css">
 .demo{ padding: 2em 0;}
@@ -102,55 +103,92 @@
 </head>
 <body style="background-color: white;">
 
-<div class="demo">
+<div class="demo" id="demo1">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-3 col-sm-6">
-				<div class="counter">
-					<div class="counter-content">
-						<div class="counter-icon fa fa-globe"></div>
-						<span class="counter-value">1250</span>
-					</div>
-					<h3 class="title">房间总数量</h3>
-				</div>
-			</div>
+		<div class="row" id="rows">
 
-			<div class="col-md-3 col-sm-6">
-				<div class="counter red">
-					<div class="counter-content">
-						<div class="counter-icon fa fa-rocket"></div>
-						<span class="counter-value">952</span>
-					</div>
-					<h3 class="title">房间类型数量</h3>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="counter blue">
-					<div class="counter-content">
-						<div class="counter-icon fa fa-briefcase"></div>
-						<span class="counter-value">578</span>
-					</div>
-					<h3 class="title">已入住房间数量 </h3>
-				</div>
-			</div>
-
-			<div class="col-md-3 col-sm-6">
-				<div class="counter purple">
-					<div class="counter-content">
-						<div class="counter-icon fa fa-mobile"></div>
-						<span class="counter-value">1450</span>
-					</div>
-					<h3 class="title">未入住房间数量</h3>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
 	
-<script src="../../../js/shop/statement/jquery-1.11.0.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-$(document).ready(function(){
+<script src="../../../js/customer/reserve/jquery-1.8.3.min.js" type="text/javascript"></script>
+<script>
+
+$(function() {
+	$.ajax({
+		url:"../../../AmountRoomServlet",
+		type:"get",
+		dataType:"json",
+		success:function(data){
+			if (data.result) {
+				//渲染
+				xuanran(data);
+			} else {
+				console.log(data.msg);
+			}
+		}
+	});
+});
+	function xuanran(data) {
+	$("rows").empty();
+	var datas= data.data;
+	var AmountRoomData =datas; 
+
+		var td1 = AmountRoomData[0];
+		var td2 = AmountRoomData[1];
+		var td3 = AmountRoomData[2];
+		var td4 = AmountRoomData[3];
+
+
+		var tdHTML = 
+
+			
+				"<div class='col-md-3 col-sm-6'>"+
+				"<div class='counter'>"+
+					"<div class='counter-content'>"+
+						"<div class='counter-icon fa fa-globe'></div>"+
+						"<span class='counter-value'>"+td3+"</span>"+
+					"</div>"+
+					"<h3 class='title'>房间总数量</h3>"+
+				"</div>"+
+			"</div>"+
+
+			"<div class='col-md-3 col-sm-6'>"+
+				"<div class='counter red'>"+
+					"<div class='counter-content'>"+
+						"<div class='counter-icon fa fa-rocket'></div>"+
+						"<span class='counter-value'>"+td4+"</span>"+
+					"</div>"+
+					"<h3 class='title'>房间类型数量</h3>"+
+				"</div>"+
+			"</div>"+
+
+			"<div class='col-md-3 col-sm-6'>"+
+				"<div class='counter blue'>"+
+					"<div class='counter-content'>"+
+						"<div class='counter-icon fa fa-briefcase'></div>"+
+						"<span class='counter-value'>"+td1+"</span>"+
+					"</div>"+
+					"<h3 class='title'>已入住房间数量 </h3>"+
+				"</div>"+
+			"</div>"+
+
+			"<div class='col-md-3 col-sm-6'>"+
+				"<div class='counter purple'>"+
+					"<div class='counter-content'>"+
+						"<div class='counter-icon fa fa-mobile'></div>"+
+						"<span class='counter-value'>"+td2+"</span>"+
+					"</div>"+
+					"<h3 class='title'>未入住房间数量</h3>"+
+				"</div>"+
+	"</div>";
+	$("#rows").append(tdHTML);
+	
+	
+};
+
+
+ $(document).ready(function(){
 	$('.counter-value').each(function(){
 		$(this).prop('Counter',0).animate({
 			Counter: $(this).text()
@@ -162,7 +200,7 @@ $(document).ready(function(){
 			}
 		});
 	});
-});
+}); 
 </script>
 
 </body>

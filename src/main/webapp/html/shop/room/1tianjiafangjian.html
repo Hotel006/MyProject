@@ -12,6 +12,7 @@
 
 <link rel="stylesheet" type="text/css" href="../../../css/shop/room/base.css">
 <link rel="stylesheet" type="text/css" href="../../../css/shop/room/home.css">
+<script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
 
 </head>
 <body>
@@ -68,7 +69,7 @@
 						<div class="aui-photo aui-up-img clear">
 							<section class="aui-file-up fl">
 								<img src="../../../images/up.png" class="add-img">
-								<input type="file" name="path" id="path" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
+								<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple/>
 							</section>
 						</div>
 					</div>
@@ -146,9 +147,9 @@
 		{
 
 			zizhi.innerHTML='<font class="tips_false">必须是2位以上的数字</font>';
-
+			
 		}else{
-
+			
 			zizhi.innerHTML='<font class="tips_true">输入正确</font>';
 
 		}
@@ -156,24 +157,23 @@
 	
 	//给提交写点击事件
 	
-	$(function() {
 		$("#add").click(function(){
 			$.ajax({
 				url:"../../../AddRoomServlet",
 				type:"post",
-				data:$("#sss").serialize(),//获取表单数据
+				data:$("#sss").serialize(),   
 				dataType:"json",
-				
 				success:function(data){
 					if (data.result) {
-						alert("添加房间成功")
+						alert("添加成功");
 					} else {
-						console.log(data.msg);
+						alert(result.msg);
 					}
 				}
-			})
+			});
 		});
-	});
+	
+	
 
 </script>
 

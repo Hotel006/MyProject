@@ -13,6 +13,7 @@
     <script src="../../../js/jquery.min.js"></script>
     <script type="text/javascript" src="../../../lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../../js/xadmin.js"></script>
+    <script id="jquery_183" type="text/javascript" class="library" src="http://runjs.cn/js/sandbox/jquery/jquery-1.8.3.min.js"></script>
 	
   </head>
   
@@ -25,173 +26,90 @@
       <a class="layui-btn layui-btn-primary layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:38px">ဂ</i></a>
     </div>
-    <div class="x-body">
+    <div class="x-body" > 
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so">
-          <input type="text" name="username"  placeholder="请输入年份" autocomplete="off" class="layui-input">
-          <input type="text" name="username"  placeholder="请输入月份" autocomplete="off" class="layui-input">
-          <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-        
-        
-        
+        <form class="layui-form layui-col-md12 x-so" onsubmit="return false" id="form1" name="form1">
+          <input type="text" name="useryear" id="useryear"   placeholder="请输入年份" autocomplete="off" class="layui-input">
+          <input type="text" name="usermonth" id="usermonth"  placeholder="请输入月份" autocomplete="off" class="layui-input">
+          <button class="layui-btn"  id="sdd" ><i class="layui-icon">&#xe615;</i></button>
+   
         </form>
       </div>
-      <!--<xblock>
-        <!--<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>-->
-        <!--<button class="layui-btn" onclick="x_admin_show('添加用户','./order-add.html')"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-      </xblock>-->
-      <table class="layui-table">
+      <table class="layui-table" id="mytable">
         <thead>
-          <tr>
-            <!--<th>
-              <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-            </th>-->
+       		 <tr>
             <th>日期</th>
             <th>姓名</th>
             <th>房间号</th>
-            <th>房间数量</th>
+            <th>房间类型</th>
+            <th >电话</th>
             <th>金额</th>
-            <th >操作</th>
             </tr>
+            
         </thead>
-        <tbody>
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-            <td>20191210001</td>
-            <td>鲁大师</td>
-            <td>8888</td>
-            <td>1</td>
-            <td>1888</td>
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
+        <tbody id="tboday1">
           
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-            <td>20191210001</td>
-            <td>周静</td>
-            <td>6666</td>
-            <td>1</td>
-            <td>1888</td>
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-          
-          <tr>
-            <!--<td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>-->
-           <td>20191210001</td>
-           <td>杨柳</td>
-           <td>8800</td>
-           <td>1</td>
-           <td>1888</td>
-           
-            <td class="td-manage">
-              <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-                <i class="layui-icon">&#xe63c;</i>
-              </a>-->
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-		  
-		  <tr>
-		    <!--<td>
-		      <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-		    </td>-->
-		   <td>20191210001</td>
-		   <td>集远</td>
-		   <td>9999</td>
-		   <td>1</td>
-		   <td>1888</td>
-		   
-		    <td class="td-manage">
-		      <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-		        <i class="layui-icon">&#xe63c;</i>
-		      </a>-->
-		      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-		        <i class="layui-icon">&#xe640;</i>
-		      </a>
-		    </td>
-		  </tr>
-		  
-		  <tr>
-		    <!--<td>
-		      <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-		    </td>-->
-		   <td>20191210001</td>
-		   <td>雷浩斌</td>
-		   <td>0000</td>
-		   <td>1</td>
-		   <td>1888</td>
-		   
-		    <td class="td-manage">
-		      <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-		        <i class="layui-icon">&#xe63c;</i>
-		      </a>-->
-		      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-		        <i class="layui-icon">&#xe640;</i>
-		      </a>
-		    </td>
-		  </tr>
-		  
-		  <tr>
-		    <!--<td>
-		      <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-		    </td>-->
-		   <td>20191210001</td>
-		   <td>马加爵</td>
-		   <td>9989</td>
-		   <td>1</td>
-		   <td>1888</td>
-		   
-		    <td class="td-manage">
-		      <!--<a title="查看"  onclick="x_admin_show('编辑','order-view.html')" href="javascript:;">
-		        <i class="layui-icon">&#xe63c;</i>
-		      </a>-->
-		      <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-		        <i class="layui-icon">&#xe640;</i>
-		      </a>
-		    </td>
-		  </tr>
         </tbody>
-      </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <span class="current">1</span>
-          <a class="num" href="">2</a>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
+        
 
+      </table>
+      <!-- 分页 -->
+	
     </div>
 	
 	<!-- 统计表 -->
-	<div id="container" style=" width: 600px;height: 300px;"></div>
+	<div id="container" style=" width: 600px;height: 300px;" ></div>
 	    <script type="text/javascript" src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts.min.js"></script>
 	    <script type="text/javascript">
+	    
+	    var parseInt(sum) = 0;
+	    //查询报表中所有的数据
+	      $(function(){
+		$.ajax({
+			url:"../../../1BaobiaoServlet",
+			type:"post",
+			dataType:"json",
+	        success:function(data){
+	        	//将查询的信息遍历
+	        	if (data.result) {
+	        		 //渲染
+	        		 console.log(data.length);
+	        		 xuanran(data);
+				} else {
+					alert(data.msg);
+				}
+	        }
+		});
+	});
+	    
+	      //当页面加载完的时候渲染
+	      function xuanran(data){
+	    	  //解析
+	    	  var datas = data.data;
+	    	 var typeroomData=datas;
+	    	  for(var j=0;j<typeroomData.length;j++){
+	    		  var td = typeroomData[j];
+	    var tdHTML =  
+	    	"<tr>"+
+        "<td>"+td.oontime+"</td>"+
+        "<td>"+td.oname+"</td>"+
+        "<td>"+td.oroom+"</td>"+
+        "<td>"+td.ohouse+"</td>"+
+        "<td>"+td.ophone+"</td>"+
+        "<td>"+td.omoney+"</td>"+
+        "<td></td><td></td><td></td><td></td><td></td>"+
+        "<td id='totalRow'>总和："+td.sum+"</td>"+
+        "</tr>"+
+	            $("#tboday1").append(tdHTML);
+	    	  }
+/* 	    	  var tdtd = "<tr>"+
+	          "<td></td><td></td><td></td><td></td><td></td>"+
+	          "<td id='totalRow'>总和："+data.sum+"</td>"+
+	          "</tr>"+
+	    	  $("#tboday1").append(tdtd);  
+	      } */
+	     
+	    //统计图
 	        var dom = document.getElementById("container");
 	        var myChart = echarts.init(dom);
 	        var app = {};
@@ -326,29 +244,7 @@
         });
       });
 
-       /*用户-停用*/
-      function member_stop(obj,id){
-          layer.confirm('确认要停用吗？',function(index){
 
-              if($(obj).attr('title')=='启用'){
-
-                //发异步把用户状态进行更改
-                $(obj).attr('title','停用')
-                $(obj).find('i').html('&#xe62f;');
-
-                $(obj).parents("tr").find(".td-status").find('span').addClass('layui-btn-disabled').html('已停用');
-                layer.msg('已停用!',{icon: 5,time:1000});
-
-              }else{
-                $(obj).attr('title','启用')
-                $(obj).find('i').html('&#xe601;');
-
-                $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
-                layer.msg('已启用!',{icon: 5,time:1000});
-              }
-              
-          });
-      }
 
       /*用户-删除*/
       function member_del(obj,id){
@@ -371,6 +267,32 @@
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
       }
+      
+      //给点击事件写点击事件
+      	//给提交写点击事件
+	
+
+		$("#sdd").click(function(){
+			$.ajax({
+				url:"../../../BaobiaoServlet2",
+				type:"post",
+				data:$("#form1").serialize(),   
+				dataType:"json",
+				
+				success:function(data){
+					if (data.result) {
+						xuanran(data);
+						
+					} else {
+						console.log(data.msg);
+						
+					}
+				}
+			});
+		});
+
+	
+	
     </script>
   </body>
 

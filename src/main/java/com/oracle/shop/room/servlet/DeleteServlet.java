@@ -1,8 +1,8 @@
 package com.oracle.shop.room.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
-import com.oracle.entity.Hotel_room;
+import com.alibaba.fastjson.JSONObject;
 import com.oracle.shop.room.service.Hotel_roomService;
 
 /**
- * Servlet implementation class Hotel_RoomServlet
+ * Servlet implementation class DeleteServlet
  */
-public class Hotel_RoomServlet extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Hotel_RoomServlet() {
+    public DeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +31,24 @@ public class Hotel_RoomServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 返回的json字符串，对应的java类
-				Map<String, Object>map = new HashMap<String, Object>();
-				Hotel_roomService hr = new Hotel_roomService();
-				try {
-					response.setContentType("application/json;charset=utf-8");
-					//查询 判断 
-					List<Hotel_room> list  =  hr.queryAll();
-					map.put("data",list);	
-					map.put("result", true);
-				} catch (Exception e) {
-					map.put("result", false);
-					map.put("msg", "没有找到房间信息");
-				}
-				//返回给客户端信息
-				response.getWriter().print(JSON.toJSONString(map));
+		Map<String, Object> map = new HashMap<String, Object>();
+		 //获取要删除的id
+		 String rid = request.getParameter("rid");
+		 
+		 Hotel_roomService hs = new Hotel_roomService();
+		 
+		 try {
+			hs.Delete(rid);
+			map.put("result", true);
+		} catch (SQLException e) {
+			map.put("result", false);
+			map.put("msg", e.getMessage());
+		}
+		 response.getWriter().print(JSONObject.toJSONString(map));
+
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

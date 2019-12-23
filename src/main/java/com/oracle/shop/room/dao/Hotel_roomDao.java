@@ -21,6 +21,12 @@ public class Hotel_roomDao extends DBHelper {
 		return list;
 		
 	}
+	public void updateRoomByRnumber(String rid) throws SQLException {
+		String sql = "DELETE FROM hotel_room WHERE rid= ?";
+		Hotel_room hr = new Hotel_room();
+		QueryRunner qr = new QueryRunner(DBHelper.ds);
+		qr.update(rid);
+	}
 	
 	
 }
