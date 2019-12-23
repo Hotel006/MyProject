@@ -109,133 +109,7 @@
 		});
     });
       
-    /*$("#btn-trem").click(function(){
-    	
-    	var house = $("#house").val();
-    	var source = $("#source").val();
-    	var phone = $("#phone").val();
-    	var number = $("#number").val();
-    	
-    	$.ajax({
-	           url : "../../../HotelOrderTermServlet.do",
-	           type : "get",
-	           dataType : "json",
-	           data: {"house":house,"source":source,"phone":phone,"number":number},
-	           success : function(data) {
-	        	   if(data.result){
-	   				xuanranorder1(data);
-	        	   }else{
-	        		   console.log(data.msg);
-	        	   }
-	        	 
-	           } 
-		
-		});
-    	
-    	
-    });
     
-    
-      function xunranorder(data) {
-		$("#hotelorder").empty();
-		var datas = data.data;
-		var odr = datas;
-		console.log(odr);
-		for (var i = 0; i<odr.length;i++) {
-			var hd = odr[i];
-			
-			var time1 = hd.oydontime;
-			var time2 = hd.oontime;
-			var time3 = hd.oyjouttime;
-			var time4 = hd.oouttime;
-			var time5 = timestampToTime(time1);
-			var time6 = timestampToTime(time2);
-			var time7 = timestampToTime(time3);
-			var time8 = timestampToTime(time4);
-			console.log(time5);
-			console.log(time6);
-			console.log(time7);
-			console.log(time8);
-			var orderinfo="<tr>"+
-	            "<td>"+hd.onumber+"</td>"+
-	            "<td>"+hd.oname+"</td>"+
-	            "<td>"+hd.ophone+"</td>"+
-	            "<td>"+hd.oroom+"</td>"+
-	            "<td>"+hd.ohouse+"</td>"+
-	            "<td>"+hd.ocount+"</td>"+
-	            "<td>"+hd.omoney+"</td>"+
-	            "<td>"+time5+"</td>"+
-	            "<td>"+hd.oday+"</td>"+
-	            "<td>"+time6+"</td>"+
-	            "<td>"+time7+"</td>"+
-	            "<td>"+time8+"</td>"+
-	            "<td>"+hd.ooderstate+"</td>"+
-	            "<td>"+hd.osource+"</td>"+
-	            "<td>"+hd.ocard+"</td>"+
-	            "<td class='td-manage'>"+
-	            "<button class='layui-btn' id='buttn' >详情</button>"+
-	            "</td>"+
-	          "</tr>";
-	       $("#hotelorder").append(orderinfo); 
-		}
-	}
-      
-      function xunranorder1(data) {
-  		$("#hotelorder").empty();
-  		var datas = data.data;
-  		var odr = datas;
-  		console.log(odr);
-  		for (var i = 0; i<odr.length;i++) {
-  			var hd = odr[i];
-  			
-  			var time1 = hd.oydontime;
-  			var time2 = hd.oontime;
-  			var time3 = hd.oyjouttime;
-  			var time4 = hd.oouttime;
-  			var time5 = timestampToTime(time1);
-  			var time6 = timestampToTime(time2);
-  			var time7 = timestampToTime(time3);
-  			var time8 = timestampToTime(time4);
-  			console.log(time5);
-  			console.log(time6);
-  			console.log(time7);
-  			console.log(time8);
-  			var orderinfo="<tr>"+
-  	            "<td>"+hd.onumber+"</td>"+
-  	            "<td>"+hd.oname+"</td>"+
-  	            "<td>"+hd.ophone+"</td>"+
-  	            "<td>"+hd.oroom+"</td>"+
-  	            "<td>"+hd.ohouse+"</td>"+
-  	            "<td>"+hd.ocount+"</td>"+
-  	            "<td>"+hd.omoney+"</td>"+
-  	            "<td>"+time5+"</td>"+
-  	            "<td>"+hd.oday+"</td>"+
-  	            "<td>"+time6+"</td>"+
-  	            "<td>"+time7+"</td>"+
-  	            "<td>"+time8+"</td>"+
-  	            "<td>"+hd.ooderstate+"</td>"+
-  	            "<td>"+hd.osource+"</td>"+
-  	            "<td>"+hd.ocard+"</td>"+
-  	            "<td class='td-manage'>"+
-  	            "<button class='layui-btn' id='buttn' >详情</button>"+
-  	            "</td>"+
-  	          "</tr>";
-  	       $("#hotelorder").append(orderinfo); 
-  		}
-  	}
-      
-      function timestampToTime(time) {//转化成YYYYMMDDhhmmss格式的时间戳
-		    var date = new Date(time),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-		    Y = date.getFullYear() + '',
-		    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '',
-		    D = date.getDate() + '',
-		    h = date.getHours() + '',
-		    m = date.getMinutes() + '',
-		    s = date.getSeconds();
-		console.log("转换时间了。");
-		console.log(Y);
-		    return Y+M+D+h+m+s;
-		}*/
       function previous(){
           if(page!=1){ //上一页
              page--;
@@ -380,9 +254,9 @@
       var house=document.getElementById("house");
       var source=document.getElementById("source");
       var phone=document.getElementById("phone");
-      console.log(name.value);
+      
       var number=document.getElementById("number");
-      console.log(number);
+      
       function search(){
             //1.初始化一个XmlHttpRequset对象
             var request=new XMLHttpRequest();

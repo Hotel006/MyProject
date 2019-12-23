@@ -10,10 +10,12 @@ public class CustomerOrderService {
 	
 	CustomerOrderDao cod = new CustomerOrderDao();
 
-	public List<Hotel_order> queryByIntro() throws SQLException {
-		List<Hotel_order> list = cod.queryByIntro();
+	public List<Hotel_order> queryByIntro(int uid) throws SQLException {
+		List<Hotel_order> list = cod.queryByIntro(uid);
 		System.out.println(list.size());
 		return list;
 	}
+
+	
 
 }

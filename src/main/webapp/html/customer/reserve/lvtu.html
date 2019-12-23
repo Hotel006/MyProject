@@ -260,7 +260,7 @@
 
 	$(function(){
 		$.ajax({
-		url:"../../../Reserve_Room_Servlet.do",
+		url:"/Reserve_Room_Servlet.do",
 		type:"get",
 		dataType:"json",
 		success:function (data) {
@@ -335,13 +335,86 @@
   		});
   	});
   		
-  	$(function(){
-  		$.ajax({
-  			type:"get",
-  			url:"",
-  			async:true
-  		});
-  	});
+$("#dd_ls").click(function() {
+	$.ajax({
+		url:"/CustomerOrderServlet.do",
+		type:"get",
+		datatype:"json",
+		success:function(data){
+			if (data.result) {
+				xunranorder(data);
+			} else {
+				alert(data.msg);
+			}
+		}
+		
+	});
+});
+
+function xunranorder(data){
+	  $("#ddjm").empty();
+	  var datas = data.data;
+		  var odr = datas;
+		console.log(odr);
+    for( i=0;i<odr.length;i++){
+   	 	var hd = odr[i];
+   		var time1 = hd.oontime;
+			var time2 = hd.oouttime;
+
+			var time3 = timestampToTime(time1);
+			var time4 = timestampToTime(time2);
+			console.log(time3);
+			console.log(time4);
+			
+   	 var orderinfo="<div class='ordlist all'>"+
+   		 "<a href='orderdateils.html'>"+
+			"<div class='ordlist_header'>"+
+				"<div class='ordlist_header_time fl'>入住时间:"+time3+"</div>"+
+				"<div class='ordlist_header_time fl'>离开时间:"+time4+"</div>"+
+				"<div class='ordlist_header_state fr' style='color:#999'>"+hd.ooderstate+"</div>"+
+				"<div class='clear'></div>"+
+			"</div>"+
+			"<div class='ordlist_body'>"+
+				"<div class='ordlist_body_img fl'>"+
+					"<img src='img/home.jpg' />"+
+				"</div>"+
+				"<div class='ordlist_body_font fl'>"+
+					"<ul>"+
+						"<li class='olb_font_font fl over2'>"+hd.ohouse+"</li>"+
+						"<li class='olb_font_money fr'>￥"+hd.omoney+"</li>"+
+						"<li class='olb_font_num fr'>"+hd.ocount+"间</li>"+
+					"</ul>"+
+					"<div class='clear'></div>"+
+				"</div>"+
+				"<div class='ordlist_body_money fl'>"+
+					"<div class='olb_money_money fl'>"+
+						"实付：<label>￥"+hd.omoney+"</label>"+
+					"</div>"+
+					"<!--<div class='olb_money_block fr' style='background-color:#eeeeee;'>赚佣0.03元</div>-->"+
+				"</div>"+
+				"<div class='clear'></div>"+
+			"</div>"+
+			"<div class='ordlist_footer'>订单编号："+hd.onumber+"</div>"+
+		"</a>"+
+		"</div>";
+	          $("#ddjm").append(orderinfo); 
+    }
+}
+	    
+	    
+	    function timestampToTime(time) {//转化成YYYYMMDDhhmmss格式的时间戳
+		    var date = new Date(time),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		    Y = date.getFullYear() + '',
+		    M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '',
+		    D = date.getDate() + '',
+		    h = date.getHours() + '',
+		    m = date.getMinutes() + '',
+		    s = date.getSeconds();
+		console.log("转换时间了。");
+		console.log(Y);
+		    return Y+M+D+h+m+s;
+		}
+
   	
 	$("#xgtj").click(function(){
 	

@@ -46,7 +46,6 @@ public class HotelOrderServlet extends HttpServlet {
 		
 		
 		try {
-			
 			List<Hotel_order> list = hos.queryAll() ;
 			System.out.println(list.size());
 			map.put("result", true);

@@ -11,21 +11,23 @@ import com.oracle.util.DBHelper;
 
 public class CustomerOrderDao {
 	
-	public List<Hotel_order> queryByIntro() throws SQLException {
+	public List<Hotel_order> queryByIntro(int uid) throws SQLException {
 		
 		QueryRunner qer = new QueryRunner(DBHelper.ds);
 		String sql = "SELECT\r\n" + 
 				"hotel_order.oontime,\r\n" + 
 				"hotel_order.oouttime,\r\n" + 
-				"hotel_order.ocount,\r\n" + 
 				"hotel_order.omoney,\r\n" + 
 				"hotel_order.ohouse,\r\n" + 
 				"hotel_order.onumber,\r\n" + 
 				"hotel_order.ooderstate\r\n" + 
-				"FROM\r\n" + 
-				"hotel_order";
+				"from hotel_order,user_admin\r\n" + 
+				"where \r\n" + 
+				"hotel_order.uid=user_admin.uid\r\n" + 
+				" AND user_admin.uid=?\r\n" + 
+				"";
 		
-		return qer.query(sql, new BeanListHandler<Hotel_order>(Hotel_order.class));
+		return qer.query(sql,uid, new BeanListHandler<Hotel_order>(Hotel_order.class));
 		
 	}
 	
