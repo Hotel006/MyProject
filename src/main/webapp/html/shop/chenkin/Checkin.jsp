@@ -52,6 +52,9 @@
 						<div class="layui-input-block">
 							<input type="tel" name="phone" id="user_phone" lay-verify="required|phone"
 								autocomplete="off" placeholder="请输入手机号" class="layui-input">
+<!-- 						<video id="video" width="20" height="10" autoplay></video>
+						<button class="layui-btn" id="snap">拍摄</button>
+							<canvas id="canvas" width="20" height="10"></canvas> -->
 						</div>
 					</div>
 					<%if(state!=3){ %>
@@ -233,6 +236,55 @@ $(      //页面加载完执行
 	
 </body>
 <style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}</style>
+
+<script>
+    window.addEventListener("DOMContentLoaded", function() {
+        var canvas = document.getElementById("canvas"),//调用canvas接口
+                context = canvas.getContext("2d"),
+                video = document.getElementById("video"),
+                videoObj = { "video": true },
+                errBack = function(error) {//错误处理
+                    console.log("Video capture error: ", error.code);
+                };
+        if(navigator.getUserMedia) {//调用html5拍摄接口
+            navigator.getUserMedia(videoObj, function(stream) {
+                video.src = stream;//摄像机属于视频流，所以当然要输出到html5的video标签中了
+                video.play();//开始播放
+            }, errBack);
+        } else if(navigator.webkitGetUserMedia) { //WebKit内核调用html5拍摄接口
+            navigator.webkitGetUserMedia(videoObj, function(stream){
+                video.src = window.webkitURL.createObjectURL(stream);//同上
+                video.play();//同上
+            }, errBack);
+        }
+        else if(navigator.mozGetUserMedia) { //moz内核调用html5拍摄接口
+            navigator.mozGetUserMedia(videoObj, function(stream){
+                video.src = window.URL.createObjectURL(stream);//同上
+                video.play();//同上
+            }, errBack);
+        }
+    }, false);
+
+    document.getElementById("snap")
+            .addEventListener("click", function() {//获取拍照按钮绑定事件
+                var canvans = document.getElementById("canvas"),//调用canvas接口
+                        context = canvas.getContext("2d");
+                context.drawImage(video, 0, 0, 640, 480);//调用canvas接口的drawImage方法绘制当前video标签中的静态图片，其实就是截图
+
+                var imgData = canvans.toDataURL();//获取图片的base64格式的数据
+                //这里就可以写上传服务器代码了
+                	$.ajax({
+    			url :"/Hotel/PhotoServlet.do",
+    			context : document.body,
+    			data:("img",imgData),
+    			dataType:"json",
+    			success : function(data) {
+    				
+    			});
+            });
+</script>
+
+
 
 
 </html>

@@ -24,8 +24,9 @@ public class QueryService {
 		for (Hotel_order h : list) {
 			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); 
 			String nowtime=DateUtil.nowtime(DateUtil.H);
+			String q=DateUtil.datetostring(h.getOyjouttime(), DateUtil.H);
 			 Date d1 = df.parse(nowtime);
-			 Date d2 =df.parse(h.getOyjouttime());
+			 Date d2 =df.parse(q);
 			 int state =Integer.valueOf(h.getOoderstate());
 	
 			 long diff = d2.getTime() - d1.getTime();
